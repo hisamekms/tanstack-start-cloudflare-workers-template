@@ -2,6 +2,7 @@
 bun = "latest"
 chezmoi = "latest"
 "npm:@openai/codex" = "latest"
+"npm:@playwright/cli" = "latest"
 "npm:aws-cdk" = "latest"
 
 [tasks."test:unit"]
