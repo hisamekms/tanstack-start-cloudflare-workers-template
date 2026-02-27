@@ -2,12 +2,14 @@ import {
   HeadContent,
   Outlet,
   Scripts,
-  createRootRoute,
+  createRootRouteWithContext,
 } from "@tanstack/react-router";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { ReactNode } from "react";
+import type { RouterContext } from "~/lib/router-context";
 import globalCss from "~/styles/global.css?url";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<RouterContext>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -16,9 +18,18 @@ export const Route = createRootRoute({
     ],
     links: [{ rel: "stylesheet", href: globalCss }],
   }),
-  component: () => <Outlet />,
+  component: RootComponent,
   shellComponent: RootDocument,
 });
+
+function RootComponent() {
+  return (
+    <>
+      <Outlet />
+      <ReactQueryDevtools buttonPosition="bottom-right" />
+    </>
+  );
+}
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
