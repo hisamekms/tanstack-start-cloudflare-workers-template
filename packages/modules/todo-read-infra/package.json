@@ -1,0 +1,15 @@
+{
+  "name": "@modules/todo-read-infra",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@contracts/todo-public": "*",
+    "@modules/todo-read-model": "*",
+    "@modules/todo-read-application": "*",
+    "@platform/db": "*"
+  }
+}

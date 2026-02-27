@@ -1,0 +1,12 @@
+{
+  "name": "@modules/shared-kernel-read-application",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@modules/shared-kernel-read-model": "*"
+  }
+}

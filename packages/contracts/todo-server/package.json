@@ -1,0 +1,14 @@
+{
+  "name": "@contracts/todo-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel-server": "*",
+    "@contracts/todo-public": "*",
+    "@lib/public": "*"
+  }
+}

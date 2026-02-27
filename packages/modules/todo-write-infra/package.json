@@ -1,0 +1,16 @@
+{
+  "name": "@modules/todo-write-infra",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel-public": "*",
+    "@contracts/todo-public": "*",
+    "@modules/todo-write-model": "*",
+    "@modules/todo-write-application": "*",
+    "@platform/db": "*"
+  }
+}
