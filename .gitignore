@@ -8,6 +8,7 @@ dist/
 worktrees/
 apps/web/src/styled-system/
 .dev.vars
+.env
 
 # Playwright
 test-results/
