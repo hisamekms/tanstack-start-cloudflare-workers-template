@@ -1,18 +1,7 @@
 {
+  "extends": "@config/ts/tanstack-start.json",
   "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "module": "ESNext",
-    "target": "ES2022",
-    "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "paths": {
-      "~/*": ["./src/*"]
-    }
+    "paths": { "~/*": ["./src/*"] }
   },
   "include": ["src"]
 }

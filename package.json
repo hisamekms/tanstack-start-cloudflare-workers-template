@@ -3,6 +3,7 @@
   "packageManager": "bun@1.3.10",
   "workspaces": [
     "apps/*",
+    "packages/config/*",
     "packages/contracts/*",
     "packages/modules/*",
     "packages/platform/*",
@@ -18,6 +19,7 @@
     "test:e2e": "turbo run test:e2e"
   },
   "devDependencies": {
+    "@typescript/native-preview": "latest",
     "turbo": "^2.8.11"
   }
 }
