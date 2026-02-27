@@ -1,3 +1,4 @@
+import { TodoCommandType } from "@contracts/todo-public";
 import type { TodoCommand } from "@contracts/todo-public";
 import type { TodoCommandBus } from "@contracts/todo-server";
 import type { Result } from "@lib/public";
@@ -14,9 +15,9 @@ export class TodoCommandBusImpl implements TodoCommandBus {
 
   async execute(command: TodoCommand): Promise<Result<void, string>> {
     switch (command.commandType) {
-      case "CreateTodo":
+      case TodoCommandType.CreateTodo:
         return this.createTodoHandler.execute(command);
-      case "CompleteTodo":
+      case TodoCommandType.CompleteTodo:
         return this.completeTodoHandler.execute(command);
       default:
         return err(`Unknown command: ${(command as TodoCommand).commandType}`);

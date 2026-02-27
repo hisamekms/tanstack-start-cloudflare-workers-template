@@ -1,3 +1,3 @@
-export interface Command {
-  readonly commandType: string;
+export interface Command<TCommandType extends string = string> {
+  readonly commandType: TCommandType;
 }
