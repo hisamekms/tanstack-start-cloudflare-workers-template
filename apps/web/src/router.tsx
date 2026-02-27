@@ -18,7 +18,7 @@ export function getRouter() {
     routeTree,
     defaultPreload: "intent",
     scrollRestoration: true,
-    context: { queryClient },
+    context: { queryClient, session: null },
     dehydrate: () => ({
       queryClientState: dehydrate(queryClient),
     }),

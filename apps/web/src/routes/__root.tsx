@@ -7,9 +7,14 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { ReactNode } from "react";
 import type { RouterContext } from "~/lib/router-context";
+import { fetchSession } from "~/lib/auth.server";
 import globalCss from "~/styles/global.css?url";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
+  beforeLoad: async () => {
+    const session = await fetchSession();
+    return { session };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
