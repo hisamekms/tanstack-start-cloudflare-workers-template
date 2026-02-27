@@ -8,3 +8,7 @@ chezmoi = "latest"
 [tasks."test:unit"]
 description = "Run unit tests"
 run = "bunx turbo run test"
+
+[tasks."test:e2e"]
+run = "bun run test:e2e"
+description = "Run Playwright e2e tests"

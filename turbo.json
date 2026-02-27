@@ -36,6 +36,11 @@
     },
     "cf-typegen": {
       "cache": false
+    },
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "passThroughEnv": ["APP_ENV", "AUTH_SECRET", "CI"]
     }
   }
 }
