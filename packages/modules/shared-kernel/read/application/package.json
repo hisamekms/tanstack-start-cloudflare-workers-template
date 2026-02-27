@@ -1,5 +1,5 @@
 {
-  "name": "@modules/todo-read-model",
+  "name": "@modules/shared-kernel-read-application",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,10 +7,9 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
-    "@contracts/todo-public": "*",
     "@modules/shared-kernel-read-model": "*"
   },
   "scripts": {
-    "lint": "oxlint -c ../../config/oxlint/base.json src/"
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }

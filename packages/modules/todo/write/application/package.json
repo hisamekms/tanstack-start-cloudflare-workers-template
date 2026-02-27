@@ -1,5 +1,5 @@
 {
-  "name": "@modules/todo-read-application",
+  "name": "@modules/todo-write-application",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,9 +9,10 @@
   "peerDependencies": {
     "@contracts/todo-public": "*",
     "@contracts/todo-server": "*",
-    "@modules/todo-read-model": "*"
+    "@lib/public": "*",
+    "@modules/todo-write-model": "*"
   },
   "scripts": {
-    "lint": "oxlint -c ../../config/oxlint/base.json src/"
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }

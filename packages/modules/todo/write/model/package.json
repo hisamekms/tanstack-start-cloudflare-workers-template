@@ -1,5 +1,5 @@
 {
-  "name": "@modules/shared-kernel-write-application",
+  "name": "@modules/todo-write-model",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,9 +7,11 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
+    "@contracts/shared-kernel-public": "*",
+    "@contracts/todo-public": "*",
     "@modules/shared-kernel-write-model": "*"
   },
   "scripts": {
-    "lint": "oxlint -c ../../config/oxlint/base.json src/"
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }

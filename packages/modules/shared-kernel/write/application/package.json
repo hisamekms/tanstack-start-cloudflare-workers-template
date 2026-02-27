@@ -1,0 +1,15 @@
+{
+  "name": "@modules/shared-kernel-write-application",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "@modules/shared-kernel-write-model": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  }
+}
