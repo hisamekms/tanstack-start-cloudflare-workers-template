@@ -1,12 +1,15 @@
 import type { Command } from "@contracts/shared-kernel-public";
 
-export interface CreateTodoCommand extends Command {
-  readonly commandType: "CreateTodo";
+export enum TodoCommandType {
+  CreateTodo = "CreateTodo",
+  CompleteTodo = "CompleteTodo",
+}
+
+export interface CreateTodoCommand extends Command<TodoCommandType.CreateTodo> {
   readonly title: string;
 }
 
-export interface CompleteTodoCommand extends Command {
-  readonly commandType: "CompleteTodo";
+export interface CompleteTodoCommand extends Command<TodoCommandType.CompleteTodo> {
   readonly todoId: string;
 }
 

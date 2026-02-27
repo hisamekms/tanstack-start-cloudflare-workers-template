@@ -1,7 +1,9 @@
 import type { Query } from "@contracts/shared-kernel-public";
 
-export interface ListTodosQuery extends Query {
-  readonly queryType: "ListTodos";
+export enum TodoQueryType {
+  ListTodos = "ListTodos",
 }
+
+export interface ListTodosQuery extends Query<TodoQueryType.ListTodos> {}
 
 export type TodoQuery = ListTodosQuery;

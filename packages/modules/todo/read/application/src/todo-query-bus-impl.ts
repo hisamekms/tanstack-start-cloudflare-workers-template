@@ -1,3 +1,4 @@
+import { TodoQueryType } from "@contracts/todo-public";
 import type { TodoDto, TodoQuery } from "@contracts/todo-public";
 import type { TodoQueryBus } from "@contracts/todo-server";
 import { err, type Result } from "neverthrow";
@@ -9,7 +10,7 @@ export class TodoQueryBusImpl implements TodoQueryBus {
 
   async execute(query: TodoQuery): Promise<Result<TodoDto[], string>> {
     switch (query.queryType) {
-      case "ListTodos":
+      case TodoQueryType.ListTodos:
         return this.listTodosHandler.execute();
       default:
         return err(`Unknown query: ${(query as TodoQuery).queryType}`);
