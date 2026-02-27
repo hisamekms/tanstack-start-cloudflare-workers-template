@@ -19,7 +19,7 @@ description = "Run Playwright e2e tests"
 
 [tasks.lint]
 description = "Run linting"
-run = "bunx turbo run lint"
+run = ["check-dep-rules.sh", "bunx turbo run lint"]
 
 [tasks.typecheck]
 description = "Run type checking with tsgo"
