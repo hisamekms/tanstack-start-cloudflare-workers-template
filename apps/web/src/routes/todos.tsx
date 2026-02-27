@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { css } from "~/styled-system/css";
+
 import { listTodos, createTodo, completeTodo } from "~/lib/todo.server";
+import { css } from "~/styled-system/css";
 
 const todosQueryOptions = {
   queryKey: ["todos"],
@@ -43,14 +44,9 @@ function TodosPage() {
 
   return (
     <div className={css({ maxW: "800px", mx: "auto", py: "8", px: "4" })}>
-      <h1 className={css({ fontSize: "3xl", fontWeight: "bold", mb: "6" })}>
-        Todos
-      </h1>
+      <h1 className={css({ fontSize: "3xl", fontWeight: "bold", mb: "6" })}>Todos</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className={css({ display: "flex", gap: "2", mb: "6" })}
-      >
+      <form onSubmit={handleSubmit} className={css({ display: "flex", gap: "2", mb: "6" })}>
         <input
           type="text"
           value={title}

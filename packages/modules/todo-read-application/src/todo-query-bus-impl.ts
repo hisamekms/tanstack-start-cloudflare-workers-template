@@ -1,5 +1,6 @@
-import type { TodoQueryBus } from "@contracts/todo-server";
 import type { TodoDto, TodoQuery } from "@contracts/todo-public";
+import type { TodoQueryBus } from "@contracts/todo-server";
+
 import type { ListTodosHandler } from "./handlers/list-todos-handler";
 
 export class TodoQueryBusImpl implements TodoQueryBus {

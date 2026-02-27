@@ -16,3 +16,11 @@ description = "Run Playwright e2e tests"
 [tasks.typecheck]
 description = "Run type checking with tsgo"
 run = "bunx turbo run typecheck"
+
+[tasks.format]
+description = "Format code with oxfmt"
+run = "bunx oxfmt ."
+
+[tasks."format:check"]
+description = "Check formatting with oxfmt"
+run = "bunx oxfmt --check ."

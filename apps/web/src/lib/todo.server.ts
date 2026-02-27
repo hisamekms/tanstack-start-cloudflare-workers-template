@@ -1,16 +1,11 @@
-import { createServerFn } from "@tanstack/react-start";
 import type { TodoDto } from "@contracts/todo-public";
-import {
-  todoCommandBus,
-  todoQueryBus,
-  syncWriteToRead,
-} from "./todo-composition-root.server";
+import { createServerFn } from "@tanstack/react-start";
 
-export const listTodos = createServerFn({ method: "GET" }).handler(
-  async (): Promise<TodoDto[]> => {
-    return todoQueryBus.execute({ queryType: "ListTodos" });
-  },
-);
+import { todoCommandBus, todoQueryBus, syncWriteToRead } from "./todo-composition-root.server";
+
+export const listTodos = createServerFn({ method: "GET" }).handler(async (): Promise<TodoDto[]> => {
+  return todoQueryBus.execute({ queryType: "ListTodos" });
+});
 
 export const createTodo = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => data as { title: string })

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import { css } from "~/styled-system/css";
 
 export const Route = createFileRoute("/")({
@@ -24,9 +25,7 @@ function Home() {
       >
         Home
       </h1>
-      <p className={css({ color: "gray.600" })}>
-        Panda CSS is working!
-      </p>
+      <p className={css({ color: "gray.600" })}>Panda CSS is working!</p>
     </div>
   );
 }

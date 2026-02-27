@@ -42,6 +42,7 @@ scripts/wth add my-feature
 ```
 
 出力:
+
 ```
 [wth] creating worktree: /path/to/worktrees/my-feature (branch: wth/my-feature)
 [wth] done: /path/to/worktrees/my-feature
@@ -62,6 +63,7 @@ scripts/wth rm my-feature
 ```
 
 出力:
+
 ```
 [wth] removing worktree: /path/to/worktrees/my-feature
 [wth] deleting branch: wth/my-feature

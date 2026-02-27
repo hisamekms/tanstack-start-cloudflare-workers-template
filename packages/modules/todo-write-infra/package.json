@@ -9,8 +9,8 @@
   "peerDependencies": {
     "@contracts/shared-kernel-public": "*",
     "@contracts/todo-public": "*",
-    "@modules/todo-write-model": "*",
     "@modules/todo-write-application": "*",
+    "@modules/todo-write-model": "*",
     "@platform/db": "*"
   }
 }

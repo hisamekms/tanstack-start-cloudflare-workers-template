@@ -1,5 +1,5 @@
-import { InMemoryStore } from "@platform/db";
 import { Todo, type TodoRepository } from "@modules/todo-write-model";
+import { InMemoryStore } from "@platform/db";
 
 interface TodoRecord {
   id: string;
