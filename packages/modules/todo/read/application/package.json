@@ -6,12 +6,15 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  },
+  "dependencies": {
+    "neverthrow": "^8.0.0"
+  },
   "peerDependencies": {
     "@contracts/todo-public": "*",
     "@contracts/todo-server": "*",
     "@modules/todo-read-model": "*"
-  },
-  "scripts": {
-    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }

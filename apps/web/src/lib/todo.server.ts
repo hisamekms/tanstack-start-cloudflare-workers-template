@@ -4,7 +4,11 @@ import { createServerFn } from "@tanstack/react-start";
 import { todoCommandBus, todoQueryBus, syncWriteToRead } from "./todo-composition-root.server";
 
 export const listTodos = createServerFn({ method: "GET" }).handler(async (): Promise<TodoDto[]> => {
-  return todoQueryBus.execute({ queryType: "ListTodos" });
+  const result = await todoQueryBus.execute({ queryType: "ListTodos" });
+  if (result.isErr()) {
+    throw new Error(result.error);
+  }
+  return result.value;
 });
 
 export const createTodo = createServerFn({ method: "POST" })
@@ -14,11 +18,15 @@ export const createTodo = createServerFn({ method: "POST" })
       commandType: "CreateTodo",
       title: data.title,
     });
-    if (!result.ok) {
+    if (result.isErr()) {
       throw new Error(result.error);
     }
     syncWriteToRead();
-    return todoQueryBus.execute({ queryType: "ListTodos" });
+    const todosResult = await todoQueryBus.execute({ queryType: "ListTodos" });
+    if (todosResult.isErr()) {
+      throw new Error(todosResult.error);
+    }
+    return todosResult.value;
   });
 
 export const completeTodo = createServerFn({ method: "POST" })
@@ -28,9 +36,13 @@ export const completeTodo = createServerFn({ method: "POST" })
       commandType: "CompleteTodo",
       todoId: data.todoId,
     });
-    if (!result.ok) {
+    if (result.isErr()) {
       throw new Error(result.error);
     }
     syncWriteToRead();
-    return todoQueryBus.execute({ queryType: "ListTodos" });
+    const todosResult = await todoQueryBus.execute({ queryType: "ListTodos" });
+    if (todosResult.isErr()) {
+      throw new Error(todosResult.error);
+    }
+    return todosResult.value;
   });

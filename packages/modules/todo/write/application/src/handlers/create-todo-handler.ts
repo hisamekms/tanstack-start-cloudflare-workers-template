@@ -1,7 +1,6 @@
 import type { CreateTodoCommand } from "@contracts/todo-public";
-import type { Result } from "@lib/public";
-import { ok } from "@lib/public";
 import { Todo, type TodoRepository } from "@modules/todo-write-model";
+import { ok, type Result } from "neverthrow";
 
 export class CreateTodoHandler {
   constructor(private readonly repository: TodoRepository) {}
