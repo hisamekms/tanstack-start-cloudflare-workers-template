@@ -1,0 +1,29 @@
+{
+  "name": "tanstack-start-cloudflare-workers-template",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "dev",
+  "containerUser": "dev",
+  "mounts": [
+    "source=${localWorkspaceFolderBasename}-mise,target=/home/dev/.local/share/mise,type=volume",
+    "source=bun,target=/home/dev/.bun,type=volume",
+    "source=npm,target=/home/dev/.npm,type=volume",
+    "source=${localWorkspaceFolderBasename}-codex,target=/home/dev/.codex,type=volume",
+    "source=${localWorkspaceFolderBasename}-claude,target=/home/dev/.claude,type=volume",
+    "source=${localWorkspaceFolderBasename}-claude-config,target=/home/dev/.config/claude,type=volume",
+    "source=${localWorkspaceFolderBasename}-claude-cache,target=/home/dev/.cache/claude,type=volume",
+    "source=${localWorkspaceFolderBasename}-gh-config,target=/home/dev/.config/gh,type=volume",
+    "source=${localEnv:HOME}/.local/share/chezmoi,target=/home/dev/.local/share/chezmoi,type=bind,consistency=cached"
+  ],
+  "containerEnv": {
+    "MISE_TRUSTED_CONFIG_PATHS": "/workspace",
+    "MISE_NPM_BACKEND": "bun"
+  },
+  "features": {},
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "postCreateCommand": "bash ./.devcontainer/post-create.sh",
+  "postStartCommand": "bash ./.devcontainer/post-start.sh",
+  "shutdownAction": "none"
+}
