@@ -1,5 +1,5 @@
 {
-  "name": "@modules/todo-write-model",
+  "name": "@modules/todo-write-infra",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,9 +9,11 @@
   "peerDependencies": {
     "@contracts/shared-kernel-public": "*",
     "@contracts/todo-public": "*",
-    "@modules/shared-kernel-write-model": "*"
+    "@modules/todo-write-application": "*",
+    "@modules/todo-write-model": "*",
+    "@platform/db": "*"
   },
   "scripts": {
-    "lint": "oxlint -c ../../config/oxlint/base.json src/"
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }
