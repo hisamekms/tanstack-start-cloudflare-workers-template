@@ -6,3 +6,4 @@ dist/
 *.gen.ts
 *.local
 worktrees/
+apps/web/src/styled-system/
