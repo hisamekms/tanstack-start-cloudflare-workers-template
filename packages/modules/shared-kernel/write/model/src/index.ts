@@ -1,16 +1,10 @@
+import type { AggregateRoot } from "@contracts/shared-kernel-public";
 import type { DomainEvent } from "@contracts/shared-kernel-public";
 
-export abstract class Entity<TId extends string = string> {
-  abstract readonly id: TId;
-  private _events: DomainEvent[] = [];
-
-  protected addEvent(event: DomainEvent): void {
-    this._events.push(event);
-  }
-
-  pullEvents(): DomainEvent[] {
-    const events = [...this._events];
-    this._events = [];
-    return events;
-  }
+export interface CommandResult<
+  TState extends AggregateRoot,
+  TEvent extends DomainEvent = DomainEvent,
+> {
+  readonly state: TState;
+  readonly events: TEvent[];
 }

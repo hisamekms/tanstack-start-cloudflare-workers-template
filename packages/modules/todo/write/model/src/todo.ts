@@ -1,45 +1,46 @@
-import type { TodoCreatedEvent, TodoCompletedEvent } from "@contracts/todo-public";
-import { Entity } from "@modules/shared-kernel-write-model";
+import type { AggregateRoot } from "@contracts/shared-kernel-public";
+import type {
+  TodoCreatedEvent,
+  TodoCompletedEvent,
+} from "@contracts/todo-public";
+import type { CommandResult } from "@modules/shared-kernel-write-model";
 
-export class Todo extends Entity<string> {
-  readonly id: string;
+export interface Todo extends AggregateRoot<string> {
   readonly title: string;
-  private _completed: boolean;
+  readonly completed: boolean;
+}
 
-  get completed(): boolean {
-    return this._completed;
-  }
-
-  private constructor(id: string, title: string, completed: boolean) {
-    super();
-    this.id = id;
-    this.title = title;
-    this._completed = completed;
-  }
-
-  static create(id: string, title: string): Todo {
-    const todo = new Todo(id, title, false);
-    const event: TodoCreatedEvent = {
+export function createTodo(
+  id: string,
+  title: string,
+): CommandResult<Todo, TodoCreatedEvent> {
+  const state: Todo = { id, title, completed: false, version: 1 };
+  const events: TodoCreatedEvent[] = [
+    {
       eventType: "TodoCreated",
       occurredAt: new Date().toISOString(),
+      schemaVersion: 1,
+      aggregateVersion: 1,
       todoId: id,
       title,
-    };
-    todo.addEvent(event);
-    return todo;
-  }
+    },
+  ];
+  return { state, events };
+}
 
-  static reconstruct(id: string, title: string, completed: boolean): Todo {
-    return new Todo(id, title, completed);
-  }
-
-  complete(): void {
-    this._completed = true;
-    const event: TodoCompletedEvent = {
+export function completeTodo(
+  todo: Todo,
+): CommandResult<Todo, TodoCompletedEvent> {
+  const newVersion = todo.version + 1;
+  const state: Todo = { ...todo, completed: true, version: newVersion };
+  const events: TodoCompletedEvent[] = [
+    {
       eventType: "TodoCompleted",
       occurredAt: new Date().toISOString(),
-      todoId: this.id,
-    };
-    this.addEvent(event);
-  }
+      schemaVersion: 1,
+      aggregateVersion: newVersion,
+      todoId: todo.id,
+    },
+  ];
+  return { state, events };
 }

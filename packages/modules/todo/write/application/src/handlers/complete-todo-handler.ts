@@ -1,5 +1,5 @@
 import type { CompleteTodoCommand } from "@contracts/todo-public";
-import type { TodoRepository } from "@modules/todo-write-model";
+import { completeTodo, type TodoRepository } from "@modules/todo-write-model";
 import { ok, err, type Result } from "neverthrow";
 
 export class CompleteTodoHandler {
@@ -10,8 +10,8 @@ export class CompleteTodoHandler {
     if (!todo) {
       return err(`Todo not found: ${command.todoId}`);
     }
-    todo.complete();
-    this.repository.save(todo);
+    const { state } = completeTodo(todo);
+    this.repository.save(state);
     return ok(undefined);
   }
 }

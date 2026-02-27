@@ -1,5 +1,5 @@
 import type { CreateTodoCommand } from "@contracts/todo-public";
-import { Todo, type TodoRepository } from "@modules/todo-write-model";
+import { createTodo, type TodoRepository } from "@modules/todo-write-model";
 import { ok, type Result } from "neverthrow";
 
 export class CreateTodoHandler {
@@ -7,8 +7,8 @@ export class CreateTodoHandler {
 
   async execute(command: CreateTodoCommand): Promise<Result<void, string>> {
     const id = crypto.randomUUID();
-    const todo = Todo.create(id, command.title);
-    this.repository.save(todo);
+    const { state } = createTodo(id, command.title);
+    this.repository.save(state);
     return ok(undefined);
   }
 }

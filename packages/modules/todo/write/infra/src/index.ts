@@ -1,10 +1,11 @@
-import { Todo, type TodoRepository } from "@modules/todo-write-model";
+import type { Todo, TodoRepository } from "@modules/todo-write-model";
 import { InMemoryStore } from "@platform/db";
 
 interface TodoRecord {
   id: string;
   title: string;
   completed: boolean;
+  version: number;
 }
 
 export class InMemoryTodoRepository implements TodoRepository {
@@ -13,7 +14,12 @@ export class InMemoryTodoRepository implements TodoRepository {
   findById(id: string): Todo | undefined {
     const record = this.store.getById(id);
     if (!record) return undefined;
-    return Todo.reconstruct(record.id, record.title, record.completed);
+    return {
+      id: record.id,
+      title: record.title,
+      completed: record.completed,
+      version: record.version,
+    };
   }
 
   save(todo: Todo): void {
@@ -21,6 +27,7 @@ export class InMemoryTodoRepository implements TodoRepository {
       id: todo.id,
       title: todo.title,
       completed: todo.completed,
+      version: todo.version,
     });
   }
 }
