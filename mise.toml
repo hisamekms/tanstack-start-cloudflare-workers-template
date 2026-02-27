@@ -3,3 +3,7 @@ bun = "latest"
 chezmoi = "latest"
 "npm:@openai/codex" = "latest"
 "npm:aws-cdk" = "latest"
+
+[tasks."test:unit"]
+description = "Run unit tests"
+run = "bunx turbo run test"
