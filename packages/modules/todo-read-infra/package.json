@@ -8,8 +8,8 @@
   },
   "peerDependencies": {
     "@contracts/todo-public": "*",
-    "@modules/todo-read-model": "*",
     "@modules/todo-read-application": "*",
+    "@modules/todo-read-model": "*",
     "@platform/db": "*"
   }
 }

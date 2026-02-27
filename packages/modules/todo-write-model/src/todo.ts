@@ -1,5 +1,5 @@
-import { Entity } from "@modules/shared-kernel-write-model";
 import type { TodoCreatedEvent, TodoCompletedEvent } from "@contracts/todo-public";
+import { Entity } from "@modules/shared-kernel-write-model";
 
 export class Todo extends Entity<string> {
   readonly id: string;

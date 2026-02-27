@@ -4,13 +4,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".output/**", "dist/**"],
-      "inputs": [
-        "src/**",
-        "vite.config.ts",
-        "tsconfig.json",
-        "wrangler.jsonc",
-        "package.json"
-      ]
+      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "wrangler.jsonc", "package.json"]
     },
     "dev": {
       "dependsOn": ["^build"],

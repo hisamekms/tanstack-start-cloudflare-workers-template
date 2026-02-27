@@ -72,26 +72,26 @@ packages/
 
 ## パッケージリスト
 
-| パス | パッケージ名 | 説明 |
-|------|-------------|------|
-| `apps/web` | - | TanStack Start / Cloudflare Workers |
-| `packages/contracts/shared-kernel-public` | `@contracts/shared-kernel-public` | ドメイン知識を伴う共通の型。client/server参照可 |
-| `packages/contracts/shared-kernel-server` | `@contracts/shared-kernel-server` | ドメイン知識を伴う共通の型。server参照可 |
-| `packages/contracts/<bc>-public` | `@contracts/<bc>-public` | BCの契約。client/server参照可 |
-| `packages/contracts/<bc>-server` | `@contracts/<bc>-server` | BCの契約。server参照可 |
-| `packages/modules/shared-kernel-write-application` | `@modules/shared-kernel-write-application` | shared-kernel write側application層 |
-| `packages/modules/shared-kernel-write-model` | `@modules/shared-kernel-write-model` | shared-kernel write側model層 |
-| `packages/modules/shared-kernel-read-application` | `@modules/shared-kernel-read-application` | shared-kernel read側application層 |
-| `packages/modules/shared-kernel-read-model` | `@modules/shared-kernel-read-model` | shared-kernel read側model層 |
-| `packages/modules/<bc>-write-application` | `@modules/<bc>-write-application` | BC write側application層 |
-| `packages/modules/<bc>-write-model` | `@modules/<bc>-write-model` | BC write側model層 |
-| `packages/modules/<bc>-write-infra` | `@modules/<bc>-write-infra` | BC write側infra層 |
-| `packages/modules/<bc>-read-application` | `@modules/<bc>-read-application` | BC read側application層 |
-| `packages/modules/<bc>-read-model` | `@modules/<bc>-read-model` | BC read側model層 |
-| `packages/modules/<bc>-read-infra` | `@modules/<bc>-read-infra` | BC read側infra層 |
-| `packages/platform/db` | `@platform/db` | DB共通処理 |
-| `packages/lib/public` | `@lib/public` | ドメイン知識のない共通処理。client/server参照可 |
-| `packages/lib/server` | `@lib/server` | ドメイン知識のない共通処理。server参照可 |
+| パス                                               | パッケージ名                               | 説明                                            |
+| -------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
+| `apps/web`                                         | -                                          | TanStack Start / Cloudflare Workers             |
+| `packages/contracts/shared-kernel-public`          | `@contracts/shared-kernel-public`          | ドメイン知識を伴う共通の型。client/server参照可 |
+| `packages/contracts/shared-kernel-server`          | `@contracts/shared-kernel-server`          | ドメイン知識を伴う共通の型。server参照可        |
+| `packages/contracts/<bc>-public`                   | `@contracts/<bc>-public`                   | BCの契約。client/server参照可                   |
+| `packages/contracts/<bc>-server`                   | `@contracts/<bc>-server`                   | BCの契約。server参照可                          |
+| `packages/modules/shared-kernel-write-application` | `@modules/shared-kernel-write-application` | shared-kernel write側application層              |
+| `packages/modules/shared-kernel-write-model`       | `@modules/shared-kernel-write-model`       | shared-kernel write側model層                    |
+| `packages/modules/shared-kernel-read-application`  | `@modules/shared-kernel-read-application`  | shared-kernel read側application層               |
+| `packages/modules/shared-kernel-read-model`        | `@modules/shared-kernel-read-model`        | shared-kernel read側model層                     |
+| `packages/modules/<bc>-write-application`          | `@modules/<bc>-write-application`          | BC write側application層                         |
+| `packages/modules/<bc>-write-model`                | `@modules/<bc>-write-model`                | BC write側model層                               |
+| `packages/modules/<bc>-write-infra`                | `@modules/<bc>-write-infra`                | BC write側infra層                               |
+| `packages/modules/<bc>-read-application`           | `@modules/<bc>-read-application`           | BC read側application層                          |
+| `packages/modules/<bc>-read-model`                 | `@modules/<bc>-read-model`                 | BC read側model層                                |
+| `packages/modules/<bc>-read-infra`                 | `@modules/<bc>-read-infra`                 | BC read側infra層                                |
+| `packages/platform/db`                             | `@platform/db`                             | DB共通処理                                      |
+| `packages/lib/public`                              | `@lib/public`                              | ドメイン知識のない共通処理。client/server参照可 |
+| `packages/lib/server`                              | `@lib/server`                              | ドメイン知識のない共通処理。server参照可        |
 
 ## 依存ルール
 
@@ -107,11 +107,11 @@ packages/
 
 ### BC間
 
-- BC間の参照は contracts/* のみ許可
-- modules/<bc-A>-* → modules/<bc-B>-* : NG（直接参照禁止）
-- modules/<bc-A>-* → contracts/<bc-B>-* : OK
+- BC間の参照は contracts/\* のみ許可
+- modules/<bc-A>-_ → modules/<bc-B>-_ : NG（直接参照禁止）
+- modules/<bc-A>-_ → contracts/<bc-B>-_ : OK
 
 ### platform
 
-- modules/*-infra → platform/* : OK
-- platform/* → modules/** : NG
+- modules/_-infra → platform/_ : OK
+- platform/\* → modules/\*\* : NG

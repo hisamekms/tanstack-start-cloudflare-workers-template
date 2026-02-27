@@ -1,18 +1,15 @@
-import { InMemoryStore } from "@platform/db";
 import type { TodoDto } from "@contracts/todo-public";
-import { InMemoryTodoRepository } from "@modules/todo-write-infra";
+import type { TodoCommandBus } from "@contracts/todo-server";
+import type { TodoQueryBus } from "@contracts/todo-server";
+import { ListTodosHandler, TodoQueryBusImpl } from "@modules/todo-read-application";
+import { InMemoryTodoReadModelStore } from "@modules/todo-read-infra";
 import {
   CreateTodoHandler,
   CompleteTodoHandler,
   TodoCommandBusImpl,
 } from "@modules/todo-write-application";
-import { InMemoryTodoReadModelStore } from "@modules/todo-read-infra";
-import {
-  ListTodosHandler,
-  TodoQueryBusImpl,
-} from "@modules/todo-read-application";
-import type { TodoCommandBus } from "@contracts/todo-server";
-import type { TodoQueryBus } from "@contracts/todo-server";
+import { InMemoryTodoRepository } from "@modules/todo-write-infra";
+import { InMemoryStore } from "@platform/db";
 
 interface TodoRecord {
   id: string;
@@ -38,9 +35,7 @@ export const todoCommandBus: TodoCommandBus = new TodoCommandBusImpl(
   completeTodoHandler,
 );
 
-export const todoQueryBus: TodoQueryBus = new TodoQueryBusImpl(
-  listTodosHandler,
-);
+export const todoQueryBus: TodoQueryBus = new TodoQueryBusImpl(listTodosHandler);
 
 // Sync write model to read model (simplified event projection)
 export function syncWriteToRead(): void {
