@@ -1,1 +1,1 @@
-// Shared kernel write-side application layer placeholder
+export const MODULE_NAME = "shared-kernel-write-application" as const;

@@ -1,1 +1,1 @@
-// Shared kernel read-side application layer placeholder
+export const MODULE_NAME = "shared-kernel-read-application" as const;
