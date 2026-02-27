@@ -9,6 +9,15 @@ chezmoi = "latest"
 "npm:@playwright/cli" = "latest"
 "npm:aws-cdk" = "latest"
 
+[tasks.setup]
+description = "Install dependencies"
+run = "bun install"
+
+[tasks.dev]
+description = "Start development server"
+depends = ["setup"]
+run = "bunx turbo run dev"
+
 [tasks."test:unit"]
 description = "Run unit tests"
 run = "bunx turbo run test"
