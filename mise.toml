@@ -1,0 +1,4 @@
+[tools]
+bun = "latest"
+chezmoi = "latest"
+"npm:@openai/codex" = "latest"
