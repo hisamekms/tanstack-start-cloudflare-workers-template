@@ -8,5 +8,8 @@
   },
   "peerDependencies": {
     "@modules/shared-kernel-write-model": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

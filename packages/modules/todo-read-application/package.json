@@ -10,5 +10,8 @@
     "@contracts/todo-public": "*",
     "@contracts/todo-server": "*",
     "@modules/todo-read-model": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

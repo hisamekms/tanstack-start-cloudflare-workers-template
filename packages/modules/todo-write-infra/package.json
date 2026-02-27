@@ -12,5 +12,8 @@
     "@modules/todo-write-application": "*",
     "@modules/todo-write-model": "*",
     "@platform/db": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

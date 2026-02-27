@@ -9,5 +9,8 @@
   "peerDependencies": {
     "@contracts/shared-kernel-public": "*",
     "@lib/public": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

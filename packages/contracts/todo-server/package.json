@@ -10,5 +10,8 @@
     "@contracts/shared-kernel-server": "*",
     "@contracts/todo-public": "*",
     "@lib/public": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

@@ -9,5 +9,8 @@
   "peerDependencies": {
     "@contracts/todo-public": "*",
     "@modules/shared-kernel-read-model": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

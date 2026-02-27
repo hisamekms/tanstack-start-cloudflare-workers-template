@@ -13,6 +13,10 @@ run = "bunx turbo run test"
 run = "bun run test:e2e"
 description = "Run Playwright e2e tests"
 
+[tasks.lint]
+description = "Run linting"
+run = "bunx turbo run lint"
+
 [tasks.typecheck]
 description = "Run type checking with tsgo"
 run = "bunx turbo run typecheck"

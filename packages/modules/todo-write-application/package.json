@@ -11,5 +11,8 @@
     "@contracts/todo-server": "*",
     "@lib/public": "*",
     "@modules/todo-write-model": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }

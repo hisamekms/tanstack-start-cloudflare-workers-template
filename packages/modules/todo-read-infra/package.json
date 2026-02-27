@@ -11,5 +11,8 @@
     "@modules/todo-read-application": "*",
     "@modules/todo-read-model": "*",
     "@platform/db": "*"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json src/"
   }
 }
