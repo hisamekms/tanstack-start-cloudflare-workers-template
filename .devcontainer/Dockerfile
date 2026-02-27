@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.6
 # Devcontainer向けの、安全性を考慮したDockerfile
 
-FROM ubuntu:resolute
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=dev
