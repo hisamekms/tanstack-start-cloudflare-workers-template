@@ -1,7 +1,6 @@
 import type { TodoCommand } from "@contracts/todo-public";
 import type { TodoCommandBus } from "@contracts/todo-server";
-import type { Result } from "@lib/public";
-import { err } from "@lib/public";
+import { err, type Result } from "neverthrow";
 
 import type { CompleteTodoHandler } from "./handlers/complete-todo-handler";
 import type { CreateTodoHandler } from "./handlers/create-todo-handler";

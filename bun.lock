@@ -68,9 +68,11 @@
     "packages/contracts/shared-kernel-server": {
       "name": "@contracts/shared-kernel-server",
       "version": "0.0.0",
+      "dependencies": {
+        "neverthrow": "^8.0.0",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel-public": "*",
-        "@lib/public": "*",
       },
     },
     "packages/contracts/todo-public": {
@@ -83,10 +85,12 @@
     "packages/contracts/todo-server": {
       "name": "@contracts/todo-server",
       "version": "0.0.0",
+      "dependencies": {
+        "neverthrow": "^8.0.0",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel-server": "*",
         "@contracts/todo-public": "*",
-        "@lib/public": "*",
       },
     },
     "packages/lib/public": {
@@ -125,6 +129,9 @@
     "packages/modules/todo/read/application": {
       "name": "@modules/todo-read-application",
       "version": "0.0.0",
+      "dependencies": {
+        "neverthrow": "^8.0.0",
+      },
       "peerDependencies": {
         "@contracts/todo-public": "*",
         "@contracts/todo-server": "*",
@@ -152,10 +159,12 @@
     "packages/modules/todo/write/application": {
       "name": "@modules/todo-write-application",
       "version": "0.0.0",
+      "dependencies": {
+        "neverthrow": "^8.0.0",
+      },
       "peerDependencies": {
         "@contracts/todo-public": "*",
         "@contracts/todo-server": "*",
-        "@lib/public": "*",
         "@modules/todo-write-model": "*",
       },
     },
@@ -1040,6 +1049,8 @@
     "nanoid": ["nanoid@3.3.11", "", { "bin": { "nanoid": "bin/nanoid.cjs" } }, "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w=="],
 
     "negotiator": ["negotiator@1.0.0", "", {}, "sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg=="],
+
+    "neverthrow": ["neverthrow@8.2.0", "", { "optionalDependencies": { "@rollup/rollup-linux-x64-gnu": "^4.24.0" } }, "sha512-kOCT/1MCPAxY5iUV3wytNFUMUolzuwd/VF/1KCx7kf6CutrOsTie+84zTGTpgQycjvfLdBBdvBvFLqFD2c0wkQ=="],
 
     "node-eval": ["node-eval@2.0.0", "", { "dependencies": { "path-is-absolute": "1.0.1" } }, "sha512-Ap+L9HznXAVeJj3TJ1op6M6bg5xtTq8L5CU/PJxtkhea/DrIxdTknGKIECKd/v/Lgql95iuMAYvIzBNd0pmcMg=="],
 

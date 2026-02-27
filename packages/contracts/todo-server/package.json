@@ -6,12 +6,14 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "peerDependencies": {
-    "@contracts/shared-kernel-server": "*",
-    "@contracts/todo-public": "*",
-    "@lib/public": "*"
-  },
   "scripts": {
     "lint": "oxlint -c ../../config/oxlint/base.json src/"
+  },
+  "dependencies": {
+    "neverthrow": "^8.0.0"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel-server": "*",
+    "@contracts/todo-public": "*"
   }
 }
