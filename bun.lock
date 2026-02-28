@@ -18,6 +18,7 @@
       "dependencies": {
         "@ark-ui/react": "catalog:",
         "@auth/core": "^0.34.3",
+        "@auth/d1-adapter": "^1.11.1",
         "@contracts/shared-kernel": "*",
         "@contracts/todo": "*",
         "@lib/public": "*",
@@ -214,6 +215,8 @@
     "@ark-ui/react": ["@ark-ui/react@5.34.0", "", { "dependencies": { "@internationalized/date": "3.11.0", "@zag-js/accordion": "1.35.2", "@zag-js/anatomy": "1.35.2", "@zag-js/angle-slider": "1.35.2", "@zag-js/async-list": "1.35.2", "@zag-js/auto-resize": "1.35.2", "@zag-js/avatar": "1.35.2", "@zag-js/carousel": "1.35.2", "@zag-js/cascade-select": "1.35.2", "@zag-js/checkbox": "1.35.2", "@zag-js/clipboard": "1.35.2", "@zag-js/collapsible": "1.35.2", "@zag-js/collection": "1.35.2", "@zag-js/color-picker": "1.35.2", "@zag-js/color-utils": "1.35.2", "@zag-js/combobox": "1.35.2", "@zag-js/core": "1.35.2", "@zag-js/date-picker": "1.35.2", "@zag-js/date-utils": "1.35.2", "@zag-js/dialog": "1.35.2", "@zag-js/dom-query": "1.35.2", "@zag-js/drawer": "1.35.2", "@zag-js/editable": "1.35.2", "@zag-js/file-upload": "1.35.2", "@zag-js/file-utils": "1.35.2", "@zag-js/floating-panel": "1.35.2", "@zag-js/focus-trap": "1.35.2", "@zag-js/highlight-word": "1.35.2", "@zag-js/hover-card": "1.35.2", "@zag-js/i18n-utils": "1.35.2", "@zag-js/image-cropper": "1.35.2", "@zag-js/json-tree-utils": "1.35.2", "@zag-js/listbox": "1.35.2", "@zag-js/marquee": "1.35.2", "@zag-js/menu": "1.35.2", "@zag-js/navigation-menu": "1.35.2", "@zag-js/number-input": "1.35.2", "@zag-js/pagination": "1.35.2", "@zag-js/password-input": "1.35.2", "@zag-js/pin-input": "1.35.2", "@zag-js/popover": "1.35.2", "@zag-js/presence": "1.35.2", "@zag-js/progress": "1.35.2", "@zag-js/qr-code": "1.35.2", "@zag-js/radio-group": "1.35.2", "@zag-js/rating-group": "1.35.2", "@zag-js/react": "1.35.2", "@zag-js/scroll-area": "1.35.2", "@zag-js/select": "1.35.2", "@zag-js/signature-pad": "1.35.2", "@zag-js/slider": "1.35.2", "@zag-js/splitter": "1.35.2", "@zag-js/steps": "1.35.2", "@zag-js/switch": "1.35.2", "@zag-js/tabs": "1.35.2", "@zag-js/tags-input": "1.35.2", "@zag-js/timer": "1.35.2", "@zag-js/toast": "1.35.2", "@zag-js/toggle": "1.35.2", "@zag-js/toggle-group": "1.35.2", "@zag-js/tooltip": "1.35.2", "@zag-js/tour": "1.35.2", "@zag-js/tree-view": "1.35.2", "@zag-js/types": "1.35.2", "@zag-js/utils": "1.35.2" }, "peerDependencies": { "react": ">=18.0.0", "react-dom": ">=18.0.0" } }, "sha512-9NDgvAyu8sdiJGDjD5MTkgsSwnSU22iYs4emF8Kpn3O8GI4aOb4I65kxqaNjd2ROaFa83jdN9gKozaz3lyml7w=="],
 
     "@auth/core": ["@auth/core@0.34.3", "", { "dependencies": { "@panva/hkdf": "^1.1.1", "@types/cookie": "0.6.0", "cookie": "0.6.0", "jose": "^5.1.3", "oauth4webapi": "^2.10.4", "preact": "10.11.3", "preact-render-to-string": "5.2.3" }, "peerDependencies": { "@simplewebauthn/browser": "^9.0.1", "@simplewebauthn/server": "^9.0.2", "nodemailer": "^7" }, "optionalPeers": ["@simplewebauthn/browser", "@simplewebauthn/server", "nodemailer"] }, "sha512-jMjY/S0doZnWYNV90x0jmU3B+UcrsfGYnukxYrRbj0CVvGI/MX3JbHsxSrx2d4mbnXaUsqJmAcDfoQWA6r0lOw=="],
+
+    "@auth/d1-adapter": ["@auth/d1-adapter@1.11.1", "", { "dependencies": { "@auth/core": "0.41.1" } }, "sha512-GRk18igRlGb0DYqskicf5101Q08WCbFCjuf5zyqqCnSShGKY43r3FkVI14sZLbkQZ8oJTciH8vCfkfQgTKHGiQ=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
@@ -1555,6 +1558,8 @@
 
     "zod-to-json-schema": ["zod-to-json-schema@3.25.1", "", { "peerDependencies": { "zod": "^3.25 || ^4" } }, "sha512-pM/SU9d3YAggzi6MtR4h7ruuQlqKtad8e9S0fmxcMi+ueAK5Korys/aWcV9LIIHTVbj01NdzxcnXSN+O74ZIVA=="],
 
+    "@auth/d1-adapter/@auth/core": ["@auth/core@0.41.1", "", { "dependencies": { "@panva/hkdf": "^1.2.1", "jose": "^6.0.6", "oauth4webapi": "^3.3.0", "preact": "10.24.3", "preact-render-to-string": "6.5.11" }, "peerDependencies": { "@simplewebauthn/browser": "^9.0.1", "@simplewebauthn/server": "^9.0.2", "nodemailer": "^7.0.7" }, "optionalPeers": ["@simplewebauthn/browser", "@simplewebauthn/server", "nodemailer"] }, "sha512-t9cJ2zNYAdWMacGRMT6+r4xr1uybIdmYa49calBPeTqwgAFPV/88ac9TEvCR85pvATiSPt8VaNf+Gt24JIT/uw=="],
+
     "@babel/generator/@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
 
     "@esbuild-kit/core-utils/esbuild": ["esbuild@0.18.20", "", { "optionalDependencies": { "@esbuild/android-arm": "0.18.20", "@esbuild/android-arm64": "0.18.20", "@esbuild/android-x64": "0.18.20", "@esbuild/darwin-arm64": "0.18.20", "@esbuild/darwin-x64": "0.18.20", "@esbuild/freebsd-arm64": "0.18.20", "@esbuild/freebsd-x64": "0.18.20", "@esbuild/linux-arm": "0.18.20", "@esbuild/linux-arm64": "0.18.20", "@esbuild/linux-ia32": "0.18.20", "@esbuild/linux-loong64": "0.18.20", "@esbuild/linux-mips64el": "0.18.20", "@esbuild/linux-ppc64": "0.18.20", "@esbuild/linux-riscv64": "0.18.20", "@esbuild/linux-s390x": "0.18.20", "@esbuild/linux-x64": "0.18.20", "@esbuild/netbsd-x64": "0.18.20", "@esbuild/openbsd-x64": "0.18.20", "@esbuild/sunos-x64": "0.18.20", "@esbuild/win32-arm64": "0.18.20", "@esbuild/win32-ia32": "0.18.20", "@esbuild/win32-x64": "0.18.20" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA=="],
@@ -1620,6 +1625,14 @@
     "wrangler/esbuild": ["esbuild@0.27.3", "", { "optionalDependencies": { "@esbuild/aix-ppc64": "0.27.3", "@esbuild/android-arm": "0.27.3", "@esbuild/android-arm64": "0.27.3", "@esbuild/android-x64": "0.27.3", "@esbuild/darwin-arm64": "0.27.3", "@esbuild/darwin-x64": "0.27.3", "@esbuild/freebsd-arm64": "0.27.3", "@esbuild/freebsd-x64": "0.27.3", "@esbuild/linux-arm": "0.27.3", "@esbuild/linux-arm64": "0.27.3", "@esbuild/linux-ia32": "0.27.3", "@esbuild/linux-loong64": "0.27.3", "@esbuild/linux-mips64el": "0.27.3", "@esbuild/linux-ppc64": "0.27.3", "@esbuild/linux-riscv64": "0.27.3", "@esbuild/linux-s390x": "0.27.3", "@esbuild/linux-x64": "0.27.3", "@esbuild/netbsd-arm64": "0.27.3", "@esbuild/netbsd-x64": "0.27.3", "@esbuild/openbsd-arm64": "0.27.3", "@esbuild/openbsd-x64": "0.27.3", "@esbuild/openharmony-arm64": "0.27.3", "@esbuild/sunos-x64": "0.27.3", "@esbuild/win32-arm64": "0.27.3", "@esbuild/win32-ia32": "0.27.3", "@esbuild/win32-x64": "0.27.3" }, "bin": { "esbuild": "bin/esbuild" } }, "sha512-8VwMnyGCONIs6cWue2IdpHxHnAjzxnw2Zr7MkVxB2vjmQ2ivqGFb4LEG3SMnv0Gb2F/G/2yA8zUaiL1gywDCCg=="],
 
     "youch/cookie": ["cookie@1.1.1", "", {}, "sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ=="],
+
+    "@auth/d1-adapter/@auth/core/jose": ["jose@6.1.3", "", {}, "sha512-0TpaTfihd4QMNwrz/ob2Bp7X04yuxJkjRGi4aKmOqwhov54i6u79oCv7T+C7lo70MKH6BesI3vscD1yb/yzKXQ=="],
+
+    "@auth/d1-adapter/@auth/core/oauth4webapi": ["oauth4webapi@3.8.5", "", {}, "sha512-A8jmyUckVhRJj5lspguklcl90Ydqk61H3dcU0oLhH3Yv13KpAliKTt5hknpGGPZSSfOwGyraNEFmofDYH+1kSg=="],
+
+    "@auth/d1-adapter/@auth/core/preact": ["preact@10.24.3", "", {}, "sha512-Z2dPnBnMUfyQfSQ+GBdsGa16hz35YmLmtTLhM169uW944hYL6xzTYkJjC07j+Wosz733pMWx0fgON3JNw1jJQA=="],
+
+    "@auth/d1-adapter/@auth/core/preact-render-to-string": ["preact-render-to-string@6.5.11", "", { "peerDependencies": { "preact": ">=10" } }, "sha512-ubnauqoGczeGISiOh6RjX0/cdaF8v/oDXIjO85XALCQjwQP+SB4RDXXtvZ6yTYSjG+PC1QRP2AhPgCEsM2EvUw=="],
 
     "@esbuild-kit/core-utils/esbuild/@esbuild/android-arm": ["@esbuild/android-arm@0.18.20", "", { "os": "android", "cpu": "arm" }, "sha512-fyi7TDI/ijKKNZTUJAQqiG5T7YjJXgnzkURqmGj13C6dCqckZBLdl4h7bkhHt/t0WP+zO9/zwroDvANaOqO5Sw=="],
 
