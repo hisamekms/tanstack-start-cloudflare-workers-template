@@ -10,6 +10,7 @@ apps/web/src/styled-system/
 .dev.vars
 .env
 apps/web/wrangler.local.toml
+apps/web/wrangler.e2e.toml
 
 # Playwright
 test-results/
