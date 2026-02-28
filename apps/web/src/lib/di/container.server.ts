@@ -1,4 +1,4 @@
-import { Container } from "@lib/di";
+import { Container } from "@lib/server-di";
 import {
   withQueryMiddleware,
   loggingQueryMiddleware,

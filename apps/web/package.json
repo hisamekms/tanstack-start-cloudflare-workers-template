@@ -20,7 +20,7 @@
     "@auth/core": "^0.34.3",
     "@contracts/shared-kernel": "*",
     "@contracts/todo": "*",
-    "@lib/di": "*",
+    "@lib/server-di": "*",
     "@lib/public": "*",
     "@lib/server": "*",
     "@modules/shared-kernel-read-application": "*",
