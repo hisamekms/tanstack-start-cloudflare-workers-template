@@ -1,4 +1,5 @@
 {
+  "name": "tanstack-start-cloudflare-workers-template",
   "private": true,
   "workspaces": {
     "packages": [
