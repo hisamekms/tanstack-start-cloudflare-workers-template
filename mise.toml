@@ -27,6 +27,10 @@ run = "bunx turbo run test"
 run = "bun run test:e2e"
 description = "Run Playwright e2e tests"
 
+[tasks."test:integration"]
+description = "Run integration tests"
+run = "bun run test:integration"
+
 [tasks.lint]
 description = "Run linting"
 run = ["check-dep-rules.sh", "bunx turbo run lint"]
@@ -42,3 +46,15 @@ run = "bunx oxfmt ."
 [tasks."format:check"]
 description = "Check formatting with oxfmt"
 run = "bunx oxfmt --check ."
+
+[tasks."db:generate"]
+description = "Generate Drizzle migrations"
+run = "bunx drizzle-kit generate --config packages/platform/db/drizzle.config.ts"
+
+[tasks."db:migrate"]
+description = "Apply local D1 migrations"
+run = "./scripts/db-migrate.sh"
+
+[tasks."db:seed"]
+description = "Seed local D1 data"
+run = "./scripts/db-seed.sh"

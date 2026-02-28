@@ -1,5 +1,5 @@
 name = "web"
-main = "@tanstack/react-start/server-entry"
+main = "./src/server-entry.ts"
 
 compatibility_date = "2026-02-27"
 compatibility_flags = ["nodejs_compat"]
@@ -8,6 +8,18 @@ compatibility_flags = ["nodejs_compat"]
 enabled = true
 
 [[d1_databases]]
-binding = "tanstack_start_cloudflare_workers_template"
+binding = "DB"
+database_name = "app-local"
+database_id = "5f471ee6-8dab-450e-ae9e-ccfc9282ab0b"
+preview_database_id = "5f471ee6-8dab-450e-ae9e-ccfc9282ab0b"
+migrations_dir = "../../packages/platform/db/src/d1/migrations"
+
+[env.production]
+name = "web"
+
+[[env.production.d1_databases]]
+binding = "DB"
 database_name = "tanstack-start-cloudflare-workers-template"
 database_id = "5f471ee6-8dab-450e-ae9e-ccfc9282ab0b"
+preview_database_id = "5f471ee6-8dab-450e-ae9e-ccfc9282ab0b"
+migrations_dir = "../../packages/platform/db/src/d1/migrations"

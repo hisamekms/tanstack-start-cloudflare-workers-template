@@ -1,4 +1,4 @@
-import type { TodoDto } from "@contracts/todo/public";
+import type { AppEnv } from "./cloudflare";
 import type { TodoCommandBus } from "@contracts/todo/server";
 import type { TodoQueryBus } from "@contracts/todo/server";
 import {
@@ -9,53 +9,40 @@ import {
   loggingCommandMiddleware,
   withCommandMiddleware,
 } from "@modules/shared-kernel-write-application";
+import { D1TodoReadModelStore, D1TodoRepository } from "@modules/todo-infra-d1";
 import { ListTodosHandler, TodoQueryBusImpl } from "@modules/todo-read-application";
-import { InMemoryTodoReadModelStore } from "@modules/todo-read-infra";
 import {
-  CreateTodoHandler,
   CompleteTodoHandler,
+  CreateTodoHandler,
   TodoCommandBusImpl,
 } from "@modules/todo-write-application";
-import { InMemoryTodoRepository } from "@modules/todo-write-infra";
-import { InMemoryStore } from "@platform/db";
+import { createD1Database } from "@platform/db";
 
-interface TodoRecord {
-  id: string;
-  title: string;
-  completed: boolean;
-  version: number;
-}
+export function createTodoServices(env: AppEnv): {
+  todoCommandBus: TodoCommandBus;
+  todoQueryBus: TodoQueryBus;
+} {
+  const db = createD1Database(env.DB);
 
-// In-memory stores (request-scoped on Cloudflare Workers)
-const writeStore = new InMemoryStore<TodoRecord>();
-const readStore = new InMemoryStore<TodoDto>();
+  const todoRepository = new D1TodoRepository(db);
+  const createTodoHandler = new CreateTodoHandler(todoRepository);
+  const completeTodoHandler = new CompleteTodoHandler(todoRepository);
 
-// Write side
-const todoRepository = new InMemoryTodoRepository(writeStore);
-const createTodoHandler = new CreateTodoHandler(todoRepository);
-const completeTodoHandler = new CompleteTodoHandler(todoRepository);
+  const todoReadModelStore = new D1TodoReadModelStore(db);
+  const listTodosHandler = new ListTodosHandler(todoReadModelStore);
 
-// Read side
-const todoReadModelStore = new InMemoryTodoReadModelStore(readStore);
-const listTodosHandler = new ListTodosHandler(todoReadModelStore);
+  const rawCommandBus = new TodoCommandBusImpl(createTodoHandler, completeTodoHandler);
+  const todoCommandBus: TodoCommandBus = withCommandMiddleware(rawCommandBus, [
+    loggingCommandMiddleware(),
+  ]);
 
-const rawCommandBus = new TodoCommandBusImpl(createTodoHandler, completeTodoHandler);
-export const todoCommandBus: TodoCommandBus = withCommandMiddleware(rawCommandBus, [
-  loggingCommandMiddleware(),
-]);
+  const rawQueryBus = new TodoQueryBusImpl(listTodosHandler);
+  const todoQueryBus: TodoQueryBus = withQueryMiddleware(rawQueryBus, [
+    loggingQueryMiddleware(),
+  ]);
 
-const rawQueryBus = new TodoQueryBusImpl(listTodosHandler);
-export const todoQueryBus: TodoQueryBus = withQueryMiddleware(rawQueryBus, [
-  loggingQueryMiddleware(),
-]);
-
-// Sync write model to read model (simplified event projection)
-export function syncWriteToRead(): void {
-  for (const record of writeStore.getAll()) {
-    readStore.save({
-      id: record.id,
-      title: record.title,
-      completed: record.completed,
-    });
-  }
+  return {
+    todoCommandBus,
+    todoQueryBus,
+  };
 }

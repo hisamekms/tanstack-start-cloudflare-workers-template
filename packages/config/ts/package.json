@@ -1,5 +1,11 @@
 {
   "name": "@config/ts",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "exports": {
+    "./base.json": "./base.json",
+    "./bun.json": "./bun.json",
+    "./react.json": "./react.json",
+    "./tanstack-start.json": "./tanstack-start.json"
+  }
 }

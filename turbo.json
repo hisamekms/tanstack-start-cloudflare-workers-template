@@ -4,7 +4,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".output/**", "dist/**"],
-      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "wrangler.jsonc", "package.json"]
+      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "wrangler.toml", "package.json"]
     },
     "dev": {
       "dependsOn": ["^build"],
@@ -35,6 +35,10 @@
       "dependsOn": ["^build"],
       "cache": false,
       "passThroughEnv": ["APP_ENV", "AUTH_SECRET", "CI"]
+    },
+    "test:integration": {
+      "dependsOn": ["^build"],
+      "cache": false
     }
   }
 }

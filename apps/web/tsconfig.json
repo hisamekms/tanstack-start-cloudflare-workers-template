@@ -1,5 +1,5 @@
 {
-  "extends": "@config/ts/tanstack-start.json",
+  "extends": "../../packages/config/ts/tanstack-start.json",
   "compilerOptions": {
     "paths": { "~/*": ["./src/*"] }
   },
