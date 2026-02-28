@@ -23,6 +23,7 @@ interface TodoRecord {
   id: string;
   title: string;
   completed: boolean;
+  version: number;
 }
 
 // In-memory stores (request-scoped on Cloudflare Workers)

@@ -6,6 +6,7 @@ describe("RouterContext", () => {
   it("should accept an object with queryClient property", () => {
     const ctx: RouterContext = {
       queryClient: {} as RouterContext["queryClient"],
+      session: null,
     };
     expect(ctx).toHaveProperty("queryClient");
   });

@@ -16,7 +16,7 @@ export function getRouter() {
     scrollRestoration: true,
     context: { queryClient, session: null },
     dehydrate: () => ({
-      queryClientState: dehydrate(queryClient),
+      queryClientState: dehydrate(queryClient) as any,
     }),
     hydrate: (dehydrated) => {
       hydrate(queryClient, dehydrated.queryClientState);
