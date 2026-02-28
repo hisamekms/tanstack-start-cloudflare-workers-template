@@ -25,7 +25,7 @@ function Home() {
       >
         Home
       </h1>
-      <p className={css({ color: "gray.600" })}>Panda CSS is working!</p>
+      <p className={css({ color: "text.secondary" })}>Panda CSS is working!</p>
     </div>
   );
 }
