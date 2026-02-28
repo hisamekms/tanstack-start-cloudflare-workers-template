@@ -31,6 +31,7 @@
     "@modules/todo-write-application": "*",
     "@modules/todo-write-model": "*",
     "@platform/db": "*",
+    "@ark-ui/react": "catalog:",
     "@tanstack/react-query": "^5.90.21",
     "@tanstack/react-query-devtools": "^5.91.3",
     "@tanstack/react-router": "^1.163.2",
