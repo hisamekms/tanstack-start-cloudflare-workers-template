@@ -1,13 +1,20 @@
 {
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/config/*",
-    "packages/contracts/*",
-    "packages/modules/*/*/*",
-    "packages/platform/*",
-    "packages/lib/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/config/*",
+      "packages/contracts/*",
+      "packages/modules/*/*/*",
+      "packages/platform/*",
+      "packages/lib/*"
+    ],
+    "catalog": {
+      "neverthrow": "^8.0.0",
+      "zod": "^3",
+      "vitest": "^4.0.18"
+    }
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

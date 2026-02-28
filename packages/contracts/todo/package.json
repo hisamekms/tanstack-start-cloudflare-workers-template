@@ -11,8 +11,8 @@
     "lint": "oxlint -c ../../config/oxlint/base.json public/src/ server/src/"
   },
   "dependencies": {
-    "neverthrow": "^8.0.0",
-    "zod": "^3"
+    "neverthrow": "catalog:",
+    "zod": "catalog:"
   },
   "peerDependencies": {
     "@contracts/shared-kernel": "*"

@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@lib/server": "*",
-    "neverthrow": "^8.0.0"
+    "neverthrow": "catalog:"
   },
   "devDependencies": {
-    "vitest": "^4.0.18"
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@contracts/shared-kernel": "*",

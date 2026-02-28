@@ -10,7 +10,7 @@
     "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   },
   "dependencies": {
-    "neverthrow": "^8.0.0",
+    "neverthrow": "catalog:",
     "uuid": "^11.1.0"
   },
   "peerDependencies": {
