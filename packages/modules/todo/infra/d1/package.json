@@ -1,15 +1,18 @@
 {
-  "name": "@modules/todo-read-infra",
+  "name": "@modules/todo-infra-d1",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
+  "dependencies": {
+    "drizzle-orm": "^0.45.1"
+  },
   "peerDependencies": {
     "@contracts/todo-public": "*",
-    "@modules/todo-read-application": "*",
     "@modules/todo-read-model": "*",
+    "@modules/todo-write-model": "*",
     "@platform/db": "*"
   },
   "scripts": {

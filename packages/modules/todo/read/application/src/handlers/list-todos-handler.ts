@@ -6,6 +6,6 @@ export class ListTodosHandler {
   constructor(private readonly store: TodoReadModelStore) {}
 
   async execute(): Promise<Result<TodoDto[], string>> {
-    return ok(this.store.getAll());
+    return ok(await this.store.getAll());
   }
 }

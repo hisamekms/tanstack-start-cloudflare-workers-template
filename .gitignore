@@ -9,6 +9,7 @@ worktrees/
 apps/web/src/styled-system/
 .dev.vars
 .env
+apps/web/wrangler.local.toml
 
 # Playwright
 test-results/

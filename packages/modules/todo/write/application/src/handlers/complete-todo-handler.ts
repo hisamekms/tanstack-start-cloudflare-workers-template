@@ -6,12 +6,12 @@ export class CompleteTodoHandler {
   constructor(private readonly repository: TodoRepository) {}
 
   async execute(command: CompleteTodoCommand): Promise<Result<void, string>> {
-    const todo = this.repository.findById(command.todoId);
+    const todo = await this.repository.findById(command.todoId);
     if (!todo) {
       return err(`Todo not found: ${command.todoId}`);
     }
     const { state } = completeTodo(todo);
-    this.repository.save(state);
+    await this.repository.save(state);
     return ok(undefined);
   }
 }
