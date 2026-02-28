@@ -1,6 +1,14 @@
 import type { TodoDto } from "@contracts/todo-public";
 import type { TodoCommandBus } from "@contracts/todo-server";
 import type { TodoQueryBus } from "@contracts/todo-server";
+import {
+  loggingQueryMiddleware,
+  withQueryMiddleware,
+} from "@modules/shared-kernel-read-application";
+import {
+  loggingCommandMiddleware,
+  withCommandMiddleware,
+} from "@modules/shared-kernel-write-application";
 import { ListTodosHandler, TodoQueryBusImpl } from "@modules/todo-read-application";
 import { InMemoryTodoReadModelStore } from "@modules/todo-read-infra";
 import {
@@ -30,12 +38,15 @@ const completeTodoHandler = new CompleteTodoHandler(todoRepository);
 const todoReadModelStore = new InMemoryTodoReadModelStore(readStore);
 const listTodosHandler = new ListTodosHandler(todoReadModelStore);
 
-export const todoCommandBus: TodoCommandBus = new TodoCommandBusImpl(
-  createTodoHandler,
-  completeTodoHandler,
-);
+const rawCommandBus = new TodoCommandBusImpl(createTodoHandler, completeTodoHandler);
+export const todoCommandBus: TodoCommandBus = withCommandMiddleware(rawCommandBus, [
+  loggingCommandMiddleware(),
+]);
 
-export const todoQueryBus: TodoQueryBus = new TodoQueryBusImpl(listTodosHandler);
+const rawQueryBus = new TodoQueryBusImpl(listTodosHandler);
+export const todoQueryBus: TodoQueryBus = withQueryMiddleware(rawQueryBus, [
+  loggingQueryMiddleware(),
+]);
 
 // Sync write model to read model (simplified event projection)
 export function syncWriteToRead(): void {

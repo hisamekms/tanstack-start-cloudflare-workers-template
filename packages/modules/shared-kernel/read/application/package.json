@@ -6,10 +6,20 @@
   "exports": {
     ".": "./src/index.ts"
   },
-  "peerDependencies": {
-    "@modules/shared-kernel-read-model": "*"
-  },
   "scripts": {
-    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@lib/server": "*",
+    "neverthrow": "^8.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel-public": "*",
+    "@contracts/shared-kernel-server": "*",
+    "@modules/shared-kernel-read-model": "*"
   }
 }
