@@ -13,8 +13,7 @@
     "neverthrow": "^8.0.0"
   },
   "peerDependencies": {
-    "@contracts/todo-public": "*",
-    "@contracts/todo-server": "*",
+    "@contracts/todo": "*",
     "@modules/todo-read-model": "*"
   }
 }

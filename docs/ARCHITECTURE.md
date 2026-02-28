@@ -8,30 +8,32 @@ apps/
 
 packages/
 ├── contracts/                                   # bounded contextの外側に対する契約API
-│   ├── shared-kernel-public/
-│   │   └── src/
-│   │       ├── events.ts
-│   │       ├── commands.ts
-│   │       ├── queries.ts
-│   │       └── index.ts
-│   ├── shared-kernel-server/
-│   │   └── src/
-│   │       ├── command-bus.ts
-│   │       ├── query-bus.ts
-│   │       ├── event-bus.ts                     # 各BCのevent-busのmarker interface
-│   │       └── index.ts
-│   ├── <bc>-public/                             # BCの契約。client/server問わず参照可能
-│   │   └── src/
-│   │       ├── events.ts
-│   │       ├── commands.ts
-│   │       ├── queries.ts
-│   │       └── index.ts
-│   └── <bc>-server/                             # BCの契約。serverから参照可能
-│       └── src/
-│           ├── <bc>-command-bus.ts
-│           ├── <bc>-query-bus.ts
-│           ├── <bc>-event-bus.ts
-│           └── index.ts
+│   ├── shared-kernel/
+│   │   ├── public/
+│   │   │   └── src/
+│   │   │       ├── events.ts
+│   │   │       ├── commands.ts
+│   │   │       ├── queries.ts
+│   │   │       └── index.ts
+│   │   └── server/
+│   │       └── src/
+│   │           ├── command-bus.ts
+│   │           ├── query-bus.ts
+│   │           ├── event-bus.ts                 # 各BCのevent-busのmarker interface
+│   │           └── index.ts
+│   └── <bc>/
+│       ├── public/                              # BCの契約。client/server問わず参照可能
+│       │   └── src/
+│       │       ├── events.ts
+│       │       ├── commands.ts
+│       │       ├── queries.ts
+│       │       └── index.ts
+│       └── server/                              # BCの契約。serverから参照可能
+│           └── src/
+│               ├── <bc>-command-bus.ts
+│               ├── <bc>-query-bus.ts
+│               ├── <bc>-event-bus.ts
+│               └── index.ts
 │
 ├── modules/                                     # bounded contextの内部実装
 │   ├── shared-kernel/
@@ -81,10 +83,8 @@ packages/
 | パス                                               | パッケージ名                               | 説明                                            |
 | -------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- |
 | `apps/web`                                         | -                                          | TanStack Start / Cloudflare Workers             |
-| `packages/contracts/shared-kernel-public`          | `@contracts/shared-kernel-public`          | ドメイン知識を伴う共通の型。client/server参照可 |
-| `packages/contracts/shared-kernel-server`          | `@contracts/shared-kernel-server`          | ドメイン知識を伴う共通の型。server参照可        |
-| `packages/contracts/<bc>-public`                   | `@contracts/<bc>-public`                   | BCの契約。client/server参照可                   |
-| `packages/contracts/<bc>-server`                   | `@contracts/<bc>-server`                   | BCの契約。server参照可                          |
+| `packages/contracts/shared-kernel`                 | `@contracts/shared-kernel`                 | ドメイン知識を伴う共通の型（`/public`, `/server` でexport） |
+| `packages/contracts/<bc>`                          | `@contracts/<bc>`                          | BCの契約（`/public`, `/server` でexport）       |
 | `packages/modules/shared-kernel/write/application` | `@modules/shared-kernel-write-application` | shared-kernel write側application層              |
 | `packages/modules/shared-kernel/write/model`       | `@modules/shared-kernel-write-model`       | shared-kernel write側model層                    |
 | `packages/modules/shared-kernel/read/application`  | `@modules/shared-kernel-read-application`  | shared-kernel read側application層               |
@@ -115,7 +115,7 @@ packages/
 
 - BC間の参照は contracts/\* のみ許可
 - modules/<bc-A>-_ → modules/<bc-B>-_ : NG（直接参照禁止）
-- modules/<bc-A>-_ → contracts/<bc-B>-_ : OK
+- modules/<bc-A>-_ → contracts/<bc-B>/* : OK
 
 ### platform
 

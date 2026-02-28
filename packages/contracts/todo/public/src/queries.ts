@@ -1,4 +1,4 @@
-import type { Query } from "@contracts/shared-kernel-public";
+import type { Query } from "@contracts/shared-kernel/public";
 
 export enum TodoQueryType {
   ListTodos = "ListTodos",

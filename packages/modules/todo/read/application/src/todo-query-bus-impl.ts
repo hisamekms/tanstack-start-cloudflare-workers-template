@@ -1,6 +1,6 @@
-import { TodoQueryType } from "@contracts/todo-public";
-import type { TodoDto, TodoQuery } from "@contracts/todo-public";
-import type { TodoQueryBus } from "@contracts/todo-server";
+import { TodoQueryType } from "@contracts/todo/public";
+import type { TodoDto, TodoQuery } from "@contracts/todo/public";
+import type { TodoQueryBus } from "@contracts/todo/server";
 import { err, type Result } from "neverthrow";
 
 import type { ListTodosHandler } from "./handlers/list-todos-handler";

@@ -1,5 +1,5 @@
-import type { Command } from "@contracts/shared-kernel-public";
-import type { CommandBus, Middleware } from "@contracts/shared-kernel-server";
+import type { Command } from "@contracts/shared-kernel/public";
+import type { CommandBus, Middleware } from "@contracts/shared-kernel/server";
 import { err, ok } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 

@@ -1,5 +1,5 @@
-import type { Query } from "@contracts/shared-kernel-public";
-import type { Middleware } from "@contracts/shared-kernel-server";
+import type { Query } from "@contracts/shared-kernel/public";
+import type { Middleware } from "@contracts/shared-kernel/server";
 import { logger } from "@lib/server";
 
 export function loggingQueryMiddleware<TQuery extends Query, TResult>(): Middleware<

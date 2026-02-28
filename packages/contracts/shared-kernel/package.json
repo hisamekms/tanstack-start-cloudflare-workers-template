@@ -1,0 +1,16 @@
+{
+  "name": "@contracts/shared-kernel",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./public": "./public/src/index.ts",
+    "./server": "./server/src/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../config/oxlint/base.json public/src/ server/src/"
+  },
+  "dependencies": {
+    "neverthrow": "^8.0.0"
+  }
+}

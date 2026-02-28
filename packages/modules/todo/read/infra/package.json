@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
-    "@contracts/todo-public": "*",
+    "@contracts/todo": "*",
     "@modules/todo-read-application": "*",
     "@modules/todo-read-model": "*",
     "@platform/db": "*"

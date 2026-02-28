@@ -7,8 +7,8 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
-    "@contracts/shared-kernel-public": "*",
-    "@contracts/todo-public": "*",
+    "@contracts/shared-kernel": "*",
+    "@contracts/todo": "*",
     "@modules/shared-kernel-write-model": "*"
   },
   "scripts": {

@@ -1,5 +1,5 @@
-import { TodoCommandType, TodoQueryType } from "@contracts/todo-public";
-import type { TodoDto } from "@contracts/todo-public";
+import { TodoCommandType, TodoQueryType } from "@contracts/todo/public";
+import type { TodoDto } from "@contracts/todo/public";
 import { createServerFn } from "@tanstack/react-start";
 
 import { todoCommandBus, todoQueryBus, syncWriteToRead } from "./todo-composition-root.server";

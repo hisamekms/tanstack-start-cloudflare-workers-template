@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
-    "@contracts/shared-kernel-public": "*"
+    "@contracts/shared-kernel": "*"
   },
   "scripts": {
     "lint": "oxlint -c ../../../../config/oxlint/base.json src/"

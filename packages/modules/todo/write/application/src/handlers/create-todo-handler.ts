@@ -1,4 +1,4 @@
-import type { CreateTodoCommand } from "@contracts/todo-public";
+import type { CreateTodoCommand } from "@contracts/todo/public";
 import { createTodo, type TodoRepository } from "@modules/todo-write-model";
 import { ok, type Result } from "neverthrow";
 

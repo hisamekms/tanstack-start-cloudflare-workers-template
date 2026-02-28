@@ -1,5 +1,5 @@
-import type { AggregateRoot } from "@contracts/shared-kernel-public";
-import type { DomainEvent } from "@contracts/shared-kernel-public";
+import type { AggregateRoot } from "@contracts/shared-kernel/public";
+import type { DomainEvent } from "@contracts/shared-kernel/public";
 
 export interface CommandResult<
   TState extends AggregateRoot,

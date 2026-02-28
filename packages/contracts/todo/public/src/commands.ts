@@ -1,4 +1,4 @@
-import type { Command } from "@contracts/shared-kernel-public";
+import type { Command } from "@contracts/shared-kernel/public";
 
 export enum TodoCommandType {
   CreateTodo = "CreateTodo",

@@ -1,4 +1,4 @@
-import type { DomainEvent } from "@contracts/shared-kernel-public";
+import type { DomainEvent } from "@contracts/shared-kernel/public";
 
 export interface TodoCreatedEvent extends DomainEvent {
   readonly eventType: "TodoCreated";

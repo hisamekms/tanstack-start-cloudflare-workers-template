@@ -1,8 +1,8 @@
-import type { AggregateRoot } from "@contracts/shared-kernel-public";
+import type { AggregateRoot } from "@contracts/shared-kernel/public";
 import type {
   TodoCreatedEvent,
   TodoCompletedEvent,
-} from "@contracts/todo-public";
+} from "@contracts/todo/public";
 import type { CommandResult } from "@modules/shared-kernel-write-model";
 
 export interface Todo extends AggregateRoot<string> {

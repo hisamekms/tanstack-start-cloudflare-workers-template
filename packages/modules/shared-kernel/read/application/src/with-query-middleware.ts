@@ -1,5 +1,5 @@
-import type { Query } from "@contracts/shared-kernel-public";
-import type { Middleware, QueryBus } from "@contracts/shared-kernel-server";
+import type { Query } from "@contracts/shared-kernel/public";
+import type { Middleware, QueryBus } from "@contracts/shared-kernel/server";
 
 export function withQueryMiddleware<TQuery extends Query, TResult>(
   bus: QueryBus<TQuery, TResult>,

@@ -1,5 +1,5 @@
-import type { Command } from "@contracts/shared-kernel-public";
-import type { Middleware } from "@contracts/shared-kernel-server";
+import type { Command } from "@contracts/shared-kernel/public";
+import type { Middleware } from "@contracts/shared-kernel/server";
 import { logger } from "@lib/server";
 
 export function loggingCommandMiddleware<TCommand extends Command>(): Middleware<TCommand, void> {

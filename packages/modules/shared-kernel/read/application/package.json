@@ -18,8 +18,7 @@
     "vitest": "^4.0.18"
   },
   "peerDependencies": {
-    "@contracts/shared-kernel-public": "*",
-    "@contracts/shared-kernel-server": "*",
+    "@contracts/shared-kernel": "*",
     "@modules/shared-kernel-read-model": "*"
   }
 }

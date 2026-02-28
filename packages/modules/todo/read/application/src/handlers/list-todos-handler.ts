@@ -1,4 +1,4 @@
-import type { TodoDto } from "@contracts/todo-public";
+import type { TodoDto } from "@contracts/todo/public";
 import type { TodoReadModelStore } from "@modules/todo-read-model";
 import { ok, type Result } from "neverthrow";
 

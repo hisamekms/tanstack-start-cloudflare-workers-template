@@ -28,10 +28,9 @@ classify_package() {
     pkg_bc="${BASH_REMATCH[1]}"
     pkg_side="${BASH_REMATCH[2]}"
     pkg_layer="${BASH_REMATCH[3]}"
-  elif [[ "$name" =~ ^@contracts/(.+)-(public|server)$ ]]; then
+  elif [[ "$name" =~ ^@contracts/(.+)$ ]]; then
     pkg_scope="contracts"
     pkg_bc="${BASH_REMATCH[1]}"
-    pkg_suffix="${BASH_REMATCH[2]}"
   elif [[ "$name" =~ ^@platform/(.+)$ ]]; then
     pkg_scope="platform"
   elif [[ "$name" =~ ^@lib/(.+)$ ]]; then

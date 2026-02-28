@@ -16,10 +16,8 @@
   },
   "dependencies": {
     "@auth/core": "^0.34.3",
-    "@contracts/shared-kernel-public": "*",
-    "@contracts/shared-kernel-server": "*",
-    "@contracts/todo-public": "*",
-    "@contracts/todo-server": "*",
+    "@contracts/shared-kernel": "*",
+    "@contracts/todo": "*",
     "@lib/public": "*",
     "@lib/server": "*",
     "@modules/shared-kernel-read-application": "*",

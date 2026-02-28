@@ -1,6 +1,6 @@
-import type { TodoDto } from "@contracts/todo-public";
-import type { TodoCommandBus } from "@contracts/todo-server";
-import type { TodoQueryBus } from "@contracts/todo-server";
+import type { TodoDto } from "@contracts/todo/public";
+import type { TodoCommandBus } from "@contracts/todo/server";
+import type { TodoQueryBus } from "@contracts/todo/server";
 import {
   loggingQueryMiddleware,
   withQueryMiddleware,
