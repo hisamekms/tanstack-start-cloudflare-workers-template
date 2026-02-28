@@ -9,7 +9,8 @@
     "dev": {
       "dependsOn": ["^build"],
       "persistent": true,
-      "cache": false
+      "cache": false,
+      "passThroughEnv": ["APP_ENV", "AUTH_SECRET"]
     },
     "lint": {
       "dependsOn": ["^lint"]
