@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 import { D1TodoReadModelStore, D1TodoRepository } from "@modules/todo-infra-d1";
 import { createTodo, type Todo } from "@modules/todo-write-model";
-import { createD1Database } from "@platform/db";
+import { createD1Database } from "@platform/db-d1";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { getPlatformProxy } from "wrangler";
 
@@ -15,7 +15,7 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirPath = path.dirname(currentFilePath);
 const appRootPath = path.resolve(currentDirPath, "../..");
 const baseWranglerConfigPath = path.join(appRootPath, "wrangler.toml");
-const migrationsDirPath = path.resolve(appRootPath, "../../packages/platform/db/src/d1/migrations");
+const migrationsDirPath = path.resolve(appRootPath, "../../packages/platform/db/d1/src/migrations");
 
 interface TestContext {
   dispose: () => Promise<void>;
@@ -51,7 +51,10 @@ async function createTestContext(): Promise<TestContext> {
 
   await writeFile(
     wranglerConfigPath,
-    wranglerConfigTemplate.replace('database_name = "app-local"', `database_name = "${databaseName}"`),
+    wranglerConfigTemplate.replace(
+      'database_name = "app-local"',
+      `database_name = "${databaseName}"`,
+    ),
   );
 
   const proxy = await getPlatformProxy<AppEnv>({
@@ -89,7 +92,10 @@ describe("todo D1 integration", () => {
 
     const database = createD1Database(context.env.DB);
     const repository = new D1TodoRepository(database);
-    const created = createTodo("01954a8f-65e3-7b14-9e0c-8d4f6f15f201", "Call carrier about invoice mismatch");
+    const created = createTodo(
+      "01954a8f-65e3-7b14-9e0c-8d4f6f15f201",
+      "Call carrier about invoice mismatch",
+    );
 
     await repository.save(created.state);
 
@@ -106,8 +112,12 @@ describe("todo D1 integration", () => {
     const readModelStore = new D1TodoReadModelStore(database);
 
     const todos: Todo[] = [
-      createTodo("01954a8f-65e3-7b14-9e0c-8d4f6f15f301", "Update customer success handoff notes").state,
-      createTodo("01954a8f-65e3-7b14-9e0c-8d4f6f15f302", "Book user interviews for billing redesign").state,
+      createTodo("01954a8f-65e3-7b14-9e0c-8d4f6f15f301", "Update customer success handoff notes")
+        .state,
+      createTodo(
+        "01954a8f-65e3-7b14-9e0c-8d4f6f15f302",
+        "Book user interviews for billing redesign",
+      ).state,
     ];
 
     for (const todo of todos) {

@@ -48,7 +48,7 @@ run = "bunx oxfmt --check ."
 
 [tasks."db:generate"]
 description = "Generate Drizzle migrations"
-run = "bunx drizzle-kit generate --config packages/platform/db/drizzle.config.ts"
+run = "bunx drizzle-kit generate --config packages/platform/db/d1/drizzle.config.ts"
 
 [tasks."db:migrate"]
 description = "Apply local D1 migrations"

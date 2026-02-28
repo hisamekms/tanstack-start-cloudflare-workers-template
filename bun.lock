@@ -31,7 +31,7 @@
         "@modules/todo-read-model": "*",
         "@modules/todo-write-application": "*",
         "@modules/todo-write-model": "*",
-        "@platform/db": "*",
+        "@platform/db-d1": "*",
         "@tanstack/react-query": "^5.90.21",
         "@tanstack/react-query-devtools": "^5.91.3",
         "@tanstack/react-router": "^1.163.2",
@@ -149,7 +149,7 @@
         "@contracts/todo": "*",
         "@modules/todo-read-model": "*",
         "@modules/todo-write-model": "*",
-        "@platform/db": "*",
+        "@platform/db-d1": "*",
       },
     },
     "packages/modules/todo/read/application": {
@@ -192,8 +192,8 @@
         "@modules/shared-kernel-write-model": "*",
       },
     },
-    "packages/platform/db": {
-      "name": "@platform/db",
+    "packages/platform/db/d1": {
+      "name": "@platform/db-d1",
       "version": "0.0.0",
       "dependencies": {
         "drizzle-orm": "^0.45.1",
@@ -573,7 +573,7 @@
 
     "@panva/hkdf": ["@panva/hkdf@1.2.1", "", {}, "sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw=="],
 
-    "@platform/db": ["@platform/db@workspace:packages/platform/db"],
+    "@platform/db-d1": ["@platform/db-d1@workspace:packages/platform/db/d1"],
 
     "@playwright/test": ["@playwright/test@1.49.0", "", { "dependencies": { "playwright": "1.49.0" }, "bin": { "playwright": "cli.js" } }, "sha512-DMulbwQURa8rNIQrf94+jPJQ4FmOVdpE5ZppRNvWVjvhC+6sOeo28r8MgIpQRYouXRtt/FCCXU7zn20jnHR4Qw=="],
 

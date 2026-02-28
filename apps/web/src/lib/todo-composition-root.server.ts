@@ -1,4 +1,3 @@
-import type { AppEnv } from "./cloudflare";
 import type { TodoCommandBus } from "@contracts/todo/server";
 import type { TodoQueryBus } from "@contracts/todo/server";
 import {
@@ -16,7 +15,9 @@ import {
   CreateTodoHandler,
   TodoCommandBusImpl,
 } from "@modules/todo-write-application";
-import { createD1Database } from "@platform/db";
+import { createD1Database } from "@platform/db-d1";
+
+import type { AppEnv } from "./cloudflare";
 
 export function createTodoServices(env: AppEnv): {
   todoCommandBus: TodoCommandBus;
@@ -37,9 +38,7 @@ export function createTodoServices(env: AppEnv): {
   ]);
 
   const rawQueryBus = new TodoQueryBusImpl(listTodosHandler);
-  const todoQueryBus: TodoQueryBus = withQueryMiddleware(rawQueryBus, [
-    loggingQueryMiddleware(),
-  ]);
+  const todoQueryBus: TodoQueryBus = withQueryMiddleware(rawQueryBus, [loggingQueryMiddleware()]);
 
   return {
     todoCommandBus,

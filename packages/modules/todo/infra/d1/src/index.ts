@@ -1,7 +1,7 @@
 import type { TodoDto } from "@contracts/todo/public";
 import type { TodoReadModelStore } from "@modules/todo-read-model";
 import type { Todo, TodoRepository } from "@modules/todo-write-model";
-import { todosTable, type AppDatabase } from "@platform/db";
+import { todosTable, type AppDatabase } from "@platform/db-d1";
 import { eq } from "drizzle-orm";
 
 function mapRecordToTodo(record: typeof todosTable.$inferSelect): Todo {

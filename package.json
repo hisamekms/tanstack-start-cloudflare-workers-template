@@ -7,7 +7,7 @@
       "packages/config/*",
       "packages/contracts/*",
       "packages/modules/*/*/*",
-      "packages/platform/*",
+      "packages/platform/*/*",
       "packages/lib/*"
     ],
     "catalog": {

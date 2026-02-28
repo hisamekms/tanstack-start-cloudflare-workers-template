@@ -6,6 +6,9 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  },
   "dependencies": {
     "drizzle-orm": "^0.45.1"
   },
@@ -13,9 +16,6 @@
     "@contracts/todo": "*",
     "@modules/todo-read-model": "*",
     "@modules/todo-write-model": "*",
-    "@platform/db": "*"
-  },
-  "scripts": {
-    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+    "@platform/db-d1": "*"
   }
 }

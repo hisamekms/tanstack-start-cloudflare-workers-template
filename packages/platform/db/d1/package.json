@@ -1,0 +1,15 @@
+{
+  "name": "@platform/db-d1",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../../config/oxlint/base.json src/"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.1"
+  }
+}
