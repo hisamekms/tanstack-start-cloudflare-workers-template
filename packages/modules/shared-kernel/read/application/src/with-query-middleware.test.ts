@@ -1,6 +1,6 @@
 import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
-import type { Middleware, QueryBus } from "@contracts/shared-kernel/server";
+import type { Context, Middleware, QueryBus } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
@@ -15,14 +15,20 @@ interface TestQuery extends Query<"TestQuery"> {
 
 type TestResult = { items: string[] };
 
+const testContext: Context = { kind: "public" };
+
 function createMockBus(
   result = okAsync<TestResult, InstanceType<typeof TestError>>({ items: ["a", "b"] }),
 ): QueryBus<TestQuery, TestResult, InstanceType<typeof TestError>> {
   return { execute: vi.fn().mockReturnValue(result) };
 }
 
-const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (query, next) => {
-  return next(query);
+const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
+  query,
+  ctx,
+  next,
+) => {
+  return next(query, ctx);
 };
 
 describe("withQueryMiddleware", () => {
@@ -31,11 +37,11 @@ describe("withQueryMiddleware", () => {
     const wrapped = withQueryMiddleware(bus, []);
     const query: TestQuery = { queryType: "TestQuery", filter: "all" };
 
-    const result = await wrapped.execute(query);
+    const result = await wrapped.execute(query, testContext);
 
     expect(result.isOk()).toBe(true);
     expect(result._unsafeUnwrap()).toEqual({ items: ["a", "b"] });
-    expect(bus.execute).toHaveBeenCalledWith(query);
+    expect(bus.execute).toHaveBeenCalledWith(query, testContext);
   });
 
   test("executes middlewares in order (first middleware is outermost)", async () => {
@@ -44,11 +50,12 @@ describe("withQueryMiddleware", () => {
 
     const mw1: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       query,
+      ctx,
       next,
     ) => {
       order.push("mw1-before");
       return new ResultAsync(
-        next(query).then((result) => {
+        next(query, ctx).then((result) => {
           order.push("mw1-after");
           return result;
         }),
@@ -57,11 +64,12 @@ describe("withQueryMiddleware", () => {
 
     const mw2: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       query,
+      ctx,
       next,
     ) => {
       order.push("mw2-before");
       return new ResultAsync(
-        next(query).then((result) => {
+        next(query, ctx).then((result) => {
           order.push("mw2-after");
           return result;
         }),
@@ -69,7 +77,7 @@ describe("withQueryMiddleware", () => {
     };
 
     const wrapped = withQueryMiddleware(bus, [mw1, mw2]);
-    await wrapped.execute({ queryType: "TestQuery", filter: "all" });
+    await wrapped.execute({ queryType: "TestQuery", filter: "all" }, testContext);
 
     expect(order).toEqual(["mw1-before", "mw2-before", "mw2-after", "mw1-after"]);
   });
@@ -79,16 +87,20 @@ describe("withQueryMiddleware", () => {
 
     const shortCircuit: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       _query,
+      _ctx,
       _next,
     ) => {
       return okAsync({ items: ["cached"] });
     };
 
     const wrapped = withQueryMiddleware(bus, [shortCircuit]);
-    const result = await wrapped.execute({
-      queryType: "TestQuery",
-      filter: "all",
-    });
+    const result = await wrapped.execute(
+      {
+        queryType: "TestQuery",
+        filter: "all",
+      },
+      testContext,
+    );
 
     expect(result.isOk()).toBe(true);
     expect(result._unsafeUnwrap()).toEqual({ items: ["cached"] });
@@ -99,10 +111,13 @@ describe("withQueryMiddleware", () => {
     const bus = createMockBus(errAsync(new TestError("query error")));
 
     const wrapped = withQueryMiddleware(bus, [mw]);
-    const result = await wrapped.execute({
-      queryType: "TestQuery",
-      filter: "all",
-    });
+    const result = await wrapped.execute(
+      {
+        queryType: "TestQuery",
+        filter: "all",
+      },
+      testContext,
+    );
 
     expect(result.isErr()).toBe(true);
     expect(result._unsafeUnwrapErr()).toBeInstanceOf(TestError);

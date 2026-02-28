@@ -1,6 +1,6 @@
 import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
-import type { CommandBus, Middleware } from "@contracts/shared-kernel/server";
+import type { CommandBus, Context, Middleware } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
@@ -13,18 +13,24 @@ interface TestCommand extends Command<"Test"> {
   readonly payload: string;
 }
 
+const testContext: Context = { kind: "public" };
+
 function createMockBus(
   result = okAsync<void, InstanceType<typeof TestError>>(undefined),
 ): CommandBus<TestCommand, InstanceType<typeof TestError>> {
   return { execute: vi.fn().mockReturnValue(result) };
 }
 
-const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
-  return next(cmd);
+const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, ctx, next) => {
+  return next(cmd, ctx);
 };
 
-const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
-  return next({ ...cmd, payload: "modified" });
+const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (
+  cmd,
+  ctx,
+  next,
+) => {
+  return next({ ...cmd, payload: "modified" }, ctx);
 };
 
 describe("withCommandMiddleware", () => {
@@ -33,30 +39,30 @@ describe("withCommandMiddleware", () => {
     const wrapped = withCommandMiddleware(bus, []);
     const command: TestCommand = { commandType: "Test", payload: "hello" };
 
-    const result = await wrapped.execute(command);
+    const result = await wrapped.execute(command, testContext);
 
     expect(result.isOk()).toBe(true);
-    expect(bus.execute).toHaveBeenCalledWith(command);
+    expect(bus.execute).toHaveBeenCalledWith(command, testContext);
   });
 
   test("executes middlewares in order (first middleware is outermost)", async () => {
     const order: string[] = [];
     const bus = createMockBus();
 
-    const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
+    const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, ctx, next) => {
       order.push("mw1-before");
       return new ResultAsync(
-        next(cmd).then((result) => {
+        next(cmd, ctx).then((result) => {
           order.push("mw1-after");
           return result;
         }),
       );
     };
 
-    const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
+    const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, ctx, next) => {
       order.push("mw2-before");
       return new ResultAsync(
-        next(cmd).then((result) => {
+        next(cmd, ctx).then((result) => {
           order.push("mw2-after");
           return result;
         }),
@@ -64,7 +70,7 @@ describe("withCommandMiddleware", () => {
     };
 
     const wrapped = withCommandMiddleware(bus, [mw1, mw2]);
-    await wrapped.execute({ commandType: "Test", payload: "hello" });
+    await wrapped.execute({ commandType: "Test", payload: "hello" }, testContext);
 
     expect(order).toEqual(["mw1-before", "mw2-before", "mw2-after", "mw1-after"]);
   });
@@ -74,13 +80,14 @@ describe("withCommandMiddleware", () => {
 
     const shortCircuit: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (
       _cmd,
+      _ctx,
       _next,
     ) => {
       return errAsync(new TestError("blocked"));
     };
 
     const wrapped = withCommandMiddleware(bus, [shortCircuit]);
-    const result = await wrapped.execute({ commandType: "Test", payload: "hello" });
+    const result = await wrapped.execute({ commandType: "Test", payload: "hello" }, testContext);
 
     expect(result.isErr()).toBe(true);
     expect(result._unsafeUnwrapErr()).toBeInstanceOf(TestError);
@@ -92,7 +99,7 @@ describe("withCommandMiddleware", () => {
     const bus = createMockBus(errAsync(new TestError("bus error")));
 
     const wrapped = withCommandMiddleware(bus, [mw]);
-    const result = await wrapped.execute({ commandType: "Test", payload: "hello" });
+    const result = await wrapped.execute({ commandType: "Test", payload: "hello" }, testContext);
 
     expect(result.isErr()).toBe(true);
     expect(result._unsafeUnwrapErr()).toBeInstanceOf(TestError);
@@ -103,11 +110,14 @@ describe("withCommandMiddleware", () => {
     const bus = createMockBus();
 
     const wrapped = withCommandMiddleware(bus, [modifying]);
-    await wrapped.execute({ commandType: "Test", payload: "original" });
+    await wrapped.execute({ commandType: "Test", payload: "original" }, testContext);
 
-    expect(bus.execute).toHaveBeenCalledWith({
-      commandType: "Test",
-      payload: "modified",
-    });
+    expect(bus.execute).toHaveBeenCalledWith(
+      {
+        commandType: "Test",
+        payload: "modified",
+      },
+      testContext,
+    );
   });
 });

@@ -1,6 +1,6 @@
 import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
-import type { QueryBus } from "@contracts/shared-kernel/server";
+import type { Context, QueryBus } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
@@ -25,6 +25,8 @@ interface TestQuery extends Query<"TestQuery"> {
 
 type TestResult = string[];
 
+const testContext: Context = { kind: "public" };
+
 function createMockBus(
   result = okAsync<TestResult, InstanceType<typeof TestError>>(["item1", "item2"]),
 ): QueryBus<TestQuery, TestResult, InstanceType<typeof TestError>> {
@@ -37,7 +39,7 @@ describe("loggingQueryMiddleware", () => {
     const mw = loggingQueryMiddleware<TestQuery, TestResult>();
     const query: TestQuery = { queryType: "TestQuery" };
 
-    const result = await mw(query, bus.execute);
+    const result = await mw(query, testContext, bus.execute);
 
     expect(result.isOk()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing query: TestQuery");
@@ -49,7 +51,7 @@ describe("loggingQueryMiddleware", () => {
     const mw = loggingQueryMiddleware<TestQuery, TestResult>();
     const query: TestQuery = { queryType: "TestQuery" };
 
-    const result = await mw(query, bus.execute);
+    const result = await mw(query, testContext, bus.execute);
 
     expect(result.isErr()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing query: TestQuery");

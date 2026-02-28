@@ -13,6 +13,7 @@
     "neverthrow": "catalog:"
   },
   "peerDependencies": {
+    "@contracts/shared-kernel": "*",
     "@contracts/todo": "*",
     "@modules/todo-read-model": "*"
   }

@@ -1,3 +1,4 @@
+import type { Context } from "@contracts/shared-kernel/server";
 import { TodoCommandType } from "@contracts/todo/public";
 import type { TodoCommand } from "@contracts/todo/public";
 import { UnknownTodoCommandError, type TodoError } from "@contracts/todo/public";
@@ -13,12 +14,12 @@ export class TodoCommandBusImpl implements TodoCommandBus {
     private readonly completeTodoHandler: CompleteTodoHandler,
   ) {}
 
-  execute(command: TodoCommand): ResultAsync<void, TodoError> {
+  execute(command: TodoCommand, context: Context): ResultAsync<void, TodoError> {
     switch (command.commandType) {
       case TodoCommandType.CreateTodo:
-        return this.createTodoHandler.execute(command);
+        return this.createTodoHandler.execute(command, context);
       case TodoCommandType.CompleteTodo:
-        return this.completeTodoHandler.execute(command);
+        return this.completeTodoHandler.execute(command, context);
       default:
         return errAsync(new UnknownTodoCommandError((command as TodoCommand).commandType));
     }

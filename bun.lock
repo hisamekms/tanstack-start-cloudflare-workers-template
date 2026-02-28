@@ -161,6 +161,7 @@
         "neverthrow": "catalog:",
       },
       "peerDependencies": {
+        "@contracts/shared-kernel": "*",
         "@contracts/todo": "*",
         "@modules/todo-read-model": "*",
       },
@@ -181,6 +182,7 @@
         "uuid": "^11.1.0",
       },
       "peerDependencies": {
+        "@contracts/shared-kernel": "*",
         "@contracts/todo": "*",
         "@modules/todo-write-model": "*",
       },

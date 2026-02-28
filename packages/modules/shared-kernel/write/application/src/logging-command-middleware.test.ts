@@ -1,6 +1,6 @@
 import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
-import type { CommandBus } from "@contracts/shared-kernel/server";
+import type { CommandBus, Context } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
@@ -23,6 +23,8 @@ interface TestCommand extends Command<"Test"> {
   readonly commandType: "Test";
 }
 
+const testContext: Context = { kind: "public" };
+
 function createMockBus(
   result = okAsync<void, InstanceType<typeof TestError>>(undefined),
 ): CommandBus<TestCommand, InstanceType<typeof TestError>> {
@@ -35,7 +37,7 @@ describe("loggingCommandMiddleware", () => {
     const mw = loggingCommandMiddleware<TestCommand>();
     const command: TestCommand = { commandType: "Test" };
 
-    const result = await mw(command, bus.execute);
+    const result = await mw(command, testContext, bus.execute);
 
     expect(result.isOk()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing command: Test");
@@ -47,7 +49,7 @@ describe("loggingCommandMiddleware", () => {
     const mw = loggingCommandMiddleware<TestCommand>();
     const command: TestCommand = { commandType: "Test" };
 
-    const result = await mw(command, bus.execute);
+    const result = await mw(command, testContext, bus.execute);
 
     expect(result.isErr()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing command: Test");

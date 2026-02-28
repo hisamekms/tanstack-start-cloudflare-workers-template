@@ -7,9 +7,9 @@ export function loggingQueryMiddleware<
   TResult,
   TError extends AppError = AppError,
 >(): Middleware<TQuery, TResult, TError> {
-  return (query, next) => {
+  return (query, context, next) => {
     logger.info(`Executing query: ${query.queryType}`);
-    return next(query).mapErr((e) => {
+    return next(query, context).mapErr((e) => {
       logger.error(`Query ${query.queryType} failed: ${e}`);
       return e;
     });
