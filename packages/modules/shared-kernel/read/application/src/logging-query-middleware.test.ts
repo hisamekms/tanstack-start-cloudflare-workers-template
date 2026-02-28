@@ -1,7 +1,7 @@
 import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { QueryBus } from "@contracts/shared-kernel/server";
-import { err, ok } from "neverthrow";
+import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { loggingQueryMiddleware } from "./logging-query-middleware";
@@ -26,9 +26,9 @@ interface TestQuery extends Query<"TestQuery"> {
 type TestResult = string[];
 
 function createMockBus(
-  result = ok<TestResult, InstanceType<typeof TestError>>(["item1", "item2"]),
+  result = okAsync<TestResult, InstanceType<typeof TestError>>(["item1", "item2"]),
 ): QueryBus<TestQuery, TestResult, InstanceType<typeof TestError>> {
-  return { execute: vi.fn().mockResolvedValue(result) };
+  return { execute: vi.fn().mockReturnValue(result) };
 }
 
 describe("loggingQueryMiddleware", () => {
@@ -45,7 +45,7 @@ describe("loggingQueryMiddleware", () => {
   });
 
   test("logs error when query fails", async () => {
-    const bus = createMockBus(err(new TestError("query failed")));
+    const bus = createMockBus(errAsync(new TestError("query failed")));
     const mw = loggingQueryMiddleware<TestQuery, TestResult>();
     const query: TestQuery = { queryType: "TestQuery" };
 

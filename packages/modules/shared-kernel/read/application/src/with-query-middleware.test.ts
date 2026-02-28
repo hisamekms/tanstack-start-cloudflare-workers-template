@@ -1,7 +1,7 @@
 import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { Middleware, QueryBus } from "@contracts/shared-kernel/server";
-import { err, ok } from "neverthrow";
+import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { withQueryMiddleware } from "./with-query-middleware";
@@ -16,9 +16,9 @@ interface TestQuery extends Query<"TestQuery"> {
 type TestResult = { items: string[] };
 
 function createMockBus(
-  result = ok<TestResult, InstanceType<typeof TestError>>({ items: ["a", "b"] }),
+  result = okAsync<TestResult, InstanceType<typeof TestError>>({ items: ["a", "b"] }),
 ): QueryBus<TestQuery, TestResult, InstanceType<typeof TestError>> {
-  return { execute: vi.fn().mockResolvedValue(result) };
+  return { execute: vi.fn().mockReturnValue(result) };
 }
 
 describe("withQueryMiddleware", () => {
@@ -38,24 +38,30 @@ describe("withQueryMiddleware", () => {
     const order: string[] = [];
     const bus = createMockBus();
 
-    const mw1: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = async (
+    const mw1: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       query,
       next,
     ) => {
       order.push("mw1-before");
-      const result = await next(query);
-      order.push("mw1-after");
-      return result;
+      return new ResultAsync(
+        next(query).then((result) => {
+          order.push("mw1-after");
+          return result;
+        }),
+      );
     };
 
-    const mw2: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = async (
+    const mw2: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       query,
       next,
     ) => {
       order.push("mw2-before");
-      const result = await next(query);
-      order.push("mw2-after");
-      return result;
+      return new ResultAsync(
+        next(query).then((result) => {
+          order.push("mw2-after");
+          return result;
+        }),
+      );
     };
 
     const wrapped = withQueryMiddleware(bus, [mw1, mw2]);
@@ -67,11 +73,11 @@ describe("withQueryMiddleware", () => {
   test("short-circuits when a middleware does not call next", async () => {
     const bus = createMockBus();
 
-    const shortCircuit: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = async (
+    const shortCircuit: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
       _query,
       _next,
     ) => {
-      return ok({ items: ["cached"] });
+      return okAsync({ items: ["cached"] });
     };
 
     const wrapped = withQueryMiddleware(bus, [shortCircuit]);
@@ -86,12 +92,9 @@ describe("withQueryMiddleware", () => {
   });
 
   test("propagates errors from the bus through middlewares", async () => {
-    const bus = createMockBus(err(new TestError("query error")));
+    const bus = createMockBus(errAsync(new TestError("query error")));
 
-    const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = async (
-      query,
-      next,
-    ) => {
+    const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (query, next) => {
       return next(query);
     };
 

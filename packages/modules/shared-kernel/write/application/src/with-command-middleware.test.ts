@@ -1,7 +1,7 @@
 import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus, Middleware } from "@contracts/shared-kernel/server";
-import { err, ok } from "neverthrow";
+import { errAsync, okAsync, ResultAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { withCommandMiddleware } from "./with-command-middleware";
@@ -14,9 +14,9 @@ interface TestCommand extends Command<"Test"> {
 }
 
 function createMockBus(
-  result = ok<void, InstanceType<typeof TestError>>(undefined),
+  result = okAsync<void, InstanceType<typeof TestError>>(undefined),
 ): CommandBus<TestCommand, InstanceType<typeof TestError>> {
-  return { execute: vi.fn().mockResolvedValue(result) };
+  return { execute: vi.fn().mockReturnValue(result) };
 }
 
 describe("withCommandMiddleware", () => {
@@ -35,24 +35,24 @@ describe("withCommandMiddleware", () => {
     const order: string[] = [];
     const bus = createMockBus();
 
-    const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
-      cmd,
-      next,
-    ) => {
+    const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
       order.push("mw1-before");
-      const result = await next(cmd);
-      order.push("mw1-after");
-      return result;
+      return new ResultAsync(
+        next(cmd).then((result) => {
+          order.push("mw1-after");
+          return result;
+        }),
+      );
     };
 
-    const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
-      cmd,
-      next,
-    ) => {
+    const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
       order.push("mw2-before");
-      const result = await next(cmd);
-      order.push("mw2-after");
-      return result;
+      return new ResultAsync(
+        next(cmd).then((result) => {
+          order.push("mw2-after");
+          return result;
+        }),
+      );
     };
 
     const wrapped = withCommandMiddleware(bus, [mw1, mw2]);
@@ -64,11 +64,11 @@ describe("withCommandMiddleware", () => {
   test("short-circuits when a middleware does not call next", async () => {
     const bus = createMockBus();
 
-    const shortCircuit: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+    const shortCircuit: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (
       _cmd,
       _next,
     ) => {
-      return err(new TestError("blocked"));
+      return errAsync(new TestError("blocked"));
     };
 
     const wrapped = withCommandMiddleware(bus, [shortCircuit]);
@@ -81,9 +81,9 @@ describe("withCommandMiddleware", () => {
   });
 
   test("propagates errors from the bus through middlewares", async () => {
-    const bus = createMockBus(err(new TestError("bus error")));
+    const bus = createMockBus(errAsync(new TestError("bus error")));
 
-    const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (cmd, next) => {
+    const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
       return next(cmd);
     };
 
@@ -98,7 +98,7 @@ describe("withCommandMiddleware", () => {
   test("allows middleware to modify the command before passing to next", async () => {
     const bus = createMockBus();
 
-    const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+    const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (
       cmd,
       next,
     ) => {
