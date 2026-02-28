@@ -1,17 +1,17 @@
 ---
 name: wth
-description: Git worktree管理。scripts/wthコマンドを使ったworktreeの追加・削除。Triggers on "/wth" or similar.
+description: Git worktree管理。scripts/bin/wthコマンドを使ったworktreeの追加・削除。Triggers on "/wth" or similar.
 argument-hint: <add|rm> <name>
 allowed-tools: Bash, Read, AskUserQuestion
 ---
 
 # wth - Git Worktree管理スキル
 
-`scripts/wth` コマンドを使ってgit worktreeの追加・削除を行う。
+`scripts/bin/wth` コマンドを使ってgit worktreeの追加・削除を行う。
 
 ## 重要
 
-- worktreeの追加・削除には **必ず `scripts/wth` コマンドを使う**こと
+- worktreeの追加・削除には **必ず `scripts/bin/wth` コマンドを使う**こと
 - `git worktree add/remove` を直接実行してはならない
 - `EnterWorktree` ツールを使ってはならない
 
@@ -26,19 +26,19 @@ allowed-tools: Bash, Read, AskUserQuestion
 
 1. **`add <name>`**: worktreeを追加
 2. **`rm <name>`**: worktreeを削除
-3. **それ以外**: ヘルプを表示（`scripts/wth help` を実行）
+3. **それ以外**: ヘルプを表示（`scripts/bin/wth help` を実行）
 
 ## worktree追加 (`add`)
 
 ### 手順
 
-1. `scripts/wth add <name>` を実行する
+1. `scripts/bin/wth add <name>` を実行する
 2. 成功したら、作成されたworktreeのパスとブランチ名をユーザーに報告する
 
 ### 実行例
 
 ```bash
-scripts/wth add my-feature
+scripts/bin/wth add my-feature
 ```
 
 出力:
@@ -53,13 +53,13 @@ scripts/wth add my-feature
 ### 手順
 
 1. `AskUserQuestion` で削除の確認を行う
-2. ユーザーが承認したら `scripts/wth rm <name>` を実行する
+2. ユーザーが承認したら `scripts/bin/wth rm <name>` を実行する
 3. 成功したら、削除されたことをユーザーに報告する
 
 ### 実行例
 
 ```bash
-scripts/wth rm my-feature
+scripts/bin/wth rm my-feature
 ```
 
 出力:
@@ -76,7 +76,7 @@ scripts/wth rm my-feature
 
 ## フック
 
-`scripts/wth` は `.wth/hooks/` 配下のシェルスクリプトを自動実行する:
+`scripts/bin/wth` は `.wth/hooks/` 配下のシェルスクリプトを自動実行する:
 
 - `.wth/hooks/add/*.sh` — worktree作成後に実行
 - `.wth/hooks/rm/*.sh` — worktree削除前に実行
