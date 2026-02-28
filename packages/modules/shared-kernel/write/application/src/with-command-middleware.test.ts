@@ -1,16 +1,21 @@
 import type { Command } from "@contracts/shared-kernel/public";
+import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus, Middleware } from "@contracts/shared-kernel/server";
 import { err, ok } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { withCommandMiddleware } from "./with-command-middleware";
 
+const TestError = defineError("TestError", "application");
+
 interface TestCommand extends Command<"Test"> {
   readonly commandType: "Test";
   readonly payload: string;
 }
 
-function createMockBus(result = ok<void, string>(undefined)): CommandBus<TestCommand> {
+function createMockBus(
+  result = ok<void, InstanceType<typeof TestError>>(undefined),
+): CommandBus<TestCommand, InstanceType<typeof TestError>> {
   return { execute: vi.fn().mockResolvedValue(result) };
 }
 
@@ -30,14 +35,20 @@ describe("withCommandMiddleware", () => {
     const order: string[] = [];
     const bus = createMockBus();
 
-    const mw1: Middleware<TestCommand, void> = async (cmd, next) => {
+    const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+      cmd,
+      next,
+    ) => {
       order.push("mw1-before");
       const result = await next(cmd);
       order.push("mw1-after");
       return result;
     };
 
-    const mw2: Middleware<TestCommand, void> = async (cmd, next) => {
+    const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+      cmd,
+      next,
+    ) => {
       order.push("mw2-before");
       const result = await next(cmd);
       order.push("mw2-after");
@@ -53,22 +64,26 @@ describe("withCommandMiddleware", () => {
   test("short-circuits when a middleware does not call next", async () => {
     const bus = createMockBus();
 
-    const shortCircuit: Middleware<TestCommand, void> = async (_cmd, _next) => {
-      return err("blocked");
+    const shortCircuit: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+      _cmd,
+      _next,
+    ) => {
+      return err(new TestError("blocked"));
     };
 
     const wrapped = withCommandMiddleware(bus, [shortCircuit]);
     const result = await wrapped.execute({ commandType: "Test", payload: "hello" });
 
     expect(result.isErr()).toBe(true);
-    expect(result._unsafeUnwrapErr()).toBe("blocked");
+    expect(result._unsafeUnwrapErr()).toBeInstanceOf(TestError);
+    expect(result._unsafeUnwrapErr().message).toBe("blocked");
     expect(bus.execute).not.toHaveBeenCalled();
   });
 
   test("propagates errors from the bus through middlewares", async () => {
-    const bus = createMockBus(err("bus error"));
+    const bus = createMockBus(err(new TestError("bus error")));
 
-    const mw: Middleware<TestCommand, void> = async (cmd, next) => {
+    const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (cmd, next) => {
       return next(cmd);
     };
 
@@ -76,13 +91,17 @@ describe("withCommandMiddleware", () => {
     const result = await wrapped.execute({ commandType: "Test", payload: "hello" });
 
     expect(result.isErr()).toBe(true);
-    expect(result._unsafeUnwrapErr()).toBe("bus error");
+    expect(result._unsafeUnwrapErr()).toBeInstanceOf(TestError);
+    expect(result._unsafeUnwrapErr().message).toBe("bus error");
   });
 
   test("allows middleware to modify the command before passing to next", async () => {
     const bus = createMockBus();
 
-    const modifying: Middleware<TestCommand, void> = async (cmd, next) => {
+    const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = async (
+      cmd,
+      next,
+    ) => {
       return next({ ...cmd, payload: "modified" });
     };
 

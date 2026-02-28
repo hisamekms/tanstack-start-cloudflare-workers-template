@@ -1,4 +1,5 @@
 import type { Query } from "@contracts/shared-kernel/public";
+import { defineError } from "@contracts/shared-kernel/public";
 import type { QueryBus } from "@contracts/shared-kernel/server";
 import { err, ok } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
@@ -16,6 +17,8 @@ vi.mock("@lib/server", () => ({
 
 import { logger } from "@lib/server";
 
+const TestError = defineError("TestError", "application");
+
 interface TestQuery extends Query<"TestQuery"> {
   readonly queryType: "TestQuery";
 }
@@ -23,8 +26,8 @@ interface TestQuery extends Query<"TestQuery"> {
 type TestResult = string[];
 
 function createMockBus(
-  result = ok<TestResult, string>(["item1", "item2"]),
-): QueryBus<TestQuery, TestResult> {
+  result = ok<TestResult, InstanceType<typeof TestError>>(["item1", "item2"]),
+): QueryBus<TestQuery, TestResult, InstanceType<typeof TestError>> {
   return { execute: vi.fn().mockResolvedValue(result) };
 }
 
@@ -42,7 +45,7 @@ describe("loggingQueryMiddleware", () => {
   });
 
   test("logs error when query fails", async () => {
-    const bus = createMockBus(err("query failed"));
+    const bus = createMockBus(err(new TestError("query failed")));
     const mw = loggingQueryMiddleware<TestQuery, TestResult>();
     const query: TestQuery = { queryType: "TestQuery" };
 
@@ -50,6 +53,6 @@ describe("loggingQueryMiddleware", () => {
 
     expect(result.isErr()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing query: TestQuery");
-    expect(logger.error).toHaveBeenCalledWith("Query TestQuery failed: query failed");
+    expect(logger.error).toHaveBeenCalledWith("Query TestQuery failed: [TestError] query failed");
   });
 });

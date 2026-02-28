@@ -1,4 +1,5 @@
 import type { Command } from "@contracts/shared-kernel/public";
+import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus } from "@contracts/shared-kernel/server";
 import { err, ok } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
@@ -16,11 +17,15 @@ vi.mock("@lib/server", () => ({
 
 import { logger } from "@lib/server";
 
+const TestError = defineError("TestError", "application");
+
 interface TestCommand extends Command<"Test"> {
   readonly commandType: "Test";
 }
 
-function createMockBus(result = ok<void, string>(undefined)): CommandBus<TestCommand> {
+function createMockBus(
+  result = ok<void, InstanceType<typeof TestError>>(undefined),
+): CommandBus<TestCommand, InstanceType<typeof TestError>> {
   return { execute: vi.fn().mockResolvedValue(result) };
 }
 
@@ -38,7 +43,7 @@ describe("loggingCommandMiddleware", () => {
   });
 
   test("logs error when command fails", async () => {
-    const bus = createMockBus(err("something went wrong"));
+    const bus = createMockBus(err(new TestError("something went wrong")));
     const mw = loggingCommandMiddleware<TestCommand>();
     const command: TestCommand = { commandType: "Test" };
 
@@ -46,6 +51,8 @@ describe("loggingCommandMiddleware", () => {
 
     expect(result.isErr()).toBe(true);
     expect(logger.info).toHaveBeenCalledWith("Executing command: Test");
-    expect(logger.error).toHaveBeenCalledWith("Command Test failed: something went wrong");
+    expect(logger.error).toHaveBeenCalledWith(
+      "Command Test failed: [TestError] something went wrong",
+    );
   });
 });

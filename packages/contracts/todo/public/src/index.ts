@@ -8,3 +8,5 @@ export { TodoCreatedEventSchema, TodoCompletedEventSchema, TodoEventSchema } fro
 export type { TodoCreatedEvent, TodoCompletedEvent, TodoEvent } from "./events";
 export { TodoDtoSchema } from "./dto";
 export type { TodoDto } from "./dto";
+export { TodoNotFoundError, UnknownTodoCommandError, UnknownTodoQueryError } from "./errors";
+export type { TodoError } from "./errors";

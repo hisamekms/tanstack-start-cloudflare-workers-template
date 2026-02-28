@@ -1,5 +1,6 @@
 import { TodoCommandType } from "@contracts/todo/public";
 import type { TodoCommand } from "@contracts/todo/public";
+import { UnknownTodoCommandError, type TodoError } from "@contracts/todo/public";
 import type { TodoCommandBus } from "@contracts/todo/server";
 import { err, type Result } from "neverthrow";
 
@@ -12,14 +13,14 @@ export class TodoCommandBusImpl implements TodoCommandBus {
     private readonly completeTodoHandler: CompleteTodoHandler,
   ) {}
 
-  async execute(command: TodoCommand): Promise<Result<void, string>> {
+  async execute(command: TodoCommand): Promise<Result<void, TodoError>> {
     switch (command.commandType) {
       case TodoCommandType.CreateTodo:
         return this.createTodoHandler.execute(command);
       case TodoCommandType.CompleteTodo:
         return this.completeTodoHandler.execute(command);
       default:
-        return err(`Unknown command: ${(command as TodoCommand).commandType}`);
+        return err(new UnknownTodoCommandError((command as TodoCommand).commandType));
     }
   }
 }

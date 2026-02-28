@@ -1,8 +1,9 @@
+import type { AppError } from "@contracts/shared-kernel/public";
 import type { Result } from "neverthrow";
 
-export function unwrap<T>(result: Result<T, string>): T {
+export function unwrap<T>(result: Result<T, AppError>): T {
   if (result.isErr()) {
-    throw new Error(result.error);
+    throw new Error(result.error.message);
   }
   return result.value;
 }
