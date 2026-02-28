@@ -10,13 +10,8 @@ chezmoi = "latest"
 "npm:aws-cdk" = "latest"
 wrangler = "latest"
 
-[tasks.setup]
-description = "Install dependencies"
-run = "bun install"
-
 [tasks.dev]
 description = "Start development server"
-depends = ["setup"]
 run = "bunx turbo run dev"
 
 [tasks."test:unit"]
