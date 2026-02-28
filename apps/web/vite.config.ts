@@ -7,7 +7,13 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
-const localWranglerConfigPath = path.resolve(__dirname, "wrangler.local.toml");
+function resolveWranglerConfigPath(): string {
+  if (process.env.WRANGLER_CONFIG) {
+    return process.env.WRANGLER_CONFIG;
+  }
+  const localPath = path.resolve(__dirname, "wrangler.local.toml");
+  return existsSync(localPath) ? "./wrangler.local.toml" : "./wrangler.toml";
+}
 
 export default defineConfig({
   server: {
@@ -15,7 +21,7 @@ export default defineConfig({
   },
   plugins: [
     cloudflare({
-      configPath: existsSync(localWranglerConfigPath) ? "./wrangler.local.toml" : "./wrangler.toml",
+      configPath: resolveWranglerConfigPath(),
       viteEnvironment: { name: "ssr" },
     }),
     tanstackStart(),
