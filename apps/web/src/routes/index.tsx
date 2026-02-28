@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 
 import { css } from "~/styled-system/css";
 
@@ -26,6 +26,16 @@ function Home() {
         Home
       </h1>
       <p className={css({ color: "gray.600" })}>Panda CSS is working!</p>
+      <Link
+        to="/todos"
+        className={css({
+          color: "blue.600",
+          fontWeight: "semibold",
+          _hover: { color: "blue.700", textDecoration: "underline" },
+        })}
+      >
+        Todos
+      </Link>
     </div>
   );
 }
