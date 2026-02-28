@@ -1,5 +1,5 @@
 [env]
-_.path = ["./scripts"]
+_.path = ["./scripts/bin"]
 _.file = ".env"
 
 [tools]
@@ -23,7 +23,7 @@ description = "Run unit tests"
 run = "bunx turbo run test"
 
 [tasks."test:e2e"]
-run = ["./scripts/setup-e2e-d1.sh", "bun run test:e2e"]
+run = ["./scripts/bin/setup-e2e-d1.sh", "bun run test:e2e"]
 description = "Run Playwright e2e tests"
 
 [tasks."test:integration"]
@@ -52,8 +52,8 @@ run = "bunx drizzle-kit generate --config packages/platform/db/d1/drizzle.config
 
 [tasks."db:migrate"]
 description = "Apply local D1 migrations"
-run = "./scripts/db-migrate.sh"
+run = "./scripts/bin/db-migrate.sh"
 
 [tasks."db:seed"]
 description = "Seed local D1 data"
-run = "./scripts/db-seed.sh"
+run = "./scripts/bin/db-seed.sh"

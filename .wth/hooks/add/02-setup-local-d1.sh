@@ -2,5 +2,5 @@
 set -euo pipefail
 
 cd "$WTH_PATH"
-./scripts/setup-local-d1.sh
-./scripts/setup-e2e-d1.sh
+./scripts/bin/setup-local-d1.sh
+./scripts/bin/setup-e2e-d1.sh
