@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { listTodos, createTodo, completeTodo } from "~/lib/todo.server";
+import { listTodos, createTodo, completeTodo } from "~/lib/todo";
 import { css } from "~/styled-system/css";
 
 const todosQueryOptions = {
