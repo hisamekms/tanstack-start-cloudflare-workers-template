@@ -1,6 +1,10 @@
 export { TodoCommandType } from "./commands";
+export { CreateTodoCommandSchema, CompleteTodoCommandSchema, TodoCommandSchema } from "./commands";
 export type { CreateTodoCommand, CompleteTodoCommand, TodoCommand } from "./commands";
 export { TodoQueryType } from "./queries";
+export { ListTodosQuerySchema, TodoQuerySchema } from "./queries";
 export type { ListTodosQuery, TodoQuery } from "./queries";
+export { TodoCreatedEventSchema, TodoCompletedEventSchema, TodoEventSchema } from "./events";
 export type { TodoCreatedEvent, TodoCompletedEvent, TodoEvent } from "./events";
+export { TodoDtoSchema } from "./dto";
 export type { TodoDto } from "./dto";

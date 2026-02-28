@@ -1,16 +1,26 @@
-import type { Command } from "@contracts/shared-kernel/public";
+import { commandSchema } from "@contracts/shared-kernel/public";
+import { z } from "zod";
 
 export enum TodoCommandType {
   CreateTodo = "CreateTodo",
   CompleteTodo = "CompleteTodo",
 }
 
-export interface CreateTodoCommand extends Command<TodoCommandType.CreateTodo> {
-  readonly title: string;
-}
+export const CreateTodoCommandSchema = commandSchema(TodoCommandType.CreateTodo).extend({
+  title: z.string(),
+});
 
-export interface CompleteTodoCommand extends Command<TodoCommandType.CompleteTodo> {
-  readonly todoId: string;
-}
+export type CreateTodoCommand = z.infer<typeof CreateTodoCommandSchema>;
 
-export type TodoCommand = CreateTodoCommand | CompleteTodoCommand;
+export const CompleteTodoCommandSchema = commandSchema(TodoCommandType.CompleteTodo).extend({
+  todoId: z.string(),
+});
+
+export type CompleteTodoCommand = z.infer<typeof CompleteTodoCommandSchema>;
+
+export const TodoCommandSchema = z.discriminatedUnion("commandType", [
+  CreateTodoCommandSchema,
+  CompleteTodoCommandSchema,
+]);
+
+export type TodoCommand = z.infer<typeof TodoCommandSchema>;

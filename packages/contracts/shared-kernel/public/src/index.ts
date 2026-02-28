@@ -1,4 +1,8 @@
+export { DomainEventSchema } from "./events";
 export type { DomainEvent } from "./events";
+export { AggregateRootSchema } from "./aggregate-root";
 export type { AggregateRoot } from "./aggregate-root";
+export { CommandSchema, commandSchema } from "./commands";
 export type { Command } from "./commands";
+export { QuerySchema, querySchema } from "./queries";
 export type { Query } from "./queries";
