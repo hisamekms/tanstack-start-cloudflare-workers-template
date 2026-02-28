@@ -25,13 +25,12 @@ function Home() {
       >
         Home
       </h1>
-      <p className={css({ color: "gray.600" })}>Panda CSS is working!</p>
+      <p className={css({ color: "text.secondary" })}>Panda CSS is working!</p>
       <Link
         to="/todos"
         className={css({
-          color: "blue.600",
           fontWeight: "semibold",
-          _hover: { color: "blue.700", textDecoration: "underline" },
+          _hover: { textDecoration: "underline" },
         })}
       >
         Todos

@@ -57,7 +57,7 @@ function TodosPage() {
             px: "3",
             py: "2",
             border: "1px solid",
-            borderColor: "gray.300",
+            borderColor: "border.default",
             borderRadius: "md",
             fontSize: "md",
           })}
@@ -68,12 +68,12 @@ function TodosPage() {
           className={css({
             px: "4",
             py: "2",
-            bg: "blue.600",
-            color: "white",
+            bg: "bg.primary",
+            color: "text.inverse",
             borderRadius: "md",
             fontWeight: "semibold",
             cursor: "pointer",
-            _hover: { bg: "blue.700" },
+            _hover: { bg: "bg.primary.hover" },
             _disabled: { opacity: 0.5, cursor: "not-allowed" },
           })}
         >
@@ -91,7 +91,7 @@ function TodosPage() {
               gap: "3",
               p: "3",
               border: "1px solid",
-              borderColor: "gray.200",
+              borderColor: "border.subtle",
               borderRadius: "md",
             })}
           >
@@ -104,8 +104,8 @@ function TodosPage() {
                 h: "5",
                 borderRadius: "full",
                 border: "2px solid",
-                borderColor: todo.completed ? "green.500" : "gray.300",
-                bg: todo.completed ? "green.500" : "transparent",
+                borderColor: todo.completed ? "success" : "border.default",
+                bg: todo.completed ? "success" : "transparent",
                 cursor: todo.completed ? "default" : "pointer",
                 flexShrink: 0,
               })}
@@ -115,7 +115,7 @@ function TodosPage() {
               className={css({
                 fontSize: "md",
                 textDecoration: todo.completed ? "line-through" : "none",
-                color: todo.completed ? "gray.400" : "gray.900",
+                color: todo.completed ? "text.disabled" : "text.primary",
               })}
             >
               {todo.title}
@@ -125,7 +125,7 @@ function TodosPage() {
       </ul>
 
       {todos.length === 0 && (
-        <p className={css({ color: "gray.500", textAlign: "center", py: "8" })}>
+        <p className={css({ color: "text.tertiary", textAlign: "center", py: "8" })}>
           No todos yet. Add one above!
         </p>
       )}
