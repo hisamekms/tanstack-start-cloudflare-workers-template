@@ -81,6 +81,13 @@
         "@contracts/shared-kernel": "*",
       },
     },
+    "packages/lib/di": {
+      "name": "@lib/di",
+      "version": "0.0.0",
+      "devDependencies": {
+        "vitest": "^4.0.18",
+      },
+    },
     "packages/lib/public": {
       "name": "@lib/public",
       "version": "0.0.0",
@@ -398,6 +405,8 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.9", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.0.3", "@jridgewell/sourcemap-codec": "^1.4.10" } }, "sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ=="],
+
+    "@lib/di": ["@lib/di@workspace:packages/lib/di"],
 
     "@lib/public": ["@lib/public@workspace:packages/lib/public"],
 
