@@ -59,6 +59,7 @@
     },
     "packages/config/ts": {
       "name": "@config/ts",
+      "version": "0.0.0",
     },
     "packages/contracts/shared-kernel": {
       "name": "@contracts/shared-kernel",
