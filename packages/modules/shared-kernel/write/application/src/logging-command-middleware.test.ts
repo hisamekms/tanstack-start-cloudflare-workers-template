@@ -1,7 +1,7 @@
 import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus } from "@contracts/shared-kernel/server";
-import { err, ok } from "neverthrow";
+import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { loggingCommandMiddleware } from "./logging-command-middleware";
@@ -24,9 +24,9 @@ interface TestCommand extends Command<"Test"> {
 }
 
 function createMockBus(
-  result = ok<void, InstanceType<typeof TestError>>(undefined),
+  result = okAsync<void, InstanceType<typeof TestError>>(undefined),
 ): CommandBus<TestCommand, InstanceType<typeof TestError>> {
-  return { execute: vi.fn().mockResolvedValue(result) };
+  return { execute: vi.fn().mockReturnValue(result) };
 }
 
 describe("loggingCommandMiddleware", () => {
@@ -43,7 +43,7 @@ describe("loggingCommandMiddleware", () => {
   });
 
   test("logs error when command fails", async () => {
-    const bus = createMockBus(err(new TestError("something went wrong")));
+    const bus = createMockBus(errAsync(new TestError("something went wrong")));
     const mw = loggingCommandMiddleware<TestCommand>();
     const command: TestCommand = { commandType: "Test" };
 

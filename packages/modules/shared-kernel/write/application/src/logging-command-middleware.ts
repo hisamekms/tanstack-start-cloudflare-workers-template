@@ -6,12 +6,11 @@ export function loggingCommandMiddleware<
   TCommand extends Command,
   TError extends AppError = AppError,
 >(): Middleware<TCommand, void, TError> {
-  return async (command, next) => {
+  return (command, next) => {
     logger.info(`Executing command: ${command.commandType}`);
-    const result = await next(command);
-    if (result.isErr()) {
-      logger.error(`Command ${command.commandType} failed: ${result.error}`);
-    }
-    return result;
+    return next(command).mapErr((e) => {
+      logger.error(`Command ${command.commandType} failed: ${e}`);
+      return e;
+    });
   };
 }
