@@ -21,6 +21,10 @@ function createMockBus(
   return { execute: vi.fn().mockReturnValue(result) };
 }
 
+const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (query, next) => {
+  return next(query);
+};
+
 describe("withQueryMiddleware", () => {
   test("passes results through when no middlewares are provided", async () => {
     const bus = createMockBus();
@@ -93,10 +97,6 @@ describe("withQueryMiddleware", () => {
 
   test("propagates errors from the bus through middlewares", async () => {
     const bus = createMockBus(errAsync(new TestError("query error")));
-
-    const mw: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (query, next) => {
-      return next(query);
-    };
 
     const wrapped = withQueryMiddleware(bus, [mw]);
     const result = await wrapped.execute({

@@ -19,6 +19,14 @@ function createMockBus(
   return { execute: vi.fn().mockReturnValue(result) };
 }
 
+const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
+  return next(cmd);
+};
+
+const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
+  return next({ ...cmd, payload: "modified" });
+};
+
 describe("withCommandMiddleware", () => {
   test("delegates to the underlying bus when no middlewares are provided", async () => {
     const bus = createMockBus();
@@ -83,10 +91,6 @@ describe("withCommandMiddleware", () => {
   test("propagates errors from the bus through middlewares", async () => {
     const bus = createMockBus(errAsync(new TestError("bus error")));
 
-    const mw: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, next) => {
-      return next(cmd);
-    };
-
     const wrapped = withCommandMiddleware(bus, [mw]);
     const result = await wrapped.execute({ commandType: "Test", payload: "hello" });
 
@@ -97,13 +101,6 @@ describe("withCommandMiddleware", () => {
 
   test("allows middleware to modify the command before passing to next", async () => {
     const bus = createMockBus();
-
-    const modifying: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (
-      cmd,
-      next,
-    ) => {
-      return next({ ...cmd, payload: "modified" });
-    };
 
     const wrapped = withCommandMiddleware(bus, [modifying]);
     await wrapped.execute({ commandType: "Test", payload: "original" });
