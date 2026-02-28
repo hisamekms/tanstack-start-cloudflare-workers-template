@@ -25,6 +25,11 @@
       "dependsOn": ["^typecheck"],
       "outputs": []
     },
+    "preview": {
+      "dependsOn": ["build"],
+      "persistent": true,
+      "cache": false
+    },
     "deploy": {
       "dependsOn": ["build"],
       "cache": false

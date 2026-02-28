@@ -14,6 +14,10 @@ wrangler = "latest"
 description = "Start development server"
 run = "bunx turbo run dev"
 
+[tasks.preview]
+description = "Build and preview production build"
+run = "bunx turbo run preview"
+
 [tasks."test:unit"]
 description = "Run unit tests"
 run = "bunx turbo run test"
