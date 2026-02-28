@@ -18,6 +18,7 @@
   "dependencies": {
     "@ark-ui/react": "catalog:",
     "@auth/core": "^0.34.3",
+    "@auth/d1-adapter": "^1.11.1",
     "@contracts/shared-kernel": "*",
     "@contracts/todo": "*",
     "@lib/public": "*",
