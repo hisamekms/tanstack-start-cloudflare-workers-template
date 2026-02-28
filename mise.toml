@@ -8,6 +8,7 @@ chezmoi = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@playwright/cli" = "latest"
 "npm:aws-cdk" = "latest"
+wrangler = "latest"
 
 [tasks.setup]
 description = "Install dependencies"

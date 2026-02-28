@@ -1,0 +1,13 @@
+name = "web"
+main = "@tanstack/react-start/server-entry"
+
+compatibility_date = "2026-02-27"
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "tanstack_start_cloudflare_workers_template"
+database_name = "tanstack-start-cloudflare-workers-template"
+database_id = "5f471ee6-8dab-450e-ae9e-ccfc9282ab0b"

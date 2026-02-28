@@ -104,7 +104,16 @@
     "packages/modules/shared-kernel/read/application": {
       "name": "@modules/shared-kernel-read-application",
       "version": "0.0.0",
+      "dependencies": {
+        "@lib/server": "*",
+        "neverthrow": "^8.0.0",
+      },
+      "devDependencies": {
+        "vitest": "^4.0.18",
+      },
       "peerDependencies": {
+        "@contracts/shared-kernel-public": "*",
+        "@contracts/shared-kernel-server": "*",
         "@modules/shared-kernel-read-model": "*",
       },
     },
@@ -115,7 +124,16 @@
     "packages/modules/shared-kernel/write/application": {
       "name": "@modules/shared-kernel-write-application",
       "version": "0.0.0",
+      "dependencies": {
+        "@lib/server": "*",
+        "neverthrow": "^8.0.0",
+      },
+      "devDependencies": {
+        "vitest": "^4.0.18",
+      },
       "peerDependencies": {
+        "@contracts/shared-kernel-public": "*",
+        "@contracts/shared-kernel-server": "*",
         "@modules/shared-kernel-write-model": "*",
       },
     },
