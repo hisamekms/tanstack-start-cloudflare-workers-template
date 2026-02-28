@@ -21,4 +21,4 @@ export default {
       },
     });
   },
-} as ExportedHandler<AppEnv>;
+} as unknown as ExportedHandler<AppEnv>;
