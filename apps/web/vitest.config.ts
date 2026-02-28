@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react(), tsConfigPaths({ projects: ["./tsconfig.json"] })],
   test: {
     globals: false,
-    exclude: [...defaultExclude, "e2e/**"],
+    exclude: [...defaultExclude, "e2e/**", "src/**/*.integration.test.ts"],
   },
 });
