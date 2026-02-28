@@ -10,5 +10,5 @@
   "endOfLine": "lf",
   "sortImports": {},
   "sortPackageJson": true,
-  "ignorePatterns": ["*.min.js", "dist", ".output", "node_modules", "bun.lock"],
+  "ignorePatterns": ["*.min.js", "dist", ".output", "node_modules", "bun.lock", "**/migrations/meta"],
 }
