@@ -30,7 +30,7 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v3
         with:
           install: false
 
@@ -54,7 +54,7 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v3
         with:
           install: false
 
@@ -96,7 +96,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: bunx playwright install --with-deps chromium
 
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v3
         with:
           install: false
 
