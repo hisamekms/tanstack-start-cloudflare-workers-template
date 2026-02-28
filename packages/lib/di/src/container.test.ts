@@ -163,9 +163,7 @@ describe("Container", () => {
       const t1 = token<string>("A");
       const t2 = token<number>("B");
 
-      const result = container
-        .registerValue(t1, "hello")
-        .registerValue(t2, 42);
+      const result = container.registerValue(t1, "hello").registerValue(t2, 42);
 
       expect(result).toBe(container);
       expect(container.resolve(t1)).toBe("hello");
@@ -177,9 +175,7 @@ describe("Container", () => {
       const t1 = token<string>("A");
       const t2 = token<number>("B");
 
-      const result = container
-        .registerFactory(t1, () => "hello")
-        .registerFactory(t2, () => 42);
+      const result = container.registerFactory(t1, () => "hello").registerFactory(t2, () => 42);
 
       expect(result).toBe(container);
       expect(container.resolve(t1)).toBe("hello");

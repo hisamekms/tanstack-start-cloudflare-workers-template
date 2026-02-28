@@ -1,5 +1,6 @@
 import Cognito from "@auth/core/providers/cognito";
 import type { StartAuthJSConfig } from "start-authjs";
+
 import { config } from "~/config";
 
 export const authConfig: StartAuthJSConfig = {

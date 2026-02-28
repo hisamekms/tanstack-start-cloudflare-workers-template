@@ -6,12 +6,12 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  },
   "peerDependencies": {
     "@contracts/shared-kernel": "*",
     "@contracts/todo": "*",
     "@modules/shared-kernel-write-model": "*"
-  },
-  "scripts": {
-    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   }
 }

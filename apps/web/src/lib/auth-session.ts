@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 import { getSession } from "start-authjs";
 import type { AuthSession } from "start-authjs";
+
 import { config } from "~/config";
 
 import { authConfig } from "./auth";

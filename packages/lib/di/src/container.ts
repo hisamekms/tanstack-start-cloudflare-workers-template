@@ -21,11 +21,7 @@ export class Container implements Resolver {
     return this;
   }
 
-  registerFactory<T>(
-    token: Token<T>,
-    factory: Factory<T>,
-    lifetime: Lifetime = "transient",
-  ): this {
+  registerFactory<T>(token: Token<T>, factory: Factory<T>, lifetime: Lifetime = "transient"): this {
     this.registrations.set(token.symbol, { factory, lifetime });
     return this;
   }
@@ -72,10 +68,7 @@ export class Container implements Resolver {
     return value;
   }
 
-  private resolveScoped(
-    symbol: symbol,
-    registration: Registration<unknown>,
-  ): unknown {
+  private resolveScoped(symbol: symbol, registration: Registration<unknown>): unknown {
     const cached = this.scopedCache.get(symbol);
     if (cached !== undefined) {
       return cached;
