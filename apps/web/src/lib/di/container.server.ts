@@ -1,20 +1,21 @@
 import { Container } from "@lib/di";
+import {
+  withQueryMiddleware,
+  loggingQueryMiddleware,
+} from "@modules/shared-kernel-read-application";
+import {
+  withCommandMiddleware,
+  loggingCommandMiddleware,
+} from "@modules/shared-kernel-write-application";
 import { D1TodoRepository, D1TodoReadModelStore } from "@modules/todo-infra-d1";
+import { ListTodosHandler, TodoQueryBusImpl } from "@modules/todo-read-application";
 import {
   CreateTodoHandler,
   CompleteTodoHandler,
   TodoCommandBusImpl,
 } from "@modules/todo-write-application";
-import { ListTodosHandler, TodoQueryBusImpl } from "@modules/todo-read-application";
-import {
-  withCommandMiddleware,
-  loggingCommandMiddleware,
-} from "@modules/shared-kernel-write-application";
-import {
-  withQueryMiddleware,
-  loggingQueryMiddleware,
-} from "@modules/shared-kernel-read-application";
 import { createD1Database } from "@platform/db-d1";
+
 import type { AppEnv } from "../cloudflare";
 import { Tokens } from "./tokens.server";
 
