@@ -12,5 +12,5 @@ perl -0pi -e "s/database_name = \"app-local\"/database_name = \"${LOCAL_DB_NAME}
 
 cd "${PROJECT_ROOT}/apps/web"
 bun x wrangler d1 execute DB --local --config "$LOCAL_CONFIG" --command "select 1;"
-bash "${PROJECT_ROOT}/scripts/bin/db-migrate.sh"
-bash "${PROJECT_ROOT}/scripts/bin/db-seed.sh"
+"${PROJECT_ROOT}/scripts/bin/db-migrate"
+"${PROJECT_ROOT}/scripts/bin/db-seed"

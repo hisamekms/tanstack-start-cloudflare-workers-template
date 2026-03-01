@@ -23,7 +23,7 @@ description = "Run unit tests"
 run = "bunx turbo run test"
 
 [tasks."test:e2e"]
-run = ["./scripts/bin/setup-e2e-d1.sh", "bun run test:e2e"]
+run = ["./scripts/bin/setup-e2e-d1", "bun run test:e2e"]
 description = "Run Playwright e2e tests"
 
 [tasks."test:integration"]
@@ -32,7 +32,7 @@ run = "bun run test:integration"
 
 [tasks.lint]
 description = "Run linting"
-run = ["check-dep-rules.sh", "bunx turbo run lint"]
+run = ["check-dep-rules", "bunx turbo run lint"]
 
 [tasks.typecheck]
 description = "Run type checking with tsgo"
@@ -52,8 +52,8 @@ run = "bunx drizzle-kit generate --config packages/platform/db/d1/drizzle.config
 
 [tasks."db:migrate"]
 description = "Apply local D1 migrations"
-run = "./scripts/bin/db-migrate.sh"
+run = "./scripts/bin/db-migrate"
 
 [tasks."db:seed"]
 description = "Seed local D1 data"
-run = "./scripts/bin/db-seed.sh"
+run = "./scripts/bin/db-seed"
