@@ -8,14 +8,18 @@
   },
   "scripts": {
     "lint": "oxlint -c .oxlintrc.json src/",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260305.0",
     "@config/oxlint": "workspace:*",
-    "@config/ts": "*"
+    "@config/ts": "*",
+    "vitest": "catalog:",
+    "wrangler": "^4.0.0"
   },
   "peerDependencies": {
     "@contracts/todo-public": "*",

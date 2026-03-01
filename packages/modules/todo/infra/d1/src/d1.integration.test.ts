@@ -3,29 +3,35 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import type { D1Database } from "@cloudflare/workers-types";
 import { D1TodoReadModelStore, D1TodoRepository } from "@modules/todo-infra-d1";
 import { createTodo, type Todo } from "@modules/todo-write-model";
 import { createD1Database } from "@platform/db-d1";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { getPlatformProxy } from "wrangler";
 
-import type { AppEnv } from "../../platform/cloudflare.server";
+type TestEnv = { DB: D1Database };
 
 const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirPath = path.dirname(currentFilePath);
-const appRootPath = path.resolve(currentDirPath, "../../../..");
-const baseWranglerConfigPath = path.join(appRootPath, "wrangler.toml");
-const migrationsDirPath = path.resolve(appRootPath, "../../packages/platform/db/d1/src/migrations");
+const baseWranglerConfigPath = path.resolve(
+  currentDirPath,
+  "../../../../../../apps/web/wrangler.toml",
+);
+const migrationsDirPath = path.resolve(
+  currentDirPath,
+  "../../../../../platform/db/d1/src/migrations",
+);
 
 interface TestContext {
   dispose: () => Promise<void>;
-  env: AppEnv;
+  env: TestEnv;
   tempDirPath: string;
 }
 
 let testContext: TestContext | undefined;
 
-async function applyMigrations(env: AppEnv): Promise<void> {
+async function applyMigrations(env: TestEnv): Promise<void> {
   const migrationFileNames = (await readdir(migrationsDirPath))
     .filter((fileName) => fileName.endsWith(".sql"))
     .toSorted();
@@ -57,7 +63,7 @@ async function createTestContext(): Promise<TestContext> {
     ),
   );
 
-  const proxy = await getPlatformProxy<AppEnv>({
+  const proxy = await getPlatformProxy<TestEnv>({
     configPath: wranglerConfigPath,
     persist: {
       path: tempDirPath,
