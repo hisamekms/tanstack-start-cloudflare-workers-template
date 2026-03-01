@@ -1,4 +1,5 @@
 {
   "extends": "@config/ts/base.json",
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.integration.test.ts"]
 }

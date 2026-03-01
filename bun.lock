@@ -224,8 +224,11 @@
         "drizzle-orm": "^0.45.1",
       },
       "devDependencies": {
+        "@cloudflare/workers-types": "^4.20260305.0",
         "@config/oxlint": "workspace:*",
         "@config/ts": "*",
+        "vitest": "catalog:",
+        "wrangler": "^4.0.0",
       },
       "peerDependencies": {
         "@contracts/todo-public": "*",
