@@ -7,7 +7,10 @@ import { ResultAsync } from "neverthrow";
 export class ListTodosHandler {
   constructor(private readonly store: TodoReadModelStore) {}
 
-  execute(_context: Context): ResultAsync<TodoDto[], TodoError> {
+  execute(context: Context): ResultAsync<TodoDto[], TodoError> {
+    if (context.kind === "protected") {
+      return ResultAsync.fromSafePromise(this.store.getByUserId(context.userId));
+    }
     return ResultAsync.fromSafePromise(this.store.getAll());
   }
 }

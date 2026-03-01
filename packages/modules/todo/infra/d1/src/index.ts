@@ -9,6 +9,7 @@ function mapRecordToTodo(record: typeof todosTable.$inferSelect): Todo {
     id: record.id,
     title: record.title,
     completed: record.completed,
+    userId: record.userId,
     version: record.version,
   };
 }
@@ -37,6 +38,7 @@ export class D1TodoRepository implements TodoRepository {
         id: todo.id,
         title: todo.title,
         completed: todo.completed,
+        userId: todo.userId,
         version: todo.version,
         createdAt: timestamp,
         updatedAt: timestamp,
@@ -58,6 +60,15 @@ export class D1TodoReadModelStore implements TodoReadModelStore {
 
   async getAll(): Promise<TodoDto[]> {
     const records = await this.db.select().from(todosTable).orderBy(todosTable.createdAt);
+    return records.map(mapRecordToDto);
+  }
+
+  async getByUserId(userId: string): Promise<TodoDto[]> {
+    const records = await this.db
+      .select()
+      .from(todosTable)
+      .where(eq(todosTable.userId, userId))
+      .orderBy(todosTable.createdAt);
     return records.map(mapRecordToDto);
   }
 }
