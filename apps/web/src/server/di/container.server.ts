@@ -19,8 +19,8 @@ import { EnsureUserHandler, UserCommandBusImpl } from "@modules/user-write-appli
 import { createD1Database } from "@platform/db-d1";
 import { ResultAsync } from "neverthrow";
 
+import { type AppEnv, getCloudflareEnv } from "../platform/cloudflare.server";
 import { getSessionUserId } from "../auth/session.server";
-import { type AppEnv, getCloudflareEnv } from "../infra/cloudflare.server";
 import { Tokens } from "./tokens.server";
 
 const root = new Container();

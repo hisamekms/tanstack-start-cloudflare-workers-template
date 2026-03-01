@@ -9,9 +9,9 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import { fetchSession } from "~/lib/auth/auth-session";
-import { AppHeader } from "~/lib/components/app-header";
-import type { RouterContext } from "~/lib/router-context";
+import { fetchSession } from "~/server/auth/auth-session";
+import { AppHeader } from "~/public/components/ui/app-header";
+import type { RouterContext } from "~/public/lib/router-context";
 
 import globalCss from "~/styles/global.css?url";
 

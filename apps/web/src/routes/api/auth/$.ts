@@ -3,7 +3,7 @@ import { logger } from "@lib/public-logger";
 import { createFileRoute } from "@tanstack/react-router";
 import { StartAuthJS } from "start-authjs";
 
-import { authConfig } from "~/lib/auth/config.server";
+import { authConfig } from "~/server/auth/config.server";
 
 const { GET, POST } = StartAuthJS(async (context) => {
   const url = new URL(context.request.url);

@@ -6,8 +6,8 @@ import {
 } from "@contracts/todo-public";
 import { createServerFn } from "@tanstack/react-start";
 
-import { Tokens } from "../di/index.server";
-import { commandHandler, queryHandler } from "./handler.server";
+import { Tokens } from "../../di/index.server";
+import { commandHandler, queryHandler } from "../../lib/handler.server";
 
 export const listTodos = createServerFn({ method: "GET" }).handler(
   queryHandler(({ ctx, container }) => {
