@@ -1,5 +1,6 @@
 import Google from "@auth/core/providers/google";
 import { D1Adapter, up } from "@auth/d1-adapter";
+import { logger } from "@lib/server";
 import { UserCommandType } from "@contracts/user-public";
 import { env } from "cloudflare:workers";
 import type { StartAuthJSConfig } from "start-authjs";
@@ -27,19 +28,37 @@ export const authConfig: StartAuthJSConfig = {
   providers: [Google({})],
   callbacks: {
     async signIn({ account, profile }) {
-      if (!account || !profile?.email) return true;
+      logger.debug("[AUTH:signIn] called", { provider: account?.provider, email: profile?.email });
+      if (!account || !profile?.email) {
+        logger.debug("[AUTH:signIn] skipping EnsureUser (no account or email)");
+        return true;
+      }
       const sub = account.providerAccountId;
       const email = profile.email;
-      const scope = createRequestScope(env as Parameters<typeof createRequestScope>[0]);
-      const userCommandBus = scope.resolve(Tokens.userCommandBus);
-      const result = await userCommandBus.execute(
-        { commandType: UserCommandType.EnsureUser, sub, email },
-        { kind: "public" },
-      );
-      if (result.isErr()) {
-        console.error("Failed to ensure user:", result.error);
+      try {
+        const scope = createRequestScope(env as Parameters<typeof createRequestScope>[0]);
+        const userCommandBus = scope.resolve(Tokens.userCommandBus);
+        const result = await userCommandBus.execute(
+          { commandType: UserCommandType.EnsureUser, sub, email },
+          { kind: "public" },
+        );
+        if (result.isErr()) {
+          logger.error("[AUTH:signIn] EnsureUser failed:", result.error);
+        } else {
+          logger.debug("[AUTH:signIn] EnsureUser succeeded for", email);
+        }
+      } catch (e) {
+        logger.error("[AUTH:signIn] EnsureUser threw:", e);
       }
       return true;
+    },
+    async redirect({ url, baseUrl }) {
+      logger.debug("[AUTH:redirect]", { url, baseUrl });
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
+    async session({ session }) {
+      logger.debug("[AUTH:session]", { userId: session?.user?.id, email: session?.user?.email, expires: session?.expires });
+      return session;
     },
   },
 };
