@@ -54,7 +54,7 @@
     "@config/oxlint": "workspace:*",
     "@config/ts": "*",
     "@pandacss/dev": "^1.8.2",
-    "@playwright/test": "1.49.0",
+    "@playwright/test": "1.58.2",
     "@types/node": "^25.3.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
