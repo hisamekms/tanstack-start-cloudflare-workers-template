@@ -1,4 +1,4 @@
-import type { TodoCommandBus, TodoQueryBus } from "@contracts/todo/server";
+import type { TodoCommandBus, TodoQueryBus } from "@contracts/todo-server";
 import type { UserCommandBus } from "@contracts/user-server";
 import { token } from "@lib/server-di";
 import type { AppDatabase } from "@platform/db-d1";

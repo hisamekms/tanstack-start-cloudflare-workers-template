@@ -15,7 +15,8 @@
   },
   "peerDependencies": {
     "@contracts/shared-kernel": "*",
-    "@contracts/todo": "*",
+    "@contracts/todo-public": "*",
+    "@contracts/todo-server": "*",
     "@modules/todo-write-model": "*"
   }
 }

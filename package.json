@@ -6,6 +6,7 @@
       "apps/*",
       "packages/config/*",
       "packages/contracts/*",
+      "packages/contracts/*/*",
       "packages/modules/*/*/*",
       "packages/platform/*/*",
       "packages/lib/*",

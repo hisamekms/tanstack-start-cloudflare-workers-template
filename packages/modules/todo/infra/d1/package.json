@@ -13,7 +13,7 @@
     "drizzle-orm": "^0.45.1"
   },
   "peerDependencies": {
-    "@contracts/todo": "*",
+    "@contracts/todo-public": "*",
     "@modules/todo-read-model": "*",
     "@modules/todo-write-model": "*",
     "@platform/db-d1": "*"

@@ -1,8 +1,8 @@
 import type { Context } from "@contracts/shared-kernel/server";
-import { TodoQueryType } from "@contracts/todo/public";
-import type { TodoDto, TodoQuery } from "@contracts/todo/public";
-import { UnknownTodoQueryError, type TodoError } from "@contracts/todo/public";
-import type { TodoQueryBus } from "@contracts/todo/server";
+import { TodoQueryType } from "@contracts/todo-public";
+import type { TodoDto, TodoQuery } from "@contracts/todo-public";
+import { UnknownTodoQueryError, type TodoError } from "@contracts/todo-public";
+import type { TodoQueryBus } from "@contracts/todo-server";
 import { errAsync, type ResultAsync } from "neverthrow";
 
 import type { ListTodosHandler } from "./handlers/list-todos-handler";

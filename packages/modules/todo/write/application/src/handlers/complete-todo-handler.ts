@@ -1,6 +1,6 @@
 import type { Context } from "@contracts/shared-kernel/server";
-import type { CompleteTodoCommand } from "@contracts/todo/public";
-import { TodoNotFoundError, type TodoError } from "@contracts/todo/public";
+import type { CompleteTodoCommand } from "@contracts/todo-public";
+import { TodoNotFoundError, type TodoError } from "@contracts/todo-public";
 import { completeTodo, type TodoRepository } from "@modules/todo-write-model";
 import { ResultAsync, errAsync } from "neverthrow";
 
