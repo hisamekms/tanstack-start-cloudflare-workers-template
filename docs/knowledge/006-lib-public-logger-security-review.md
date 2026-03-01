@@ -4,7 +4,7 @@ tags: [security, lib, public-logger, logging]
 title: "@lib/public-loggerセキュリティレビュー — 問題なし"
 created_at: 2026-03-01T00:00:00+09:00
 updated_at: 2026-03-01T00:00:00+09:00
-related_to: [002-shared-kernel-security-review, 003-todo-server-security-review]
+related_to: [002-shared-kernel-security-review, 003-todo-server-security-review, 009-sk-read-application-security-review]
 ---
 
 # @lib/public-loggerセキュリティレビュー — 問題なし

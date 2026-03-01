@@ -4,7 +4,7 @@ tags: [security, zod, shared-kernel, validation]
 title: shared-kernelセキュリティレビュー — Zodスキーマ制約の強化
 created_at: 2026-03-01T00:00:00+09:00
 updated_at: 2026-03-01T00:00:00+09:00
-related_to: [005-user-public-security-review]
+related_to: [005-user-public-security-review, 009-sk-read-application-security-review]
 ---
 
 # shared-kernelセキュリティレビュー — Zodスキーマ制約の強化
