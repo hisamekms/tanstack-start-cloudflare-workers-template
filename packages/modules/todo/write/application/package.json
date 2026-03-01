@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+    "lint": "oxlint -c .oxlintrc.json src/"
   },
   "dependencies": {
     "neverthrow": "catalog:",
