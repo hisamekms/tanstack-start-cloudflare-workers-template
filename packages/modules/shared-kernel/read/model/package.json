@@ -8,5 +8,8 @@
   },
   "scripts": {
     "lint": "oxlint -c .oxlintrc.json src/"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

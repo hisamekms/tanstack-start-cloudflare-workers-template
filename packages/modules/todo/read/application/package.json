@@ -17,5 +17,8 @@
     "@contracts/todo-public": "*",
     "@contracts/todo-server": "*",
     "@modules/todo-read-model": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

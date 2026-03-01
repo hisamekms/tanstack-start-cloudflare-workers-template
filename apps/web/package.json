@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.0.0",
+    "@config/oxlint": "workspace:*",
     "@config/ts": "*",
     "@pandacss/dev": "^1.8.2",
     "@playwright/test": "1.49.0",

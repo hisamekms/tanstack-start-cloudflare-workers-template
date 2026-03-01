@@ -18,5 +18,8 @@
     "@contracts/user-public": "*",
     "@contracts/user-server": "*",
     "@modules/user-write-model": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

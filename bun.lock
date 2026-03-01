@@ -51,6 +51,7 @@
       },
       "devDependencies": {
         "@cloudflare/vite-plugin": "^1.0.0",
+        "@config/oxlint": "workspace:*",
         "@config/ts": "*",
         "@pandacss/dev": "^1.8.2",
         "@playwright/test": "1.49.0",
@@ -80,6 +81,9 @@
         "neverthrow": "catalog:",
         "zod": "catalog:",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
     },
     "packages/contracts/todo/public": {
       "name": "@contracts/todo-public",
@@ -87,6 +91,9 @@
       "dependencies": {
         "neverthrow": "catalog:",
         "zod": "catalog:",
+      },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
@@ -97,6 +104,9 @@
       "version": "0.0.0",
       "dependencies": {
         "neverthrow": "catalog:",
+      },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
@@ -110,6 +120,9 @@
         "neverthrow": "catalog:",
         "zod": "catalog:",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
       },
@@ -120,6 +133,9 @@
       "dependencies": {
         "neverthrow": "catalog:",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/user-public": "*",
@@ -128,15 +144,22 @@
     "packages/lib/public": {
       "name": "@lib/public",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
     },
     "packages/lib/server": {
       "name": "@lib/server",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
     },
     "packages/lib/server/di": {
       "name": "@lib/server-di",
       "version": "0.0.0",
       "devDependencies": {
+        "@config/oxlint": "workspace:*",
         "vitest": "^4.0.18",
       },
     },
@@ -148,6 +171,7 @@
         "neverthrow": "catalog:",
       },
       "devDependencies": {
+        "@config/oxlint": "workspace:*",
         "vitest": "catalog:",
       },
       "peerDependencies": {
@@ -158,6 +182,9 @@
     "packages/modules/shared-kernel/read/model": {
       "name": "@modules/shared-kernel-read-model",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
     },
     "packages/modules/shared-kernel/write/application": {
       "name": "@modules/shared-kernel-write-application",
@@ -167,6 +194,7 @@
         "neverthrow": "catalog:",
       },
       "devDependencies": {
+        "@config/oxlint": "workspace:*",
         "vitest": "catalog:",
       },
       "peerDependencies": {
@@ -177,6 +205,9 @@
     "packages/modules/shared-kernel/write/model": {
       "name": "@modules/shared-kernel-write-model",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
       },
@@ -186,6 +217,9 @@
       "version": "0.0.0",
       "dependencies": {
         "drizzle-orm": "^0.45.1",
+      },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
       },
       "peerDependencies": {
         "@contracts/todo-public": "*",
@@ -200,6 +234,9 @@
       "dependencies": {
         "neverthrow": "catalog:",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/todo-public": "*",
@@ -210,6 +247,9 @@
     "packages/modules/todo/read/model": {
       "name": "@modules/todo-read-model",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/todo-public": "*",
         "@modules/shared-kernel-read-model": "*",
@@ -222,6 +262,9 @@
         "neverthrow": "catalog:",
         "uuid": "^11.1.0",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/todo-public": "*",
@@ -232,6 +275,9 @@
     "packages/modules/todo/write/model": {
       "name": "@modules/todo-write-model",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/todo-public": "*",
@@ -243,6 +289,9 @@
       "version": "0.0.0",
       "dependencies": {
         "drizzle-orm": "^0.45.1",
+      },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
       },
       "peerDependencies": {
         "@modules/user-write-model": "*",
@@ -256,6 +305,9 @@
         "neverthrow": "catalog:",
         "uuid": "^11.1.0",
       },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/user-public": "*",
@@ -266,6 +318,9 @@
     "packages/modules/user/write/model": {
       "name": "@modules/user-write-model",
       "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+      },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
         "@contracts/user-public": "*",
@@ -277,6 +332,9 @@
       "version": "0.0.0",
       "dependencies": {
         "drizzle-orm": "^0.45.1",
+      },
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
       },
     },
   },

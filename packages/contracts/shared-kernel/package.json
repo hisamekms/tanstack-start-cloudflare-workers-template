@@ -13,5 +13,8 @@
   "dependencies": {
     "neverthrow": "catalog:",
     "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

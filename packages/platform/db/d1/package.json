@@ -11,5 +11,8 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

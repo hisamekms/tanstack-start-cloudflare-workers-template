@@ -17,5 +17,8 @@
     "@modules/todo-read-model": "*",
     "@modules/todo-write-model": "*",
     "@platform/db-d1": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

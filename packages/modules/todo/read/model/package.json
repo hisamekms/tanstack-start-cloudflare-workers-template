@@ -12,5 +12,8 @@
   "peerDependencies": {
     "@contracts/todo-public": "*",
     "@modules/shared-kernel-read-model": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

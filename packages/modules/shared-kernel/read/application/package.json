@@ -15,6 +15,7 @@
     "neverthrow": "catalog:"
   },
   "devDependencies": {
+    "@config/oxlint": "workspace:*",
     "vitest": "catalog:"
   },
   "peerDependencies": {

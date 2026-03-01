@@ -15,5 +15,8 @@
   "peerDependencies": {
     "@contracts/shared-kernel": "*",
     "@contracts/user-public": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

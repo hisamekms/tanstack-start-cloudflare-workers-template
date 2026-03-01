@@ -15,5 +15,8 @@
   "peerDependencies": {
     "@modules/user-write-model": "*",
     "@platform/db-d1": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }

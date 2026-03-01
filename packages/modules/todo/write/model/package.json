@@ -13,5 +13,8 @@
     "@contracts/shared-kernel": "*",
     "@contracts/todo-public": "*",
     "@modules/shared-kernel-write-model": "*"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*"
   }
 }
