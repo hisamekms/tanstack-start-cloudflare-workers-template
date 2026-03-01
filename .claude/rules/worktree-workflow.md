@@ -7,4 +7,5 @@ git管理下のファイルを変更する作業は、worktreeで実施するこ
 - 変更が完了しマージされたら、worktreeを削除する（`wth rm`）
 
 ## mainへのマージ
+
 `main` は `/workspace` で利用されているのでそちらを使うこと。
