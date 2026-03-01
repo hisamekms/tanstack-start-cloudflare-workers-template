@@ -1,4 +1,4 @@
-import Cognito from "@auth/core/providers/cognito";
+import Google from "@auth/core/providers/google";
 import { D1Adapter, up } from "@auth/d1-adapter";
 import { UserCommandType } from "@contracts/user-public";
 import { env } from "cloudflare:workers";
@@ -24,7 +24,7 @@ export async function ensureAuthTables(): Promise<void> {
 export const authConfig: StartAuthJSConfig = {
   secret: config.isLocalDev ? "local-dev-dummy-secret" : config.authSecret,
   adapter: D1Adapter(env.DB),
-  providers: [Cognito({})],
+  providers: [Google({})],
   callbacks: {
     async signIn({ account, profile }) {
       if (!account || !profile?.email) return true;
