@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+KNOWLEDGE_DIR="docs/knowledge"
+
+if [ ! -d "$KNOWLEDGE_DIR" ]; then
+  exit 0
+fi
+
+files=("$KNOWLEDGE_DIR"/*.md)
+
+if [ ! -e "${files[0]}" ]; then
+  exit 0
+fi
+
+declare -A seen
+duplicates=()
+
+for file in "${files[@]}"; do
+  id=""
+  in_frontmatter=false
+
+  while IFS= read -r line; do
+    if [ "$in_frontmatter" = false ]; then
+      if [ "$line" = "---" ]; then
+        in_frontmatter=true
+      fi
+      continue
+    fi
+
+    if [ "$line" = "---" ]; then
+      break
+    fi
+
+    if [[ "$line" =~ ^id:[[:space:]]*(.+)$ ]]; then
+      id="${BASH_REMATCH[1]}"
+      break
+    fi
+  done < "$file"
+
+  if [ -z "$id" ]; then
+    continue
+  fi
+
+  if [ -n "${seen[$id]+x}" ]; then
+    duplicates+=("  id=$id: ${seen[$id]} and $file")
+  else
+    seen[$id]="$file"
+  fi
+done
+
+if [ ${#duplicates[@]} -gt 0 ]; then
+  echo "ERROR: Duplicate knowledge IDs found:" >&2
+  for dup in "${duplicates[@]}"; do
+    echo "$dup" >&2
+  done
+  exit 1
+fi
