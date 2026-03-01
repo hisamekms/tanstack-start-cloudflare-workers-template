@@ -9,6 +9,7 @@ import { authConfig } from "./auth";
 
 const LOCAL_MOCK_SESSION: AuthSession = {
   user: {
+    id: "01954a8f-0000-7000-8000-000000000001",
     name: "Local User",
     email: "local@example.com",
     image: null,

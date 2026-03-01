@@ -1,0 +1,17 @@
+{
+  "name": "@modules/user-write-model",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel": "*",
+    "@contracts/user-public": "*",
+    "@modules/shared-kernel-write-model": "*"
+  }
+}
