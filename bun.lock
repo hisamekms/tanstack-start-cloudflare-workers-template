@@ -285,6 +285,7 @@
       "devDependencies": {
         "@config/oxlint": "workspace:*",
         "@config/ts": "*",
+        "vitest": "catalog:",
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
@@ -331,6 +332,7 @@
       "devDependencies": {
         "@config/oxlint": "workspace:*",
         "@config/ts": "*",
+        "vitest": "catalog:",
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
