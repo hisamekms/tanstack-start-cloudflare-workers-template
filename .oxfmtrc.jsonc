@@ -17,5 +17,7 @@
     "node_modules",
     "bun.lock",
     "**/migrations/meta",
+    "*.gen.ts",
+    "**/styled-system",
   ],
 }
