@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-knowledge-ids
+        name: Check knowledge ID duplicates
+        language: system
+        entry: scripts/hooks/check-knowledge-ids
+        stages: [pre-merge-commit]
+        pass_filenames: false
+        always_run: true
