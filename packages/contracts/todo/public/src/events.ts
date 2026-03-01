@@ -3,15 +3,15 @@ import { z } from "zod";
 
 export const TodoCreatedEventSchema = DomainEventSchema.extend({
   eventType: z.literal("TodoCreated"),
-  todoId: z.string(),
-  title: z.string(),
+  todoId: z.string().min(1),
+  title: z.string().min(1),
 });
 
 export type TodoCreatedEvent = z.infer<typeof TodoCreatedEventSchema>;
 
 export const TodoCompletedEventSchema = DomainEventSchema.extend({
   eventType: z.literal("TodoCompleted"),
-  todoId: z.string(),
+  todoId: z.string().min(1),
 });
 
 export type TodoCompletedEvent = z.infer<typeof TodoCompletedEventSchema>;
