@@ -12,7 +12,6 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
-    "@lib/server": "*",
     "neverthrow": "catalog:"
   },
   "devDependencies": {
