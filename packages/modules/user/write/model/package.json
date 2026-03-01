@@ -8,11 +8,13 @@
   },
   "scripts": {
     "lint": "oxlint -c .oxlintrc.json src/",
+    "test": "vitest run",
     "typecheck": "tsgo --noEmit"
   },
   "devDependencies": {
     "@config/oxlint": "workspace:*",
-    "@config/ts": "*"
+    "@config/ts": "*",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "@contracts/shared-kernel": "*",
