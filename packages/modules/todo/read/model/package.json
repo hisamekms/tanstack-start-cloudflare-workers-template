@@ -10,7 +10,7 @@
     "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
   },
   "peerDependencies": {
-    "@contracts/todo": "*",
+    "@contracts/todo-public": "*",
     "@modules/shared-kernel-read-model": "*"
   }
 }

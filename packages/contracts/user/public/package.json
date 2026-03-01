@@ -1,14 +1,13 @@
 {
-  "name": "@contracts/todo",
+  "name": "@contracts/user-public",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./public": "./public/src/index.ts",
-    "./server": "./server/src/index.ts"
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c ../../config/oxlint/base.json public/src/ server/src/"
+    "lint": "oxlint -c ../../../config/oxlint/base.json src/"
   },
   "dependencies": {
     "neverthrow": "catalog:",

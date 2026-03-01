@@ -20,7 +20,8 @@
         "@auth/core": "^0.34.3",
         "@auth/d1-adapter": "^1.11.1",
         "@contracts/shared-kernel": "*",
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
+        "@contracts/todo-server": "*",
         "@contracts/user-public": "*",
         "@contracts/user-server": "*",
         "@lib/public": "*",
@@ -80,8 +81,8 @@
         "zod": "catalog:",
       },
     },
-    "packages/contracts/todo": {
-      "name": "@contracts/todo",
+    "packages/contracts/todo/public": {
+      "name": "@contracts/todo-public",
       "version": "0.0.0",
       "dependencies": {
         "neverthrow": "catalog:",
@@ -91,7 +92,18 @@
         "@contracts/shared-kernel": "*",
       },
     },
-    "packages/contracts/user-public": {
+    "packages/contracts/todo/server": {
+      "name": "@contracts/todo-server",
+      "version": "0.0.0",
+      "dependencies": {
+        "neverthrow": "catalog:",
+      },
+      "peerDependencies": {
+        "@contracts/shared-kernel": "*",
+        "@contracts/todo-public": "*",
+      },
+    },
+    "packages/contracts/user/public": {
       "name": "@contracts/user-public",
       "version": "0.0.0",
       "dependencies": {
@@ -102,7 +114,7 @@
         "@contracts/shared-kernel": "*",
       },
     },
-    "packages/contracts/user-server": {
+    "packages/contracts/user/server": {
       "name": "@contracts/user-server",
       "version": "0.0.0",
       "dependencies": {
@@ -176,7 +188,7 @@
         "drizzle-orm": "^0.45.1",
       },
       "peerDependencies": {
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
         "@modules/todo-read-model": "*",
         "@modules/todo-write-model": "*",
         "@platform/db-d1": "*",
@@ -190,7 +202,8 @@
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
+        "@contracts/todo-server": "*",
         "@modules/todo-read-model": "*",
       },
     },
@@ -198,7 +211,7 @@
       "name": "@modules/todo-read-model",
       "version": "0.0.0",
       "peerDependencies": {
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
         "@modules/shared-kernel-read-model": "*",
       },
     },
@@ -211,7 +224,8 @@
       },
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
+        "@contracts/todo-server": "*",
         "@modules/todo-write-model": "*",
       },
     },
@@ -220,7 +234,7 @@
       "version": "0.0.0",
       "peerDependencies": {
         "@contracts/shared-kernel": "*",
-        "@contracts/todo": "*",
+        "@contracts/todo-public": "*",
         "@modules/shared-kernel-write-model": "*",
       },
     },
@@ -349,11 +363,13 @@
 
     "@contracts/shared-kernel": ["@contracts/shared-kernel@workspace:packages/contracts/shared-kernel"],
 
-    "@contracts/todo": ["@contracts/todo@workspace:packages/contracts/todo"],
+    "@contracts/todo-public": ["@contracts/todo-public@workspace:packages/contracts/todo/public"],
 
-    "@contracts/user-public": ["@contracts/user-public@workspace:packages/contracts/user-public"],
+    "@contracts/todo-server": ["@contracts/todo-server@workspace:packages/contracts/todo/server"],
 
-    "@contracts/user-server": ["@contracts/user-server@workspace:packages/contracts/user-server"],
+    "@contracts/user-public": ["@contracts/user-public@workspace:packages/contracts/user/public"],
+
+    "@contracts/user-server": ["@contracts/user-server@workspace:packages/contracts/user/server"],
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 

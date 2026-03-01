@@ -1,4 +1,4 @@
-import type { TodoCommandBus, TodoQueryBus } from "@contracts/todo/server";
+import type { TodoCommandBus, TodoQueryBus } from "@contracts/todo-server";
 
 import type { AppEnv } from "./cloudflare";
 import { createRequestScope } from "./di/index.server";

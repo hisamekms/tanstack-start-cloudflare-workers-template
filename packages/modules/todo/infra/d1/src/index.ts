@@ -1,4 +1,4 @@
-import type { TodoDto } from "@contracts/todo/public";
+import type { TodoDto } from "@contracts/todo-public";
 import type { TodoReadModelStore } from "@modules/todo-read-model";
 import type { Todo, TodoRepository } from "@modules/todo-write-model";
 import { todosTable, type AppDatabase } from "@platform/db-d1";
