@@ -6,8 +6,8 @@ export enum UserCommandType {
 }
 
 export const EnsureUserCommandSchema = commandSchema(UserCommandType.EnsureUser).extend({
-  sub: z.string(),
-  email: z.string(),
+  sub: z.string().min(1),
+  email: z.string().email(),
 });
 
 export type EnsureUserCommand = z.infer<typeof EnsureUserCommandSchema>;
