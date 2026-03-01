@@ -4,8 +4,8 @@ import { createStartHandler, defaultStreamHandler } from "@tanstack/react-start/
 
 import { config } from "~/config";
 
-import type { AppServerContext } from "./lib/infra/cloudflare.server";
-import type { AppEnv } from "./lib/infra/cloudflare.server";
+import type { AppServerContext } from "./server/platform/cloudflare.server";
+import type { AppEnv } from "./server/platform/cloudflare.server";
 
 const requestHandler = createStartHandler<AppServerContext>(defaultStreamHandler);
 const requestHandlerWithCloudflareContext = requestHandler as unknown as (

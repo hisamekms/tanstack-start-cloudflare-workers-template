@@ -9,11 +9,11 @@ import { createD1Database } from "@platform/db-d1";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { getPlatformProxy } from "wrangler";
 
-import type { AppEnv } from "../infra/cloudflare.server";
+import type { AppEnv } from "../../platform/cloudflare.server";
 
 const currentFilePath = fileURLToPath(import.meta.url);
 const currentDirPath = path.dirname(currentFilePath);
-const appRootPath = path.resolve(currentDirPath, "../../..");
+const appRootPath = path.resolve(currentDirPath, "../../../..");
 const baseWranglerConfigPath = path.join(appRootPath, "wrangler.toml");
 const migrationsDirPath = path.resolve(appRootPath, "../../packages/platform/db/d1/src/migrations");
 

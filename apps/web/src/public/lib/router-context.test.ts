@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import type { RouterContext } from "~/lib/router-context";
+import type { RouterContext } from "~/public/lib/router-context";
 
 describe("RouterContext", () => {
   it("should accept an object with queryClient property", () => {
