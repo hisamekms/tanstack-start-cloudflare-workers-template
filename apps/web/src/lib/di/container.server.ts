@@ -17,8 +17,10 @@ import {
 import { D1UserRepository } from "@modules/user-infra-d1";
 import { EnsureUserHandler, UserCommandBusImpl } from "@modules/user-write-application";
 import { createD1Database } from "@platform/db-d1";
+import { ResultAsync } from "neverthrow";
 
-import type { AppEnv } from "../cloudflare";
+import { type AppEnv, getCloudflareEnv } from "../cloudflare";
+import { getSessionUserId } from "../session.server";
 import { Tokens } from "./tokens.server";
 
 const root = new Container();
@@ -59,8 +61,22 @@ root.registerFactory(
   "scoped",
 );
 
+root.registerFactory(
+  Tokens.contextProvider,
+  () => () =>
+    ResultAsync.fromPromise(getSessionUserId(), (e) =>
+      e instanceof Error ? e : new Error(String(e)),
+    ),
+  "transient",
+);
+
 export function createRequestScope(env: AppEnv): Container {
   const scope = root.createScope();
   scope.registerValue(Tokens.database, createD1Database(env.DB));
   return scope;
+}
+
+export async function getContainer(serverContext: unknown): Promise<Container> {
+  const env = getCloudflareEnv(serverContext);
+  return createRequestScope(env);
 }
