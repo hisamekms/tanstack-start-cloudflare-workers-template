@@ -4,7 +4,7 @@ tags: [security, contracts, todo-public, zod, validation]
 title: "@contracts/todo-publicセキュリティレビュー — Zodスキーマ制約強化"
 created_at: 2026-03-01T00:00:00+09:00
 updated_at: 2026-03-01T00:00:00+09:00
-related_to: [002-shared-kernel-security-review, 003-todo-server-security-review]
+related_to: [002-shared-kernel-security-review, 003-todo-server-security-review, 005-user-public-security-review]
 ---
 
 # @contracts/todo-publicセキュリティレビュー — Zodスキーマ制約強化
