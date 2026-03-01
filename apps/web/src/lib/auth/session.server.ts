@@ -3,7 +3,7 @@ import { getSession } from "start-authjs";
 
 import { config } from "~/config";
 
-import { authConfig } from "./auth";
+import { authConfig } from "./config.server";
 
 const LOCAL_MOCK_USER_ID = "01954a8f-0000-7000-8000-000000000001";
 

@@ -7,8 +7,8 @@ import type { StartAuthJSConfig } from "start-authjs";
 
 import { config } from "~/config";
 
-import { createRequestScope } from "./di/index.server";
-import { Tokens } from "./di/tokens.server";
+import { createRequestScope } from "../di/index.server";
+import { Tokens } from "../di/tokens.server";
 
 export const authConfig: StartAuthJSConfig = {
   secret: config.isLocalDev ? "local-dev-dummy-secret" : config.authSecret,

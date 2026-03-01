@@ -4,7 +4,7 @@ import type { Context } from "@contracts/shared-kernel/server";
 import type { Container } from "@lib/server-di";
 import type { Result, ResultAsync } from "neverthrow";
 
-import { getContainer, Tokens } from "./di/index.server";
+import { getContainer, Tokens } from "../di/index.server";
 
 export function unwrap<T>(result: Result<T, AppError>): T {
   if (result.isErr()) {

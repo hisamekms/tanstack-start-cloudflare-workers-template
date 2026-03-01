@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute } from "@tanstack/react-router";
 
-import { listTodos } from "~/lib/todo";
+import { listTodos } from "~/lib/todo/todo";
 import { css } from "~/styled-system/css";
 
 const todosQueryOptions = {

@@ -6,7 +6,7 @@ import type { AuthSession } from "start-authjs";
 
 import { config } from "~/config";
 
-import { authConfig } from "./auth";
+import { authConfig } from "./config.server";
 
 const LOCAL_MOCK_SESSION: AuthSession = {
   user: {

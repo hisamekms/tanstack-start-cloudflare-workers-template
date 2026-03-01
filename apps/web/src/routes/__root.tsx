@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import { fetchSession } from "~/lib/auth-session";
+import { fetchSession } from "~/lib/auth/auth-session";
 import { AppHeader } from "~/lib/components/app-header";
 import type { RouterContext } from "~/lib/router-context";
 
