@@ -1,3 +1,4 @@
+# Generate with: openssl rand -base64 33
 AUTH_SECRET=your-secret-key-here-min-32-chars-long
 AUTH_GOOGLE_ID=your-google-client-id
 AUTH_GOOGLE_SECRET=your-google-client-secret
