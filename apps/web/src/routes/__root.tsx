@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   createRootRouteWithContext,
+  redirect,
   useRouteContext,
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -15,8 +16,13 @@ import type { RouterContext } from "~/lib/router-context";
 import globalCss from "~/styles/global.css?url";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-  beforeLoad: async () => {
+  beforeLoad: async ({ location }) => {
     const session = await fetchSession();
+    if (!session?.user) {
+      throw redirect({
+        href: `/api/auth/signin?callbackUrl=${encodeURIComponent(location.href)}`,
+      });
+    }
     return { session };
   },
   head: () => ({
