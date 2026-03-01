@@ -1,11 +1,16 @@
+import { skipCSRFCheck } from "@auth/core";
 import { logger } from "@lib/server";
 import { createFileRoute } from "@tanstack/react-router";
 import { StartAuthJS } from "start-authjs";
 
 import { authConfig, ensureAuthTables } from "~/lib/auth";
 
-const { GET, POST } = StartAuthJS(async () => {
+const { GET, POST } = StartAuthJS(async (context) => {
   await ensureAuthTables();
+  const url = new URL(context.request.url);
+  if (url.pathname.endsWith("/signout")) {
+    return { ...authConfig, skipCSRFCheck };
+  }
   return authConfig;
 });
 
