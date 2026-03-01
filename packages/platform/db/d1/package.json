@@ -7,12 +7,14 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c .oxlintrc.json src/"
+    "lint": "oxlint -c .oxlintrc.json src/",
+    "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "drizzle-orm": "^0.45.1"
   },
   "devDependencies": {
-    "@config/oxlint": "workspace:*"
+    "@config/oxlint": "workspace:*",
+    "@config/ts": "*"
   }
 }

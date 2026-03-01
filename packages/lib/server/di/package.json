@@ -8,10 +8,12 @@
   },
   "scripts": {
     "lint": "oxlint -c .oxlintrc.json src/",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsgo --noEmit"
   },
   "devDependencies": {
     "@config/oxlint": "workspace:*",
+    "@config/ts": "*",
     "vitest": "^4.0.18"
   }
 }

@@ -8,13 +8,15 @@
     "./server": "./server/src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c .oxlintrc.json public/src/ server/src/"
+    "lint": "oxlint -c .oxlintrc.json public/src/ server/src/",
+    "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "neverthrow": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@config/oxlint": "workspace:*"
+    "@config/oxlint": "workspace:*",
+    "@config/ts": "*"
   }
 }

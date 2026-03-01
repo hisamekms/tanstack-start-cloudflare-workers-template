@@ -1,7 +1,7 @@
 import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus, Context, Middleware } from "@contracts/shared-kernel/server";
-import { errAsync, okAsync, ResultAsync } from "neverthrow";
+import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { withCommandMiddleware } from "./with-command-middleware";
@@ -51,22 +51,16 @@ describe("withCommandMiddleware", () => {
 
     const mw1: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, ctx, next) => {
       order.push("mw1-before");
-      return new ResultAsync(
-        next(cmd, ctx).then((result) => {
-          order.push("mw1-after");
-          return result;
-        }),
-      );
+      return next(cmd, ctx).map(() => {
+        order.push("mw1-after");
+      });
     };
 
     const mw2: Middleware<TestCommand, void, InstanceType<typeof TestError>> = (cmd, ctx, next) => {
       order.push("mw2-before");
-      return new ResultAsync(
-        next(cmd, ctx).then((result) => {
-          order.push("mw2-after");
-          return result;
-        }),
-      );
+      return next(cmd, ctx).map(() => {
+        order.push("mw2-after");
+      });
     };
 
     const wrapped = withCommandMiddleware(bus, [mw1, mw2]);

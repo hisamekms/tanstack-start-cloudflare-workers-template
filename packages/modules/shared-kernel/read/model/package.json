@@ -7,9 +7,11 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c .oxlintrc.json src/"
+    "lint": "oxlint -c .oxlintrc.json src/",
+    "typecheck": "tsgo --noEmit"
   },
   "devDependencies": {
-    "@config/oxlint": "workspace:*"
+    "@config/oxlint": "workspace:*",
+    "@config/ts": "*"
   }
 }

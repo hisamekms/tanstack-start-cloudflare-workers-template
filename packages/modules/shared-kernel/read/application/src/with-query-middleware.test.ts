@@ -1,7 +1,7 @@
 import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { Context, Middleware, QueryBus } from "@contracts/shared-kernel/server";
-import { errAsync, okAsync, ResultAsync } from "neverthrow";
+import { errAsync, okAsync } from "neverthrow";
 import { describe, expect, test, vi } from "vitest";
 
 import { withQueryMiddleware } from "./with-query-middleware";
@@ -54,12 +54,10 @@ describe("withQueryMiddleware", () => {
       next,
     ) => {
       order.push("mw1-before");
-      return new ResultAsync(
-        next(query, ctx).then((result) => {
-          order.push("mw1-after");
-          return result;
-        }),
-      );
+      return next(query, ctx).map((value) => {
+        order.push("mw1-after");
+        return value;
+      });
     };
 
     const mw2: Middleware<TestQuery, TestResult, InstanceType<typeof TestError>> = (
@@ -68,12 +66,10 @@ describe("withQueryMiddleware", () => {
       next,
     ) => {
       order.push("mw2-before");
-      return new ResultAsync(
-        next(query, ctx).then((result) => {
-          order.push("mw2-after");
-          return result;
-        }),
-      );
+      return next(query, ctx).map((value) => {
+        order.push("mw2-after");
+        return value;
+      });
     };
 
     const wrapped = withQueryMiddleware(bus, [mw1, mw2]);
