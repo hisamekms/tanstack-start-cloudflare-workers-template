@@ -1,8 +1,15 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRouteWithContext,
+  useRouteContext,
+} from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 import { fetchSession } from "~/lib/auth-session";
+import { AppHeader } from "~/lib/components/app-header";
 import type { RouterContext } from "~/lib/router-context";
 
 import globalCss from "~/styles/global.css?url";
@@ -37,8 +44,10 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 
 function RootComponent() {
+  const { session } = useRouteContext({ from: "__root__" });
   return (
     <>
+      <AppHeader session={session} />
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
     </>
