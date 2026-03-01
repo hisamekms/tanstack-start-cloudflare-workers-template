@@ -1,4 +1,9 @@
-import { TodoCommandType, TodoQueryType } from "@contracts/todo-public";
+import {
+  CompleteTodoInputSchema,
+  CreateTodoInputSchema,
+  TodoCommandType,
+  TodoQueryType,
+} from "@contracts/todo-public";
 import { createServerFn } from "@tanstack/react-start";
 
 import { Tokens } from "../di/index.server";
@@ -12,7 +17,7 @@ export const listTodos = createServerFn({ method: "GET" }).handler(
 );
 
 export const createTodo = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => data as { title: string })
+  .inputValidator(CreateTodoInputSchema)
   .handler(
     commandHandler(({ data, ctx, container }) => {
       const todoCommandBus = container.resolve(Tokens.todoCommandBus);
@@ -30,7 +35,7 @@ export const createTodo = createServerFn({ method: "POST" })
   );
 
 export const completeTodo = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => data as { todoId: string })
+  .inputValidator(CompleteTodoInputSchema)
   .handler(
     commandHandler(({ data, ctx, container }) => {
       const todoCommandBus = container.resolve(Tokens.todoCommandBus);

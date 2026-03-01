@@ -6,14 +6,26 @@ export enum TodoCommandType {
   CompleteTodo = "CompleteTodo",
 }
 
+export const CreateTodoInputSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+});
+
+export type CreateTodoInput = z.infer<typeof CreateTodoInputSchema>;
+
+export const CompleteTodoInputSchema = z.object({
+  todoId: z.string().uuid(),
+});
+
+export type CompleteTodoInput = z.infer<typeof CompleteTodoInputSchema>;
+
 export const CreateTodoCommandSchema = commandSchema(TodoCommandType.CreateTodo).extend({
-  title: z.string(),
+  title: CreateTodoInputSchema.shape.title,
 });
 
 export type CreateTodoCommand = z.infer<typeof CreateTodoCommandSchema>;
 
 export const CompleteTodoCommandSchema = commandSchema(TodoCommandType.CompleteTodo).extend({
-  todoId: z.string(),
+  todoId: CompleteTodoInputSchema.shape.todoId,
 });
 
 export type CompleteTodoCommand = z.infer<typeof CompleteTodoCommandSchema>;

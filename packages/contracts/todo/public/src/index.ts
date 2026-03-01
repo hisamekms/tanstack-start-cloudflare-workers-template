@@ -1,4 +1,6 @@
 export { TodoCommandType } from "./commands";
+export { CreateTodoInputSchema, CompleteTodoInputSchema } from "./commands";
+export type { CreateTodoInput, CompleteTodoInput } from "./commands";
 export { CreateTodoCommandSchema, CompleteTodoCommandSchema, TodoCommandSchema } from "./commands";
 export type { CreateTodoCommand, CompleteTodoCommand, TodoCommand } from "./commands";
 export { TodoQueryType } from "./queries";
