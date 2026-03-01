@@ -14,6 +14,8 @@ import {
   CompleteTodoHandler,
   TodoCommandBusImpl,
 } from "@modules/todo-write-application";
+import { D1UserRepository } from "@modules/user-infra-d1";
+import { EnsureUserHandler, UserCommandBusImpl } from "@modules/user-write-application";
 import { createD1Database } from "@platform/db-d1";
 
 import type { AppEnv } from "../cloudflare";
@@ -42,6 +44,17 @@ root.registerFactory(
     const store = new D1TodoReadModelStore(db);
     const rawBus = new TodoQueryBusImpl(new ListTodosHandler(store));
     return withQueryMiddleware(rawBus, [loggingQueryMiddleware()]);
+  },
+  "scoped",
+);
+
+root.registerFactory(
+  Tokens.userCommandBus,
+  (r) => {
+    const db = r.resolve(Tokens.database);
+    const repo = new D1UserRepository(db);
+    const rawBus = new UserCommandBusImpl(new EnsureUserHandler(repo));
+    return withCommandMiddleware(rawBus, [loggingCommandMiddleware()]);
   },
   "scoped",
 );

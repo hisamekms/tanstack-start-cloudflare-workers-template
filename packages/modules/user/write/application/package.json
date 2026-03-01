@@ -1,0 +1,22 @@
+{
+  "name": "@modules/user-write-application",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint -c ../../../../config/oxlint/base.json src/"
+  },
+  "dependencies": {
+    "neverthrow": "catalog:",
+    "uuid": "^11.1.0"
+  },
+  "peerDependencies": {
+    "@contracts/shared-kernel": "*",
+    "@contracts/user-public": "*",
+    "@contracts/user-server": "*",
+    "@modules/user-write-model": "*"
+  }
+}
