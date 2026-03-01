@@ -7,9 +7,12 @@ import { ResultAsync, errAsync } from "neverthrow";
 export class CompleteTodoHandler {
   constructor(private readonly repository: TodoRepository) {}
 
-  execute(command: CompleteTodoCommand, _context: Context): ResultAsync<void, TodoError> {
+  execute(command: CompleteTodoCommand, context: Context): ResultAsync<void, TodoError> {
+    if (context.kind !== "protected") {
+      throw new Error("CompleteTodo requires authenticated context");
+    }
     return ResultAsync.fromSafePromise(this.repository.findById(command.todoId)).andThen((todo) => {
-      if (!todo) {
+      if (!todo || todo.userId !== context.userId) {
         return errAsync<void, TodoError>(new TodoNotFoundError(command.todoId));
       }
       const { state } = completeTodo(todo);

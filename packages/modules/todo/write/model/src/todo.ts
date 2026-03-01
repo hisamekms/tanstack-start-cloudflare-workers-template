@@ -5,10 +5,15 @@ import type { CommandResult } from "@modules/shared-kernel-write-model";
 export interface Todo extends AggregateRoot<string> {
   readonly title: string;
   readonly completed: boolean;
+  readonly userId: string;
 }
 
-export function createTodo(id: string, title: string): CommandResult<Todo, TodoCreatedEvent> {
-  const state: Todo = { id, title, completed: false, version: 1 };
+export function createTodo(
+  id: string,
+  title: string,
+  userId: string,
+): CommandResult<Todo, TodoCreatedEvent> {
+  const state: Todo = { id, title, completed: false, userId, version: 1 };
   const events: TodoCreatedEvent[] = [
     {
       eventType: "TodoCreated",

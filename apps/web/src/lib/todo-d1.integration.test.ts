@@ -95,6 +95,7 @@ describe("todo D1 integration", () => {
     const created = createTodo(
       "01954a8f-65e3-7b14-9e0c-8d4f6f15f201",
       "Call carrier about invoice mismatch",
+      "user-001",
     );
 
     await repository.save(created.state);
@@ -112,11 +113,15 @@ describe("todo D1 integration", () => {
     const readModelStore = new D1TodoReadModelStore(database);
 
     const todos: Todo[] = [
-      createTodo("01954a8f-65e3-7b14-9e0c-8d4f6f15f301", "Update customer success handoff notes")
-        .state,
+      createTodo(
+        "01954a8f-65e3-7b14-9e0c-8d4f6f15f301",
+        "Update customer success handoff notes",
+        "user-001",
+      ).state,
       createTodo(
         "01954a8f-65e3-7b14-9e0c-8d4f6f15f302",
         "Book user interviews for billing redesign",
+        "user-001",
       ).state,
     ];
 
