@@ -1,5 +1,4 @@
 import type { ExecutionContext, ExportedHandler } from "@cloudflare/workers-types";
-import { logger } from "@lib/server";
 import { createStartHandler, defaultStreamHandler } from "@tanstack/react-start/server";
 
 import { config } from "~/config";
@@ -19,7 +18,7 @@ export default {
   async fetch(request: Request, env: AppEnv, ctx: ExecutionContext): Promise<Response> {
     if (!startupLogged) {
       startupLogged = true;
-      logger.info(`Auth bypass mode: ${config.isLocalDev ? "enabled" : "disabled"}`);
+      console.log(`Auth bypass mode: ${config.isLocalDev ? "enabled" : "disabled"}`);
     }
     return requestHandlerWithCloudflareContext(request, {
       context: {

@@ -2,20 +2,16 @@ import type { Query } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { Context, QueryBus } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync } from "neverthrow";
-import { describe, expect, test, vi } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import { loggingQueryMiddleware } from "./logging-query-middleware";
 
-vi.mock("@lib/server", () => ({
-  logger: {
-    info: vi.fn(),
-    error: vi.fn(),
-    warn: vi.fn(),
-    debug: vi.fn(),
-  },
-}));
+const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-import { logger } from "@lib/server";
+afterEach(() => {
+  vi.clearAllMocks();
+});
 
 const TestError = defineError("TestError", "application");
 
@@ -42,8 +38,8 @@ describe("loggingQueryMiddleware", () => {
     const result = await mw(query, testContext, bus.execute);
 
     expect(result.isOk()).toBe(true);
-    expect(logger.info).toHaveBeenCalledWith("Executing query: TestQuery");
-    expect(logger.error).not.toHaveBeenCalled();
+    expect(logSpy).toHaveBeenCalledWith("Executing query: TestQuery");
+    expect(errorSpy).not.toHaveBeenCalled();
   });
 
   test("logs error when query fails", async () => {
@@ -54,7 +50,7 @@ describe("loggingQueryMiddleware", () => {
     const result = await mw(query, testContext, bus.execute);
 
     expect(result.isErr()).toBe(true);
-    expect(logger.info).toHaveBeenCalledWith("Executing query: TestQuery");
-    expect(logger.error).toHaveBeenCalledWith("Query TestQuery failed: [TestError] query failed");
+    expect(logSpy).toHaveBeenCalledWith("Executing query: TestQuery");
+    expect(errorSpy).toHaveBeenCalledWith("Query TestQuery failed: [TestError] query failed");
   });
 });
