@@ -1,1 +1,0 @@
-ALTER TABLE todos ADD COLUMN user_id text NOT NULL DEFAULT '';

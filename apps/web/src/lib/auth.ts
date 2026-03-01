@@ -1,7 +1,7 @@
 import Google from "@auth/core/providers/google";
-import { D1Adapter, up } from "@auth/d1-adapter";
-import { logger } from "@lib/server";
+import { D1Adapter } from "@auth/d1-adapter";
 import { UserCommandType } from "@contracts/user-public";
+import { logger } from "@lib/server";
 import { env } from "cloudflare:workers";
 import type { StartAuthJSConfig } from "start-authjs";
 
@@ -9,18 +9,6 @@ import { config } from "~/config";
 
 import { createRequestScope } from "./di/index.server";
 import { Tokens } from "./di/tokens.server";
-
-let migrated = false;
-
-export async function ensureAuthTables(): Promise<void> {
-  if (migrated) return;
-  try {
-    await up(env.DB);
-    migrated = true;
-  } catch (e) {
-    console.error("Auth D1 migration failed:", e);
-  }
-}
 
 export const authConfig: StartAuthJSConfig = {
   secret: config.isLocalDev ? "local-dev-dummy-secret" : config.authSecret,
@@ -57,7 +45,11 @@ export const authConfig: StartAuthJSConfig = {
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     async session({ session }) {
-      logger.debug("[AUTH:session]", { userId: session?.user?.id, email: session?.user?.email, expires: session?.expires });
+      logger.debug("[AUTH:session]", {
+        userId: session?.user?.id,
+        email: session?.user?.email,
+        expires: session?.expires,
+      });
       return session;
     },
   },

@@ -13,23 +13,23 @@ related_to: []
 
 Auth.jsのDBアダプターを使用すると、以下のテーブルが作成される。
 
-| テーブル名 | 用途 |
-|---|---|
-| `users` | ユーザー情報 |
-| `accounts` | OAuthアカウント連携 |
-| `sessions` | セッション管理 |
-| `verification_tokens` | メール認証トークン |
-| `authenticators` | WebAuthn用（オプション） |
+| テーブル名            | 用途                     |
+| --------------------- | ------------------------ |
+| `users`               | ユーザー情報             |
+| `accounts`            | OAuthアカウント連携      |
+| `sessions`            | セッション管理           |
+| `verification_tokens` | メール認証トークン       |
+| `authenticators`      | WebAuthn用（オプション） |
 
 ## アダプター別のテーブル名カスタマイズ可否
 
-| アダプター | カスタマイズ | 方法 |
-|---|---|---|
-| **D1 Adapter** | 不可 | テーブル名・カラム名ともに固定 |
-| **Drizzle Adapter** | 可 | スキーマ定義で自由に変更可能 |
-| **Prisma Adapter** | 可 | `@@map("custom_name")` で変更可能 |
-| **Kysely Adapter** | 可 | テーブル定義でカスタマイズ可能 |
-| **TypeORM Adapter** | 可 | エンティティ定義で変更可能 |
+| アダプター          | カスタマイズ | 方法                              |
+| ------------------- | ------------ | --------------------------------- |
+| **D1 Adapter**      | 不可         | テーブル名・カラム名ともに固定    |
+| **Drizzle Adapter** | 可           | スキーマ定義で自由に変更可能      |
+| **Prisma Adapter**  | 可           | `@@map("custom_name")` で変更可能 |
+| **Kysely Adapter**  | 可           | テーブル定義でカスタマイズ可能    |
+| **TypeORM Adapter** | 可           | エンティティ定義で変更可能        |
 
 いずれのアダプターでも、カラム構造やリレーションはAuth.jsの期待する形に合わせる必要がある。
 
@@ -41,19 +41,20 @@ Auth.jsのDBアダプターを使用すると、以下のテーブルが作成�
 
 ### テーブル構成
 
-**Auth.js管理（D1 Adapter自動作成）:**
+**Auth.jsテーブル（Drizzleスキーマで定義）:**
 
 - `users` — Auth.jsのユーザー
 - `accounts` — OAuthアカウント連携
 - `sessions` — セッション
 - `verification_tokens` — 認証トークン
 
-**アプリ管理（Drizzle ORM）:**
+**アプリテーブル（Drizzleスキーマで定義）:**
 
 - `users_app` — アプリ独自のユーザー情報（`sub` でAuth.jsユーザーと紐付け）
 - `todos` — Todoデータ（`userId` でアプリユーザーと紐付け）
 
 ### マイグレーション
 
-- Auth.jsテーブル: `ensureAuthTables()` で自動マイグレーション（`/api/auth/*` アクセス時に実行）
-- アプリテーブル: Drizzle Kit によるマイグレーション管理（`packages/platform/db/d1/src/migrations/`）
+- 全テーブル（Auth.js + アプリ）を Drizzle Kit / Wrangler マイグレーションで一元管理（`packages/platform/db/d1/src/migrations/`）
+- Auth.jsテーブルのスキーマは `@auth/d1-adapter` の期待するカラム構造に合わせて `schema.ts` で定義
+- ~~`ensureAuthTables()` による自動マイグレーションは廃止~~

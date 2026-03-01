@@ -27,7 +27,11 @@ export const fetchSession = createServerFn({ method: "GET" }).handler(async () =
   logger.debug("[AUTH:fetchSession] fetching session for", request.url);
   try {
     const session = await getSession(request, authConfig);
-    logger.debug("[AUTH:fetchSession] result:", { hasUser: !!session?.user, userId: session?.user?.id, email: session?.user?.email });
+    logger.debug("[AUTH:fetchSession] result:", {
+      hasUser: !!session?.user,
+      userId: session?.user?.id,
+      email: session?.user?.email,
+    });
     return session;
   } catch (e) {
     logger.error("[AUTH:fetchSession] getSession threw:", e);
