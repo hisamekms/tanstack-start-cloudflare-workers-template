@@ -1,3 +1,4 @@
+import { logger } from "@lib/public-logger";
 import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 import { getSession } from "start-authjs";
@@ -19,21 +20,21 @@ const LOCAL_MOCK_SESSION: AuthSession = {
 
 export const fetchSession = createServerFn({ method: "GET" }).handler(async () => {
   if (config.isLocalDev) {
-    console.debug("[AUTH:fetchSession] local dev mode, returning mock session");
+    logger.debug("[AUTH:fetchSession] local dev mode, returning mock session");
     return LOCAL_MOCK_SESSION;
   }
   const request = getRequest();
-  console.debug("[AUTH:fetchSession] fetching session for", request.url);
+  logger.debug("[AUTH:fetchSession] fetching session for", request.url);
   try {
     const session = await getSession(request, authConfig);
-    console.debug("[AUTH:fetchSession] result:", {
+    logger.debug("[AUTH:fetchSession] result:", {
       hasUser: !!session?.user,
       userId: session?.user?.id,
       email: session?.user?.email,
     });
     return session;
   } catch (e) {
-    console.error("[AUTH:fetchSession] getSession threw:", e);
+    logger.error("[AUTH:fetchSession] getSession threw:", e);
     return null;
   }
 });

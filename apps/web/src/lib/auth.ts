@@ -1,6 +1,7 @@
 import Google from "@auth/core/providers/google";
 import { D1Adapter } from "@auth/d1-adapter";
 import { UserCommandType } from "@contracts/user-public";
+import { logger } from "@lib/public-logger";
 import { env } from "cloudflare:workers";
 import type { StartAuthJSConfig } from "start-authjs";
 
@@ -15,9 +16,9 @@ export const authConfig: StartAuthJSConfig = {
   providers: [Google({})],
   callbacks: {
     async signIn({ account, profile }) {
-      console.debug("[AUTH:signIn] called", { provider: account?.provider, email: profile?.email });
+      logger.debug("[AUTH:signIn] called", { provider: account?.provider, email: profile?.email });
       if (!account || !profile?.email) {
-        console.debug("[AUTH:signIn] skipping EnsureUser (no account or email)");
+        logger.debug("[AUTH:signIn] skipping EnsureUser (no account or email)");
         return true;
       }
       const sub = account.providerAccountId;
@@ -30,21 +31,21 @@ export const authConfig: StartAuthJSConfig = {
           { kind: "public" },
         );
         if (result.isErr()) {
-          console.error("[AUTH:signIn] EnsureUser failed:", result.error);
+          logger.error("[AUTH:signIn] EnsureUser failed:", result.error);
         } else {
-          console.debug("[AUTH:signIn] EnsureUser succeeded for", email);
+          logger.debug("[AUTH:signIn] EnsureUser succeeded for", email);
         }
       } catch (e) {
-        console.error("[AUTH:signIn] EnsureUser threw:", e);
+        logger.error("[AUTH:signIn] EnsureUser threw:", e);
       }
       return true;
     },
     async redirect({ url, baseUrl }) {
-      console.debug("[AUTH:redirect]", { url, baseUrl });
+      logger.debug("[AUTH:redirect]", { url, baseUrl });
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     async session({ session }) {
-      console.debug("[AUTH:session]", {
+      logger.debug("[AUTH:session]", {
         userId: session?.user?.id,
         email: session?.user?.email,
         expires: session?.expires,

@@ -2,16 +2,20 @@ import type { Command } from "@contracts/shared-kernel/public";
 import { defineError } from "@contracts/shared-kernel/public";
 import type { CommandBus, Context } from "@contracts/shared-kernel/server";
 import { errAsync, okAsync } from "neverthrow";
-import { afterEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
 import { loggingCommandMiddleware } from "./logging-command-middleware";
 
-const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+vi.mock("@lib/public-logger", () => ({
+  logger: {
+    info: vi.fn(),
+    error: vi.fn(),
+    warn: vi.fn(),
+    debug: vi.fn(),
+  },
+}));
 
-afterEach(() => {
-  vi.clearAllMocks();
-});
+import { logger } from "@lib/public-logger";
 
 const TestError = defineError("TestError", "application");
 
@@ -36,8 +40,8 @@ describe("loggingCommandMiddleware", () => {
     const result = await mw(command, testContext, bus.execute);
 
     expect(result.isOk()).toBe(true);
-    expect(logSpy).toHaveBeenCalledWith("Executing command: Test");
-    expect(errorSpy).not.toHaveBeenCalled();
+    expect(logger.info).toHaveBeenCalledWith("Executing command: Test");
+    expect(logger.error).not.toHaveBeenCalled();
   });
 
   test("logs error when command fails", async () => {
@@ -48,8 +52,8 @@ describe("loggingCommandMiddleware", () => {
     const result = await mw(command, testContext, bus.execute);
 
     expect(result.isErr()).toBe(true);
-    expect(logSpy).toHaveBeenCalledWith("Executing command: Test");
-    expect(errorSpy).toHaveBeenCalledWith(
+    expect(logger.info).toHaveBeenCalledWith("Executing command: Test");
+    expect(logger.error).toHaveBeenCalledWith(
       "Command Test failed: [TestError] something went wrong",
     );
   });

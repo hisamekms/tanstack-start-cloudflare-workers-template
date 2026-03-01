@@ -24,6 +24,7 @@
     "@contracts/todo-server": "*",
     "@contracts/user-public": "*",
     "@contracts/user-server": "*",
+    "@lib/public-logger": "*",
     "@lib/server-di": "*",
     "@modules/shared-kernel-read-application": "*",
     "@modules/shared-kernel-read-model": "*",

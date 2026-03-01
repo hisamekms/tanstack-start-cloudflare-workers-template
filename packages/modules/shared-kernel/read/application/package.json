@@ -12,6 +12,7 @@
     "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
+    "@lib/public-logger": "*",
     "neverthrow": "catalog:"
   },
   "devDependencies": {

@@ -73,6 +73,8 @@ packages/
 │           └── src/
 │
 └── lib/                                         # ドメイン知識のない共通処理や型
+    ├── public-logger/                           # ロガー。client/server参照可
+    │   └── src/
     └── server/
         └── di/                                  # サーバーサイドDIコンテナ
 ```
@@ -95,6 +97,7 @@ packages/
 | `packages/modules/<bc>/read/model`                 | `@modules/<bc>-read-model`                 | BC read側model層                                            |
 | `packages/modules/<bc>/read/infra`                 | `@modules/<bc>-read-infra`                 | BC read側infra層                                            |
 | `packages/platform/db/d1`                          | `@platform/db-d1`                          | D1固有のDB処理                                              |
+| `packages/lib/public-logger`                       | `@lib/public-logger`                       | ロガー。client/server参照可                                 |
 | `packages/lib/server/di`                           | `@lib/server-di`                           | サーバーサイドDIコンテナ                                    |
 
 ## 依存ルール

@@ -1,5 +1,6 @@
 import type { AppError, Query } from "@contracts/shared-kernel/public";
 import type { Middleware } from "@contracts/shared-kernel/server";
+import { logger } from "@lib/public-logger";
 
 export function loggingQueryMiddleware<
   TQuery extends Query,
@@ -7,9 +8,9 @@ export function loggingQueryMiddleware<
   TError extends AppError = AppError,
 >(): Middleware<TQuery, TResult, TError> {
   return (query, context, next) => {
-    console.log(`Executing query: ${query.queryType}`);
+    logger.info(`Executing query: ${query.queryType}`);
     return next(query, context).mapErr((e) => {
-      console.error(`Query ${query.queryType} failed: ${e}`);
+      logger.error(`Query ${query.queryType} failed: ${e}`);
       return e;
     });
   };

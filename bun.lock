@@ -24,6 +24,7 @@
         "@contracts/todo-server": "*",
         "@contracts/user-public": "*",
         "@contracts/user-server": "*",
+        "@lib/public-logger": "*",
         "@lib/server-di": "*",
         "@modules/shared-kernel-read-application": "*",
         "@modules/shared-kernel-read-model": "*",
@@ -144,6 +145,14 @@
         "@contracts/user-public": "*",
       },
     },
+    "packages/lib/public-logger": {
+      "name": "@lib/public-logger",
+      "version": "0.0.0",
+      "devDependencies": {
+        "@config/oxlint": "workspace:*",
+        "@config/ts": "*",
+      },
+    },
     "packages/lib/server/di": {
       "name": "@lib/server-di",
       "version": "0.0.0",
@@ -157,6 +166,7 @@
       "name": "@modules/shared-kernel-read-application",
       "version": "0.0.0",
       "dependencies": {
+        "@lib/public-logger": "*",
         "neverthrow": "catalog:",
       },
       "devDependencies": {
@@ -181,6 +191,7 @@
       "name": "@modules/shared-kernel-write-application",
       "version": "0.0.0",
       "dependencies": {
+        "@lib/public-logger": "*",
         "neverthrow": "catalog:",
       },
       "devDependencies": {
@@ -567,6 +578,8 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.9", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.0.3", "@jridgewell/sourcemap-codec": "^1.4.10" } }, "sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ=="],
+
+    "@lib/public-logger": ["@lib/public-logger@workspace:packages/lib/public-logger"],
 
     "@lib/server-di": ["@lib/server-di@workspace:packages/lib/server/di"],
 

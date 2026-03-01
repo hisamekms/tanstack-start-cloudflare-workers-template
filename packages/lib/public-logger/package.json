@@ -1,0 +1,17 @@
+{
+  "name": "@lib/public-logger",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "oxlint -c .oxlintrc.json src/",
+    "typecheck": "tsgo --noEmit"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*",
+    "@config/ts": "*"
+  }
+}
