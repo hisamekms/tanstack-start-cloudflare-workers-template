@@ -5,7 +5,7 @@ export const UserCreatedEventSchema = DomainEventSchema.extend({
   eventType: z.literal("UserCreated"),
   userId: z.string().min(1),
   sub: z.string().min(1),
-  email: z.string().email(),
+  email: z.string().min(1),
 });
 
 export type UserCreatedEvent = z.infer<typeof UserCreatedEventSchema>;
