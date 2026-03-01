@@ -8,7 +8,8 @@
   },
   "scripts": {
     "lint": "oxlint -c .oxlintrc.json src/",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsgo --noEmit"
   },
   "dependencies": {
     "@lib/server": "*",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@config/oxlint": "workspace:*",
+    "@config/ts": "*",
     "vitest": "catalog:"
   },
   "peerDependencies": {

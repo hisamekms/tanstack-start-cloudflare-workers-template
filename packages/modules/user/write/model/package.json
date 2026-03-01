@@ -7,14 +7,16 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "oxlint -c .oxlintrc.json src/"
+    "lint": "oxlint -c .oxlintrc.json src/",
+    "typecheck": "tsgo --noEmit"
+  },
+  "devDependencies": {
+    "@config/oxlint": "workspace:*",
+    "@config/ts": "*"
   },
   "peerDependencies": {
     "@contracts/shared-kernel": "*",
     "@contracts/user-public": "*",
     "@modules/shared-kernel-write-model": "*"
-  },
-  "devDependencies": {
-    "@config/oxlint": "workspace:*"
   }
 }
