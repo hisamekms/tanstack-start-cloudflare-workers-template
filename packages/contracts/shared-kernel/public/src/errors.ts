@@ -29,6 +29,19 @@ export abstract class DependencyError extends AppError {
   readonly category = "dependency" as const;
 }
 
+export class OptimisticLockError extends DomainError {
+  readonly tag = "OptimisticLock" as const;
+  constructor(
+    readonly aggregateType: string,
+    readonly aggregateId: string,
+    readonly expectedVersion: number,
+  ) {
+    super(
+      `Optimistic lock conflict on ${aggregateType}(${aggregateId}): expected version ${expectedVersion}`,
+    );
+  }
+}
+
 const categoryBaseMap = {
   domain: DomainError,
   application: ApplicationError,

@@ -1,8 +1,9 @@
+import { OptimisticLockError } from "@contracts/shared-kernel/public";
 import type { TodoDto } from "@contracts/todo-public";
 import type { TodoReadModelStore } from "@modules/todo-read-model";
 import type { Todo, TodoRepository } from "@modules/todo-write-model";
 import { todosTable, type AppDatabase } from "@platform/db-d1";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 function mapRecordToTodo(record: typeof todosTable.$inferSelect): Todo {
   return {
@@ -32,9 +33,9 @@ export class D1TodoRepository implements TodoRepository {
 
   async save(todo: Todo): Promise<void> {
     const timestamp = new Date().toISOString();
-    await this.db
-      .insert(todosTable)
-      .values({
+
+    if (todo.version === 1) {
+      await this.db.insert(todosTable).values({
         id: todo.id,
         title: todo.title,
         completed: todo.completed,
@@ -42,16 +43,23 @@ export class D1TodoRepository implements TodoRepository {
         version: todo.version,
         createdAt: timestamp,
         updatedAt: timestamp,
-      })
-      .onConflictDoUpdate({
-        target: todosTable.id,
-        set: {
+      });
+    } else {
+      const result = await this.db
+        .update(todosTable)
+        .set({
           title: todo.title,
           completed: todo.completed,
           version: todo.version,
           updatedAt: timestamp,
-        },
-      });
+        })
+        .where(and(eq(todosTable.id, todo.id), eq(todosTable.version, todo.version - 1)))
+        .run();
+
+      if (result.meta.changes === 0) {
+        throw new OptimisticLockError("Todo", todo.id, todo.version);
+      }
+    }
   }
 }
 
