@@ -122,17 +122,15 @@ wrangler d1 migrations apply tanstack-start-cloudflare-workers-template --env pr
 
 ### 5. Worker を本番デプロイする
 
-依存関係のセットアップ後、`apps/web` からデプロイする。
+依存関係のセットアップ後、リポジトリルートからデプロイする。
 
 ```bash
 cd /workspace
 mise run setup
-
-cd /workspace/apps/web
-bun run deploy
+mise run deploy
 ```
 
-`bun run deploy` は `bun run build && wrangler deploy --env production` を実行する。
+`mise run deploy` は `apps/web` の deploy script を実行する。内部では `CLOUDFLARE_ENV=production bun run build && wrangler deploy --env production` を使う。
 
 ### 6. 公開 URL を割り当てる
 

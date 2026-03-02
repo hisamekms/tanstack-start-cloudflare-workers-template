@@ -18,6 +18,10 @@ run = "bunx turbo run dev"
 description = "Build and preview production build"
 run = "bunx turbo run preview"
 
+[tasks.deploy]
+description = "Deploy apps/web to Cloudflare production"
+run = "bunx turbo run deploy --filter=web"
+
 [tasks."test:unit"]
 description = "Run unit tests"
 run = "bunx turbo run test"
