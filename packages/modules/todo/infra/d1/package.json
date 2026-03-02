@@ -22,6 +22,7 @@
     "wrangler": "^4.0.0"
   },
   "peerDependencies": {
+    "@contracts/shared-kernel": "*",
     "@contracts/todo-public": "*",
     "@modules/todo-read-model": "*",
     "@modules/todo-write-model": "*",

@@ -6,5 +6,12 @@ export { CommandSchema, commandSchema } from "./commands";
 export type { Command } from "./commands";
 export { QuerySchema, querySchema } from "./queries";
 export type { Query } from "./queries";
-export { AppError, DomainError, ApplicationError, DependencyError, defineError } from "./errors";
+export {
+  AppError,
+  DomainError,
+  ApplicationError,
+  DependencyError,
+  OptimisticLockError,
+  defineError,
+} from "./errors";
 export type { ErrorCategory } from "./errors";
