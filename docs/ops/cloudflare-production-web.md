@@ -37,7 +37,7 @@ Cloudflare Dashboard で D1 を新規作成する。
 
 推奨:
 
-- DB 名: `app-production`
+- DB 名: `tanstack-start-cloudflare-workers-template`
 
 作成後、以下を控える。
 
@@ -104,7 +104,7 @@ https://<worker-name>.<subdomain>.workers.dev/api/auth/callback/google
 
 ```bash
 cd /workspace/apps/web
-wrangler d1 migrations apply app-production --env production
+wrangler d1 migrations apply tanstack-start-cloudflare-workers-template --env production --remote
 ```
 
 使用される migration は以下。
